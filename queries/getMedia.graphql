@@ -1,0 +1,10 @@
+query GetMedia($id: bigint!) {
+  media_by_pk(id: $id) {
+    id
+    name
+    url
+    media_type
+    size
+    created_at
+  }
+}

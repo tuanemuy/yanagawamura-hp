@@ -1,0 +1,157 @@
+query SearchPost(
+  $limit: Int = 10
+  $offset: Int = 0
+  $post_type_slug: [String!] = []
+  $category_ids: [Int!] = []
+  $tag_ids: [Int!] = []
+) {
+  content(
+    distinct_on: post_id
+    limit: $limit
+    offset: $offset
+    order_by: { post_id: asc, created_at: desc }
+    where: {
+      _and: {
+        post: {
+          _and: {
+            deleted_at: { _is_null: true }
+            post_type: { slug: { _in: $post_type_slug } }
+          }
+        }
+        category_id: { _in: $category_ids }
+        tags: { tag_id: { _in: $tag_ids } }
+      }
+    }
+  ) {
+    post {
+      id
+      contents(order_by: { created_at: desc }) {
+        id
+        title
+        created_at
+        values {
+          id
+          field_id
+          field {
+            id
+            slug
+            name
+          }
+          text {
+            body
+          }
+          numeric {
+            body
+          }
+          integer {
+            body
+          }
+          media {
+            body {
+              id
+              name
+              url
+              media_type
+              size
+            }
+          }
+          post {
+            body {
+              id
+              contents(order_by: { created_at: desc }) {
+                id
+                title
+                created_at
+                values {
+                  id
+                  field_id
+                  field {
+                    id
+                    slug
+                    name
+                  }
+                  text {
+                    body
+                  }
+                  numeric {
+                    body
+                  }
+                  integer {
+                    body
+                  }
+                  media {
+                    body {
+                      id
+                      name
+                      url
+                      media_type
+                      size
+                    }
+                  }
+                  post {
+                    body {
+                      id
+                      contents {
+                        title
+                      }
+                    }
+                  }
+                  timestamp {
+                    body
+                  }
+                  boolean {
+                    body
+                  }
+                }
+              }
+            }
+          }
+          timestamp {
+            body
+          }
+          boolean {
+            body
+          }
+        }
+        category {
+          id
+          slug
+          name
+        }
+        tags(order_by: { tag_id: asc }) {
+          tag {
+            id
+            slug
+            name
+          }
+        }
+      }
+      post_type {
+        id
+        slug
+        name
+      }
+      created_at
+    }
+  }
+
+  content_aggregate(
+    distinct_on: post_id
+    where: {
+      _and: {
+        post: {
+          _and: {
+            deleted_at: { _is_null: true }
+            post_type: { slug: { _in: $post_type_slug } }
+          }
+        }
+        category_id: { _in: $category_ids }
+        tags: { tag_id: { _in: $tag_ids } }
+      }
+    }
+  ) {
+    aggregate {
+      count
+    }
+  }
+}

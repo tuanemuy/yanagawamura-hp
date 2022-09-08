@@ -1,25 +1,19 @@
 import type { NextPage } from "next";
 import { colors, fonts } from "variables";
 import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, Block, Figure, PlainText } from "unflexible-ui-core";
+import { Stacked, Columns, Block, PlainText, Figure } from "unflexible-ui-core";
 import { Header, Main, Footer } from "components/layout";
 import { ListWithTitle } from "components/container";
-import { Concept } from "components/content";
-import { Villager } from "components/cta";
+import { Concept, ConceptDetails } from "components/content";
 import { MiniLink } from "components/button";
-import { Slider } from "domains/mainVisual";
-import { Headline } from "domains/news";
+import { PageTitle } from "components/title";
+import { Villager } from "components/cta";
 import { Link as RestaurantLink } from "domains/restaurant";
 import { Link as ShopLink } from "domains/shop";
 import { Link as EventLink } from "domains/event";
 
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { Order_By } from "lib/graphql";
-import {
-  useGetMainVisuals,
-  getGetMainVisualsPrefetcher,
-} from "domains/mainVisual";
-import { useGetNewsArchive, getGetNewsArchivePrefetcher } from "domains/news";
 import {
   Restaurant,
   useGetRestaurants,
@@ -32,30 +26,6 @@ import { url } from "lib/util";
 export async function getStaticProps() {
   const queryClient = new QueryClient();
   const prefetches = [];
-
-  const getMainVisualsPrefetcher = getGetMainVisualsPrefetcher({
-    limit: 5,
-    offset: 0,
-    orderBy: { created_at: Order_By.Desc },
-  });
-  prefetches.push(
-    queryClient.prefetchQuery(
-      getMainVisualsPrefetcher.key,
-      getMainVisualsPrefetcher.fetcher
-    )
-  );
-
-  const getNewsArchivePrefetcher = getGetNewsArchivePrefetcher({
-    limit: 10,
-    offset: 0,
-    orderBy: { created_at: Order_By.Desc },
-  });
-  prefetches.push(
-    queryClient.prefetchQuery(
-      getNewsArchivePrefetcher.key,
-      getNewsArchivePrefetcher.fetcher
-    )
-  );
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
@@ -103,19 +73,7 @@ export async function getStaticProps() {
   };
 }
 
-const HomePage: NextPage = () => {
-  const { mainVisuals } = useGetMainVisuals({
-    limit: 5,
-    offset: 0,
-    orderBy: { created_at: Order_By.Desc },
-  });
-
-  const { newsArchive } = useGetNewsArchive({
-    limit: 10,
-    offset: 0,
-    orderBy: { created_at: Order_By.Desc },
-  });
-
+const AboutPage: NextPage = () => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
@@ -136,27 +94,59 @@ const HomePage: NextPage = () => {
 
   return (
     <Page
-      title="ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街"
-      description="群馬県高崎市のヤナガワ村です。柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
-      path="/"
-      ogType="website"
+      title="ヤナガワ村とは | 群馬県高崎市の商店街・飲み屋街"
+      description="群馬県高崎市のヤナガワ村のご紹介です。柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。昔ながらの味わいのある風景と、関係の生まれる明るい街をお楽しみください。"
+      path="/about"
+      ogType="article"
       header={
-        <Header title="群馬県高崎市の商店街・飲み屋街【ヤナガワ村】" />
+        <Header title="ヤナガワ村とは | 群馬県高崎市の商店街・飲み屋街" />
       }
       footer={<Footer />}
       fixHeader
     >
       <Main color={colors.background} avoidHeader>
-        <Stacked paddingPos="none" isSection>
-          <Headline news={newsArchive} />
-        </Stacked>
-
-        <Stacked paddingPos="none" isSection zIndex={2}>
-          <Slider mainVisuals={mainVisuals} />
-        </Stacked>
+        <PageTitle title="ヤナガワ村とは" />
 
         <Stacked paddingPos="top" wrap isSection>
           <Concept />
+        </Stacked>
+
+        <Stacked paddingPos="top" wrap isSection>
+          <ConceptDetails
+            title="個性あふれる<br/>街のお店"
+            description="お得さや目新しさを求めて比較的若い世代が飲みに出る駅周辺エリアとは異なり、このエリアには、チェーン店はほとんどありません。その代わりに様々な個性溢れる店舗が立ち並び、「誰々さんのお店に飲みに行く」というように「人」を動機に飲みに出かけられるお店が多いのが、ヤナガワ村の特徴です。"
+            images={[
+              "images/sample.jpg",
+              "images/sample.jpg",
+              "images/sample.jpg",
+            ]}
+            reverse
+          />
+        </Stacked>
+
+        <Stacked paddingPos="top" wrap isSection>
+          <ConceptDetails
+            title="人とつながる<br/>飲み屋街"
+            description="定住人口は少ないですし、交流人口においても駅周辺には到底敵いません。しかし、このエリアは高崎市で最も「関係人口」が多い地域だと言う事ができると思うのです。頻繁にこのエリアに飲みに出かける人の事を、冗談まじりに「ヤナガワ村長」と表現する事がその象徴でもあります。ヤナガワ村長やヤナガワ村民が市内外に溢れているという事が、このエリアが持つ何よりの財産です。"
+            images={[
+              "images/sample.jpg",
+              "images/sample.jpg",
+              "images/sample.jpg",
+            ]}
+          />
+        </Stacked>
+
+        <Stacked paddingPos="top" wrap isSection>
+          <ConceptDetails
+            title="昔ながらの雰囲気に<br/>身を委ねる"
+            description="昔ながらのディープで笑顔あふれるその雰囲気に、あなたも身を委ねてみませんか？<br/>飲み屋が好きな方に限らず、多くの方に楽しんでいただきたいとの思いから、ヤナガワ村では多くのイベントを開催しています。食べ歩きや音楽ステージ、スケートボード、縁日など様々な企画があり、お子さまから大人までお楽しみいただけます。昭和の香りが漂うこの街にぜひお越しください。"
+            images={[
+              "images/sample.jpg",
+              "images/sample.jpg",
+              "images/sample.jpg",
+            ]}
+            reverse
+          />
         </Stacked>
 
         <Stacked paddingPos="top" wrap isSection>
@@ -167,6 +157,7 @@ const HomePage: NextPage = () => {
               <RestaurantLink restaurant={r} />
             ))}
             more={url("restaurant")}
+            reverse
           />
         </Stacked>
 
@@ -178,7 +169,6 @@ const HomePage: NextPage = () => {
               <ShopLink shop={s} />
             ))}
             more={url("shop")}
-            reverse
           />
         </Stacked>
 
@@ -190,6 +180,7 @@ const HomePage: NextPage = () => {
               <EventLink event={e} />
             ))}
             more={url("event")}
+            reverse
           />
         </Stacked>
 
@@ -272,4 +263,4 @@ const HomePage: NextPage = () => {
   );
 };
 
-export default HomePage;
+export default AboutPage;

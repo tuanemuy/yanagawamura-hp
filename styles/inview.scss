@@ -1,0 +1,90 @@
+@import "./variables.scss";
+
+$baseDuration: 0.6s;
+$baseDelay: 0.2s;
+
+.inview {
+  transition-duration: $baseDuration;
+
+  &__rl {
+    opacity: 0;
+    transform: translateX(100px);
+
+    &.inview__in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__lr {
+    opacity: 0;
+    transform: translateX(-100px);
+
+    &.inview__in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__bt {
+    opacity: 0;
+    transform: translateY(100px);
+
+    &.inview__in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__tb {
+    opacity: 0;
+    transform: translateY(-100px);
+
+    &.inview__in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__scale0010 {
+    opacity: 0;
+    transform: scale(0);
+
+    &.inview__in {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__scale0510 {
+    opacity: 0;
+    transform: scale(0.5);
+
+    &.inview__in {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__scale0910 {
+    opacity: 0;
+    transform: scale(0.9);
+
+    &.inview__in {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @for $i from 1 through 10 {
+    &__delay#{$i} {
+      transition-delay: #{$baseDelay * $i};
+    }
+  }
+
+  @for $i from 1 through 3 {
+    &__long#{$i} {
+      transition-duration: #{$baseDuration * ($i + 1)};
+    }
+  }
+}
