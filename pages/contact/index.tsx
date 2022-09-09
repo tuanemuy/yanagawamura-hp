@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { colors } from "variables";
 import { Page } from "unflexible-ui-next-page";
-import { Stacked, PlainText } from "unflexible-ui-core";
+import { Stacked } from "unflexible-ui-core";
 import { Header, Main, Footer } from "components/layout";
 import { Panel, Form } from "components/container";
 import { PageTitle } from "components/title";
@@ -41,8 +41,8 @@ const ContactPage: NextPage = () => {
     <Page
       title="お問い合わせ | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街"
       description="ヤナガワ村へのお問い合わせはこちらから。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」です。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
-      path="/contact"
-      ogType="website"
+      path="contact"
+      ogType="article"
       header={
         <Header title="お問い合わせ | 群馬県高崎市の飲み屋街【ヤナガワ村】" />
       }

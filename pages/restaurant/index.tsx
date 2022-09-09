@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import { colors } from "variables";
 import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns } from "unflexible-ui-core";
+import { Stacked, Columns, PlainText } from "unflexible-ui-core";
 import { Header, Main, Footer } from "components/layout";
 import { ListWithTitle, Panel } from "components/container";
+import { ToCategories, ToTags } from "components/button";
 import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
 import { SimplePagination } from "components/pagination";
@@ -21,6 +22,10 @@ import {
   Tag,
   useGetRestaurants,
   getGetRestaurantsPrefetcher,
+  useGetCategories,
+  getGetCategoriesPrefetcher,
+  useGetTags,
+  getGetTagsPrefetcher,
 } from "domains/restaurant";
 import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
 import { Event, useGetEvents, getGetEventsPrefetcher } from "domains/event";
@@ -47,7 +52,7 @@ export async function getStaticProps() {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -59,7 +64,7 @@ export async function getStaticProps() {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -78,6 +83,19 @@ export async function getStaticProps() {
       getEventsPrefetcher.key,
       getEventsPrefetcher.fetcher
     )
+  );
+
+  const getCategoriesPrefetcher = getGetCategoriesPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(
+      getCategoriesPrefetcher.key,
+      getCategoriesPrefetcher.fetcher
+    )
+  );
+
+  const getTagsPrefetcher = getGetTagsPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher)
   );
 
   await Promise.all(prefetches);
@@ -121,13 +139,13 @@ const RestaurantArchivePage: NextPage<Props> = ({
   const getInitialRestaurants = useGetRestaurants({
     limit,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const getRestaurants = useGetRestaurants({
     limit,
     offset: limit * (pageNumber - 1),
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
     options: {
       enabled: pageNumber !== 1,
     },
@@ -150,6 +168,10 @@ const RestaurantArchivePage: NextPage<Props> = ({
     orderBy: { created_at: Order_By.Desc },
   });
 
+  const { categories } = useGetCategories();
+
+  const { tags } = useGetTags();
+
   useEffect(() => {
     store.busy.setIsBusy(
       !getRestaurants.restaurants && getRestaurants.isFetching
@@ -159,8 +181,8 @@ const RestaurantArchivePage: NextPage<Props> = ({
   return (
     <Page
       title="飲食店 | 群馬県高崎市の飲み屋街「ヤナガワ村」"
-      description="ヤナガワ村"
-      path="/restaurant"
+      description="ヤナガワ村の飲食店情報です。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」には、「人」を目当てに飲みに行けるような、温かい飲食店がたくさんあります。昔ながらのディープで笑顔あふれる雰囲気をぜひお楽しみください。"
+      path="restaurant"
       ogType="article"
       header={<Header title="飲食店 | 群馬県高崎市の飲み屋街「ヤナガワ村」" />}
       footer={<Footer />}
@@ -203,7 +225,27 @@ const RestaurantArchivePage: NextPage<Props> = ({
         </Stacked>
 
         <Stacked paddingPos="top" paddingSize="thin" wrap isSection>
-          <Panel>a</Panel>
+          <Panel>
+            <Stacked paddingPos="none">
+              <PlainText>
+                <h3>カテゴリーで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToCategories postType="restaurant" categories={categories} />
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="narrow">
+              <PlainText>
+                <h3>タグで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToTags postType="restaurant" tags={tags} />
+            </Stacked>
+          </Panel>
         </Stacked>
 
         <Stacked paddingPos="top" wrap isSection>

@@ -1,7 +1,5 @@
 import { Post, Media, Category, Tag, Value } from "lib/graphql";
 import {
-  getTitle,
-  getCategory,
   getTags,
   getUpdatedAt,
   getValueOfField,
@@ -60,25 +58,23 @@ export class Menu {
   }
 
   static fromPost(post: Post): Menu {
-    const title = getTitle(post);
     const keyVisual = getValueOfField(post, "key_visual")?.media?.body;
     const overview = getValueOfField(post, "overview")?.text?.body;
     const details = getValueOfField(post, "details")?.text?.body;
-    const category = getCategory(post);
     const tags = getTags(post) || [];
     const updatedAt = getUpdatedAt(post);
 
-    if (!title || !keyVisual || !category || !updatedAt) {
+    if (!keyVisual || !updatedAt) {
       throw new Error("Failed to generate Shop from Post.");
     }
 
     return Menu.generate({
       id: post.id,
-      title,
+      title: post.title,
       keyVisual,
       overview,
       details,
-      category,
+      category: post.category,
       tags,
       createdAt: new Date(post.created_at),
       updatedAt,
@@ -111,17 +107,12 @@ export class Staff {
   }
 
   static fromPost(post: Post): Staff {
-    const title = getTitle(post);
     const keyVisual = getValueOfField(post, "key_visual")?.media?.body;
     const message = getValueOfField(post, "message")?.text?.body;
 
-    if (!title) {
-      throw new Error("Failed to generate Shop from Post.");
-    }
-
     return Staff.generate({
       id: post.id,
-      title,
+      title: post.title,
       message,
       keyVisual,
     });
@@ -206,7 +197,6 @@ export class Shop {
   }
 
   static fromPost(post: Post): Shop {
-    const title = getTitle(post);
     const address = getValueOfField(post, "address")?.text?.body;
     const hours = getValueOfField(post, "hours")?.text?.body;
     const holidays = getValueOfField(post, "holidays")?.text?.body;
@@ -249,18 +239,15 @@ export class Shop {
       .filter((s: Staff | null): s is Staff => s !== null);
 
     const googleMap = getValueOfField(post, "google_map")?.text?.body;
-    const category = getCategory(post);
     const tags = getTags(post) || [];
     const updatedAt = getUpdatedAt(post);
 
     if (
-      !title ||
       !address ||
       !hours ||
       !holidays ||
       !keyVisual ||
       !details ||
-      !category ||
       !updatedAt
     ) {
       throw new Error("Failed to generate Shop from Post.");
@@ -268,7 +255,7 @@ export class Shop {
 
     return Shop.generate({
       id: post.id,
-      title,
+      title: post.title,
       address,
       hours,
       holidays,
@@ -279,7 +266,7 @@ export class Shop {
       menu,
       staff,
       googleMap,
-      category,
+      category: post.category,
       tags,
       createdAt: new Date(post.created_at),
       updatedAt,

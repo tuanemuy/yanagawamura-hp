@@ -39,7 +39,13 @@ export async function getStaticProps({ params }: any) {
   const queryClient = new QueryClient();
   const prefetches = [];
 
-  const id = parseInt(params.id, 10) || 0;
+  const id = parseInt(params.id, 10);
+
+  if (Number.isNaN(id)) {
+    return {
+      notFound: true,
+    };
+  }
 
   const getNewsPrefetcher = getGetNewsPrefetcher({ id });
   prefetches.push(
@@ -49,7 +55,7 @@ export async function getStaticProps({ params }: any) {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -61,7 +67,7 @@ export async function getStaticProps({ params }: any) {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -103,13 +109,13 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -126,7 +132,7 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
         extractDescription(news?.body || "") ||
         "ヤナガワ村からのお知らせです。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
       }
-      path={`/news/${news?.id} || "/news"`}
+      path={`news/${news?.id || ""}`}
       ogType="article"
       header={<Header title={`${news?.title || "お知らせ"} | ヤナガワ村`} />}
       footer={<Footer />}

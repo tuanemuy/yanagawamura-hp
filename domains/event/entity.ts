@@ -1,11 +1,5 @@
 import { Post, Media, Category, Tag } from "lib/graphql";
-import {
-  getTitle,
-  getCategory,
-  getTags,
-  getUpdatedAt,
-  getValueOfField,
-} from "lib/cms";
+import { getTags, getUpdatedAt, getValueOfField } from "lib/cms";
 
 export type { Media, Category, Tag } from "lib/graphql";
 
@@ -71,39 +65,29 @@ export class Event {
   }
 
   static fromPost(post: Post): Event {
-    const title = getTitle(post);
     const overview = getValueOfField(post, "overview")?.text?.body;
     const schedule = getValueOfField(post, "schedule")?.text?.body;
     const location = getValueOfField(post, "location")?.text?.body;
     const keyVisual = getValueOfField(post, "key_visual")?.media?.body;
     const details = getValueOfField(post, "details")?.text?.body;
     const googleMap = getValueOfField(post, "google_map")?.text?.body;
-    const category = getCategory(post);
     const tags = getTags(post) || [];
     const updatedAt = getUpdatedAt(post);
 
-    if (
-      !title ||
-      !schedule ||
-      !location ||
-      !keyVisual ||
-      !details ||
-      !category ||
-      !updatedAt
-    ) {
+    if (!schedule || !location || !keyVisual || !details || !updatedAt) {
       throw new Error("Failed to generate Restaurant from Post.");
     }
 
     return Event.generate({
       id: post.id,
-      title,
+      title: post.title,
       overview,
       schedule,
       location,
       keyVisual,
       details,
       googleMap,
-      category,
+      category: post.category,
       tags,
       createdAt: new Date(post.created_at),
       updatedAt,

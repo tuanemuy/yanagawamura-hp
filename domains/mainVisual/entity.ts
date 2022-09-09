@@ -1,5 +1,5 @@
 import { Post, Media } from "lib/graphql";
-import { getTitle, getValueOfField } from "lib/cms";
+import { getValueOfField } from "lib/cms";
 
 type GenerateMainVisualVariables = {
   id: number;
@@ -32,19 +32,18 @@ export class MainVisual {
   }
 
   static fromPost(post: Post): MainVisual {
-    const title = getTitle(post);
     const url = getValueOfField(post, "url")?.text?.body;
     const image = getValueOfField(post, "image")?.media?.body;
     const mobileImage = getValueOfField(post, "image_mobile")?.media?.body;
     const priority = getValueOfField(post, "priority")?.integer?.body;
 
-    if (!title || !url || !image || !mobileImage || !priority) {
+    if (!url || !image || !mobileImage || !priority) {
       throw new Error("Failed to generate MainVisual from Post.");
     }
 
     return MainVisual.generate({
       id: post.id,
-      title,
+      title: post.title,
       url,
       image,
       mobileImage,

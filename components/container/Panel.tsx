@@ -21,4 +21,8 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.m}px) {
     padding: ${sizes.gapL};
   }
+
+  @media only screen and (max-width: ${screens.xs}px) {
+    padding: calc(${sizes.gapM} * 1.5);
+  }
 `;

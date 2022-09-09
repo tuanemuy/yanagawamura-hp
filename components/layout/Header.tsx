@@ -19,7 +19,11 @@ export const Header = ({ title }: Props) => {
       <div className="inner">
         <Sitelogo href="/">
           <div className="icon">
-            <img src={url("images/icon_yanagawa_icon.png")} alt="アイコン" width="70" />
+            <img
+              src={url("images/icon_yanagawa_icon.png")}
+              alt="アイコン"
+              width="70"
+            />
           </div>
 
           <div className="text">
@@ -237,7 +241,6 @@ const Sitelogo = styled.a`
     }
 
     h1 {
-      max-width: 300px;
       font-size: 0.7rem;
       font-weight: 700;
       line-height: 1.5;
@@ -254,6 +257,18 @@ const Sitelogo = styled.a`
     .text {
       img {
         height: 27px;
+      }
+
+      h1 {
+        max-width: 245px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: ${screens.m}px) {
+    .text {
+      h1 {
+        max-width: none;
       }
     }
   }

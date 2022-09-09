@@ -13,7 +13,7 @@ const PrivacyPage: NextPage = () => {
     <Page
       title="個人情報保護方針 | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街"
       description="ヤナガワ村の個人情報保護方針です。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」です。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
-      path="/privacy-policy"
+      path="privacy-policy"
       ogType="article"
       header={
         <Header title="個人情報保護方針 | 群馬県高崎市の飲み屋街【ヤナガワ村】" />

@@ -21,7 +21,6 @@ export const PageTitle = ({ title }: Props) => {
         h2Color={colors.white}
         h2SizeXL="2rem"
         h2SizeM="1.5rem"
-        h2SizeXS="1.25rem"
         h2Align="center"
         h2LetterSpacing=".1em"
       >

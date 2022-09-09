@@ -47,7 +47,7 @@ export async function getStaticProps({ params }: any) {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -89,7 +89,7 @@ const ShopSinglePage: NextPage<Props> = ({ id }) => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -106,7 +106,7 @@ const ShopSinglePage: NextPage<Props> = ({ id }) => {
         extractDescription(shop?.details || "") ||
         "ヤナガワ村の物販・サービス店情報です。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」には、チェーン店はほとんどありません。その代わりに様々な個性溢れる店舗が立ち並びます。昭和の香りが漂うこの街をぜひお楽しみください。"
       }
-      path={`/shop/${shop?.id} || "/shop"`}
+      path={`shop/${shop?.id || ""}`}
       ogType="article"
       header={
         <Header title={`${shop?.title || "物販・サービス店"} | ヤナガワ村`} />

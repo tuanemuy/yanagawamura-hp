@@ -4,6 +4,7 @@ import { Page } from "unflexible-ui-next-page";
 import { Stacked, Columns, PlainText } from "unflexible-ui-core";
 import { Header, Main, Footer } from "components/layout";
 import { ListWithTitle, Panel } from "components/container";
+import { ToCategories, ToTags } from "components/button";
 import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
 import { Single } from "domains/restaurant";
@@ -15,6 +16,10 @@ import { Order_By } from "lib/graphql";
 import {
   useGetRestaurant,
   getGetRestaurantPrefetcher,
+  useGetCategories,
+  getGetCategoriesPrefetcher,
+  useGetTags,
+  getGetTagsPrefetcher,
 } from "domains/restaurant";
 import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
 import { Event, useGetEvents, getGetEventsPrefetcher } from "domains/event";
@@ -49,7 +54,7 @@ export async function getStaticProps({ params }: any) {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -68,6 +73,19 @@ export async function getStaticProps({ params }: any) {
       getEventsPrefetcher.key,
       getEventsPrefetcher.fetcher
     )
+  );
+
+  const getCategoriesPrefetcher = getGetCategoriesPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(
+      getCategoriesPrefetcher.key,
+      getCategoriesPrefetcher.fetcher
+    )
+  );
+
+  const getTagsPrefetcher = getGetTagsPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher)
   );
 
   await Promise.all(prefetches);
@@ -91,7 +109,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -99,6 +117,10 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
     offset: 0,
     orderBy: { created_at: Order_By.Desc },
   });
+
+  const { categories } = useGetCategories();
+
+  const { tags } = useGetTags();
 
   return (
     <Page
@@ -108,7 +130,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
         extractDescription(restaurant?.details || "") ||
         "ヤナガワ村の飲食店情報です。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」には、「人」を目当てに飲みに行けるような、温かい飲食店がたくさんあります。昔ながらのディープで笑顔あふれる雰囲気をぜひお楽しみください。"
       }
-      path={`/restaurant/${restaurant?.id} || "/restaurant"`}
+      path={`restaurant/${restaurant?.id || ""}`}
       ogType="article"
       header={
         <Header title={`${restaurant?.title || "飲食店"} | ヤナガワ村`} />
@@ -131,6 +153,30 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
               )}
             </Panel>
           </Columns>
+        </Stacked>
+
+        <Stacked paddingPos="top" paddingSize="thin" wrap isSection>
+          <Panel>
+            <Stacked paddingPos="none">
+              <PlainText>
+                <h3>カテゴリーで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToCategories postType="restaurant" categories={categories} />
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="narrow">
+              <PlainText>
+                <h3>タグで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToTags postType="restaurant" tags={tags} />
+            </Stacked>
+          </Panel>
         </Stacked>
 
         <Stacked paddingPos="top" wrap isSection>

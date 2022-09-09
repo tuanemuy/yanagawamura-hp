@@ -22,9 +22,21 @@ query GetPosts(
     }
   ) {
     id
-    contents(order_by: { created_at: desc }) {
+    title
+    category {
       id
-      title
+      slug
+      name
+    }
+    tags(order_by: { tag_id: asc }) {
+      tag {
+        id
+        slug
+        name
+      }
+    }
+    revisions(order_by: { created_at: desc }) {
+      id
       created_at
       values {
         id
@@ -55,9 +67,10 @@ query GetPosts(
         post {
           body {
             id
-            contents(order_by: { created_at: desc }) {
+            title
+            created_at
+            revisions(order_by: { created_at: desc }) {
               id
-              title
               created_at
               values {
                 id
@@ -88,9 +101,7 @@ query GetPosts(
                 post {
                   body {
                     id
-                    contents {
-                      title
-                    }
+                    title
                   }
                 }
                 timestamp {
@@ -108,18 +119,6 @@ query GetPosts(
         }
         boolean {
           body
-        }
-      }
-      category {
-        id
-        slug
-        name
-      }
-      tags(order_by: { tag_id: asc }) {
-        tag {
-          id
-          slug
-          name
         }
       }
     }

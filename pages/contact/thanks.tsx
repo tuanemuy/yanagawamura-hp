@@ -14,7 +14,7 @@ const ContactThanksPage: NextPage = () => {
     <Page
       title="お問い合わせ完了 | 群馬県高崎市の飲み屋街【ヤナガワ村】"
       description="お問い合わせありがとうございます。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」です。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
-      path="/contact/thanks"
+      path="contact/thanks"
       ogType="article"
       header={
         <Header title="お問い合わせ完了 | 群馬県高崎市の飲み屋街【ヤナガワ村】" />

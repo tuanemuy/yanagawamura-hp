@@ -13,7 +13,7 @@ export const Footer = ({}: Props) => {
 
   return (
     <Component>
-      <Stacked paddingPos="both" paddingSize="narrow" wrap>
+      <Stacked paddingPos="top" paddingSize="narrow" wrap>
         <Stacked paddingPos="none">
           <div className="inner">
             <div className="info">
@@ -99,6 +99,40 @@ export const Footer = ({}: Props) => {
             />
           </Columns>
         </Stacked>
+      </Stacked>
+
+      <Stacked paddingSize="narrow" wrap>
+        <Sitemap>
+          <ul>
+            <li>
+              <a href={url('about')}>ヤナガワ村とは</a>
+            </li>
+            <li>
+              <a href={url('restaurant')}>飲食</a>
+            </li>
+            <li>
+              <a href={url('shop')}>物販・サービス</a>
+            </li>
+            <li>
+              <a href={url('event')}>イベント</a>
+            </li>
+            <li>
+              <a href={url('news')}>お知らせ</a>
+            </li>
+            <li>
+              <a href={url('villager')}>ヤナガワ村民について</a>
+            </li>
+            <li>
+              <a href={url('wanted')}>協力してくれる方募集</a>
+            </li>
+            <li>
+              <a href={url('contact')}>お問い合わせ</a>
+            </li>
+            <li>
+              <a href={url('privacy-policy')}>個人情報保護方針</a>
+            </li>
+          </ul>
+        </Sitemap>
       </Stacked>
 
       <Stacked paddingPos="none">
@@ -191,5 +225,25 @@ const Menu = styled.ul`
 
   @media only screen and (max-width: 1192px) {
     display: none;
+  }
+`;
+
+const Sitemap = styled.div`
+  ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: ${sizes.gapL};
+
+    a {
+      text-decoration: none;
+      color: ${colors.black};
+      font-weight: 700;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 `;

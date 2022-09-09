@@ -2,14 +2,23 @@ import { UseQueryOptions, QueryKey } from "@tanstack/react-query";
 import {
   Order_By,
   Post,
+  Post_Tag,
+  Category,
+  Tag,
   GetPostQuery,
   GetPostsQuery,
+  GetTaggedPostsQuery,
+  GetCategorizedPostsQuery,
   graphQLClient,
   useGetPostsQuery,
   useGetPostQuery,
+  useGetTaggedPostsQuery,
+  useGetCategorizedPostsQuery,
+  useGetCategoriesQuery,
+  useGetTagsQuery,
 } from "lib/graphql";
 import { Shop } from "./";
-import { InputMaybe, Post_Order_By } from "lib/graphql";
+import { InputMaybe, Post_Order_By, Post_Tag_Order_By } from "lib/graphql";
 
 type GetShopVariables = {
   id: number;
@@ -101,5 +110,212 @@ export function useGetShops({
     isFetching: getShops.isFetching,
     shops,
     count: getShops.data?.post_aggregate.aggregate?.count || 0,
+  };
+}
+
+type GetTaggedShopsVariables = {
+  tagId: number;
+  limit?: number;
+  offset?: number;
+  orderBy?: InputMaybe<Post_Tag_Order_By[] | Post_Tag_Order_By>;
+  options?: UseQueryOptions<
+    GetTaggedPostsQuery,
+    unknown,
+    GetTaggedPostsQuery,
+    QueryKey
+  >;
+};
+
+export function getGetTaggedShopsPrefetcher({
+  tagId,
+  limit,
+  offset,
+  orderBy,
+}: GetTaggedShopsVariables) {
+  const key = useGetTaggedPostsQuery.getKey({
+    tag_id: tagId,
+    post_type_slug: ["shop"],
+    limit: limit || 9,
+    offset: offset || 0,
+    order_by: orderBy || { post: { created_at: Order_By.Desc } },
+  });
+
+  const fetcher = useGetTaggedPostsQuery.fetcher(graphQLClient, {
+    tag_id: tagId,
+    post_type_slug: ["shop"],
+    limit: limit || 9,
+    offset: offset || 0,
+    order_by: orderBy || { post: { created_at: Order_By.Desc } },
+  });
+
+  return {
+    key,
+    fetcher,
+  };
+}
+
+export function useGetTaggedShops({
+  tagId,
+  limit,
+  offset,
+  orderBy,
+  options,
+}: GetTaggedShopsVariables) {
+  const getTaggedShops = useGetTaggedPostsQuery(
+    graphQLClient,
+    {
+      tag_id: tagId,
+      post_type_slug: ["shop"],
+      limit: limit || 9,
+      offset: offset || 0,
+      order_by: orderBy || { post: { created_at: Order_By.Desc } },
+    },
+    options
+  );
+
+  const taggedShops = (
+    (getTaggedShops.data?.tag_by_pk?.posts as Post_Tag[]) || []
+  )
+    .map((pt: Post_Tag) => {
+      try {
+        return Shop.fromPost(pt.post);
+      } catch {
+        return null;
+      }
+    })
+    .filter((item: Shop | null): item is Shop => item !== null);
+
+  return {
+    isFetching: getTaggedShops.isFetching,
+    taggedShops,
+    count:
+      getTaggedShops.data?.tag_by_pk?.posts_aggregate.aggregate?.count || 0,
+  };
+}
+
+type GetCategorizedShopsVariables = {
+  categoryId: number;
+  limit?: number;
+  offset?: number;
+  orderBy?: InputMaybe<Post_Order_By[] | Post_Order_By>;
+  options?: UseQueryOptions<
+    GetCategorizedPostsQuery,
+    unknown,
+    GetCategorizedPostsQuery,
+    QueryKey
+  >;
+};
+
+export function getGetCategorizedShopsPrefetcher({
+  categoryId,
+  limit,
+  offset,
+  orderBy,
+}: GetCategorizedShopsVariables) {
+  const key = useGetCategorizedPostsQuery.getKey({
+    category_id: categoryId,
+    post_type_slug: ["shop"],
+    limit: limit || 9,
+    offset: offset || 0,
+    order_by: orderBy || { created_at: Order_By.Desc },
+  });
+
+  const fetcher = useGetCategorizedPostsQuery.fetcher(graphQLClient, {
+    category_id: categoryId,
+    post_type_slug: ["shop"],
+    limit: limit || 9,
+    offset: offset || 0,
+    order_by: orderBy || { created_at: Order_By.Desc },
+  });
+
+  return {
+    key,
+    fetcher,
+  };
+}
+
+export function useGetCategorizedShops({
+  categoryId,
+  limit,
+  offset,
+  orderBy,
+  options,
+}: GetCategorizedShopsVariables) {
+  const getCategorizedShops = useGetCategorizedPostsQuery(
+    graphQLClient,
+    {
+      category_id: categoryId,
+      post_type_slug: ["shop"],
+      limit: limit || 9,
+      offset: offset || 0,
+      order_by: orderBy || { created_at: Order_By.Desc },
+    },
+    options
+  );
+
+  const categorizedShops = (
+    (getCategorizedShops.data?.category_by_pk?.posts as Post[]) || []
+  )
+    .map((p: Post) => {
+      try {
+        return Shop.fromPost(p);
+      } catch {
+        return null;
+      }
+    })
+    .filter((item: Shop | null): item is Shop => item !== null);
+
+  return {
+    isFetching: getCategorizedShops.isFetching,
+    categorizedShops,
+    count:
+      getCategorizedShops.data?.category_by_pk?.posts_aggregate.aggregate
+        ?.count || 0,
+  };
+}
+
+export function getGetCategoriesPrefetcher() {
+  const key = useGetCategoriesQuery.getKey({
+    post_type_slug: ["shop"],
+  });
+
+  const fetcher = useGetPostsQuery.fetcher(graphQLClient, {
+    post_type_slug: ["shop"],
+  });
+
+  return {
+    key,
+    fetcher,
+  };
+}
+
+export function useGetCategories() {
+  const getCategories = useGetCategoriesQuery(graphQLClient, {
+    post_type_slug: ["shop"],
+  });
+
+  return {
+    isFetching: getCategories.isFetching,
+    categories: (getCategories.data?.category as Category[]) || [],
+  };
+}
+
+export function getGetTagsPrefetcher() {
+  const key = useGetTagsQuery.getKey();
+
+  const fetcher = useGetPostsQuery.fetcher(graphQLClient);
+
+  return {
+    key,
+    fetcher,
+  };
+}
+
+export function useGetTags() {
+  const getTags = useGetTagsQuery(graphQLClient);
+
+  return {
+    isFetching: getTags.isFetching,
+    tags: (getTags.data?.tag as Tag[]) || [],
   };
 }

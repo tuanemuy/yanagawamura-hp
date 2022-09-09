@@ -4,6 +4,7 @@ import { Page } from "unflexible-ui-next-page";
 import { Stacked, Columns, Block, PlainText } from "unflexible-ui-core";
 import { Header, Main, Footer } from "components/layout";
 import { ListWithTitle, PlainList, Panel } from "components/container";
+import { ToCategories, ToTags } from "components/button";
 import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
 import { SimplePagination } from "components/pagination";
@@ -20,6 +21,10 @@ import {
   News,
   useGetNewsArchive,
   getGetNewsArchivePrefetcher,
+  useGetCategories,
+  getGetCategoriesPrefetcher,
+  useGetTags,
+  getGetTagsPrefetcher,
 } from "domains/news";
 import {
   Restaurant,
@@ -63,7 +68,7 @@ export async function getStaticProps() {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -75,13 +80,26 @@ export async function getStaticProps() {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
       getShopsPrefetcher.fetcher
     )
+  );
+
+  const getCategoriesPrefetcher = getGetCategoriesPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(
+      getCategoriesPrefetcher.key,
+      getCategoriesPrefetcher.fetcher
+    )
+  );
+
+  const getTagsPrefetcher = getGetTagsPrefetcher();
+  prefetches.push(
+    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher)
   );
 
   await Promise.all(prefetches);
@@ -131,13 +149,13 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -145,6 +163,10 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
     offset: 0,
     orderBy: { created_at: Order_By.Desc },
   });
+
+  const { categories } = useGetCategories();
+
+  const { tags } = useGetTags();
 
   useEffect(() => {
     store.busy.setIsBusy(
@@ -156,7 +178,7 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
     <Page
       title="お知らせ | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街"
       description="ヤナガワ村からのお知らせです。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
-      path="/news"
+      path="news"
       ogType="article"
       header={
         <Header title="お知らせ | 群馬県高崎市の飲み屋街【ヤナガワ村】" />
@@ -199,6 +221,30 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
               </Panel>
             </Block>
           </Columns>
+        </Stacked>
+
+        <Stacked paddingPos="top" paddingSize="thin" wrap isSection>
+          <Panel>
+            <Stacked paddingPos="none">
+              <PlainText>
+                <h3>カテゴリーで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToCategories postType="news" categories={categories} />
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="narrow">
+              <PlainText>
+                <h3>タグで検索</h3>
+              </PlainText>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <ToTags postType="news" tags={tags} />
+            </Stacked>
+          </Panel>
         </Stacked>
 
         <Stacked paddingPos="top" wrap isSection>

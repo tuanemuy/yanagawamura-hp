@@ -130,8 +130,71 @@ export type Category = {
   created_at: Scalars['timestamptz'];
   id: Scalars['Int'];
   name: Scalars['String'];
+  /** An object relationship */
+  post_type: Post_Type;
   post_type_id: Scalars['Int'];
+  /** An array relationship */
+  posts: Array<Post>;
+  /** An aggregate relationship */
+  posts_aggregate: Post_Aggregate;
   slug: Scalars['String'];
+};
+
+
+/** columns and relationships of "category" */
+export type CategoryPostsArgs = {
+  distinct_on?: InputMaybe<Array<Post_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Order_By>>;
+  where?: InputMaybe<Post_Bool_Exp>;
+};
+
+
+/** columns and relationships of "category" */
+export type CategoryPosts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Post_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Order_By>>;
+  where?: InputMaybe<Post_Bool_Exp>;
+};
+
+/** aggregated selection of "category" */
+export type Category_Aggregate = {
+  __typename?: 'category_aggregate';
+  aggregate?: Maybe<Category_Aggregate_Fields>;
+  nodes: Array<Category>;
+};
+
+/** aggregate fields of "category" */
+export type Category_Aggregate_Fields = {
+  __typename?: 'category_aggregate_fields';
+  avg?: Maybe<Category_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Category_Max_Fields>;
+  min?: Maybe<Category_Min_Fields>;
+  stddev?: Maybe<Category_Stddev_Fields>;
+  stddev_pop?: Maybe<Category_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Category_Stddev_Samp_Fields>;
+  sum?: Maybe<Category_Sum_Fields>;
+  var_pop?: Maybe<Category_Var_Pop_Fields>;
+  var_samp?: Maybe<Category_Var_Samp_Fields>;
+  variance?: Maybe<Category_Variance_Fields>;
+};
+
+
+/** aggregate fields of "category" */
+export type Category_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Category_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Category_Avg_Fields = {
+  __typename?: 'category_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "category". All fields are combined with a logical 'AND'. */
@@ -142,8 +205,30 @@ export type Category_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  post_type?: InputMaybe<Post_Type_Bool_Exp>;
   post_type_id?: InputMaybe<Int_Comparison_Exp>;
+  posts?: InputMaybe<Post_Bool_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Category_Max_Fields = {
+  __typename?: 'category_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  post_type_id?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Category_Min_Fields = {
+  __typename?: 'category_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  post_type_id?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['String']>;
 };
 
 /** Ordering options when selecting data from "category". */
@@ -151,7 +236,9 @@ export type Category_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  post_type?: InputMaybe<Post_Type_Order_By>;
   post_type_id?: InputMaybe<Order_By>;
+  posts_aggregate?: InputMaybe<Post_Aggregate_Order_By>;
   slug?: InputMaybe<Order_By>;
 };
 
@@ -169,6 +256,55 @@ export enum Category_Select_Column {
   Slug = 'slug'
 }
 
+/** aggregate stddev on columns */
+export type Category_Stddev_Fields = {
+  __typename?: 'category_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Category_Stddev_Pop_Fields = {
+  __typename?: 'category_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Category_Stddev_Samp_Fields = {
+  __typename?: 'category_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Category_Sum_Fields = {
+  __typename?: 'category_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  post_type_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type Category_Var_Pop_Fields = {
+  __typename?: 'category_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Category_Var_Samp_Fields = {
+  __typename?: 'category_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Category_Variance_Fields = {
+  __typename?: 'category_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_type_id?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "content" */
 export type Content = {
   __typename?: 'content';
@@ -183,8 +319,6 @@ export type Content = {
   /** An array relationship */
   tags: Array<Content_Tag>;
   title: Scalars['String'];
-  /** An array relationship */
-  values: Array<Value>;
 };
 
 
@@ -195,16 +329,6 @@ export type ContentTagsArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Content_Tag_Order_By>>;
   where?: InputMaybe<Content_Tag_Bool_Exp>;
-};
-
-
-/** columns and relationships of "content" */
-export type ContentValuesArgs = {
-  distinct_on?: InputMaybe<Array<Value_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Value_Order_By>>;
-  where?: InputMaybe<Value_Bool_Exp>;
 };
 
 /** aggregated selection of "content" */
@@ -280,7 +404,6 @@ export type Content_Bool_Exp = {
   post_id?: InputMaybe<Bigint_Comparison_Exp>;
   tags?: InputMaybe<Content_Tag_Bool_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
-  values?: InputMaybe<Value_Bool_Exp>;
 };
 
 /** aggregate max on columns */
@@ -331,7 +454,6 @@ export type Content_Order_By = {
   post_id?: InputMaybe<Order_By>;
   tags_aggregate?: InputMaybe<Content_Tag_Aggregate_Order_By>;
   title?: InputMaybe<Order_By>;
-  values_aggregate?: InputMaybe<Value_Aggregate_Order_By>;
 };
 
 /** select columns of table "content" */
@@ -965,6 +1087,9 @@ export enum Order_By {
 /** post */
 export type Post = {
   __typename?: 'post';
+  /** An object relationship */
+  category: Category;
+  category_id: Scalars['Int'];
   /** An array relationship */
   contents: Array<Content>;
   /** An aggregate relationship */
@@ -975,6 +1100,15 @@ export type Post = {
   /** An object relationship */
   post_type: Post_Type;
   post_type_id: Scalars['Int'];
+  /** An array relationship */
+  revisions: Array<Revision>;
+  /** An aggregate relationship */
+  revisions_aggregate: Revision_Aggregate;
+  /** An array relationship */
+  tags: Array<Post_Tag>;
+  /** An aggregate relationship */
+  tags_aggregate: Post_Tag_Aggregate;
+  title: Scalars['String'];
 };
 
 
@@ -995,6 +1129,46 @@ export type PostContents_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Content_Order_By>>;
   where?: InputMaybe<Content_Bool_Exp>;
+};
+
+
+/** post */
+export type PostRevisionsArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+/** post */
+export type PostRevisions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+/** post */
+export type PostTagsArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+/** post */
+export type PostTags_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
 };
 
 /** aggregated selection of "post" */
@@ -1027,11 +1201,34 @@ export type Post_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "post" */
+export type Post_Aggregate_Order_By = {
+  avg?: InputMaybe<Post_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Post_Max_Order_By>;
+  min?: InputMaybe<Post_Min_Order_By>;
+  stddev?: InputMaybe<Post_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Post_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Post_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Post_Sum_Order_By>;
+  var_pop?: InputMaybe<Post_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Post_Var_Samp_Order_By>;
+  variance?: InputMaybe<Post_Variance_Order_By>;
+};
+
 /** aggregate avg on columns */
 export type Post_Avg_Fields = {
   __typename?: 'post_avg_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "post" */
+export type Post_Avg_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "post". All fields are combined with a logical 'AND'. */
@@ -1039,44 +1236,80 @@ export type Post_Bool_Exp = {
   _and?: InputMaybe<Array<Post_Bool_Exp>>;
   _not?: InputMaybe<Post_Bool_Exp>;
   _or?: InputMaybe<Array<Post_Bool_Exp>>;
+  category?: InputMaybe<Category_Bool_Exp>;
+  category_id?: InputMaybe<Int_Comparison_Exp>;
   contents?: InputMaybe<Content_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deleted_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   post_type?: InputMaybe<Post_Type_Bool_Exp>;
   post_type_id?: InputMaybe<Int_Comparison_Exp>;
+  revisions?: InputMaybe<Revision_Bool_Exp>;
+  tags?: InputMaybe<Post_Tag_Bool_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
 export type Post_Max_Fields = {
   __typename?: 'post_max_fields';
+  category_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deleted_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['bigint']>;
   post_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "post" */
+export type Post_Max_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  deleted_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Post_Min_Fields = {
   __typename?: 'post_min_fields';
+  category_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   deleted_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['bigint']>;
   post_type_id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "post" */
+export type Post_Min_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  deleted_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "post". */
 export type Post_Order_By = {
+  category?: InputMaybe<Category_Order_By>;
+  category_id?: InputMaybe<Order_By>;
   contents_aggregate?: InputMaybe<Content_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   deleted_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   post_type?: InputMaybe<Post_Type_Order_By>;
   post_type_id?: InputMaybe<Order_By>;
+  revisions_aggregate?: InputMaybe<Revision_Aggregate_Order_By>;
+  tags_aggregate?: InputMaybe<Post_Tag_Aggregate_Order_By>;
+  title?: InputMaybe<Order_By>;
 };
 
 /** select columns of table "post" */
 export enum Post_Select_Column {
+  /** column name */
+  CategoryId = 'category_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1084,35 +1317,282 @@ export enum Post_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  PostTypeId = 'post_type_id'
+  PostTypeId = 'post_type_id',
+  /** column name */
+  Title = 'title'
 }
 
 /** aggregate stddev on columns */
 export type Post_Stddev_Fields = {
   __typename?: 'post_stddev_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "post" */
+export type Post_Stddev_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Post_Stddev_Pop_Fields = {
   __typename?: 'post_stddev_pop_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "post" */
+export type Post_Stddev_Pop_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Post_Stddev_Samp_Fields = {
   __typename?: 'post_stddev_samp_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "post" */
+export type Post_Stddev_Samp_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Post_Sum_Fields = {
   __typename?: 'post_sum_fields';
+  category_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['bigint']>;
   post_type_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "post" */
+export type Post_Sum_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "post_tag" */
+export type Post_Tag = {
+  __typename?: 'post_tag';
+  /** An object relationship */
+  post: Post;
+  post_id: Scalars['bigint'];
+  /** An object relationship */
+  tag: Tag;
+  tag_id: Scalars['Int'];
+};
+
+/** aggregated selection of "post_tag" */
+export type Post_Tag_Aggregate = {
+  __typename?: 'post_tag_aggregate';
+  aggregate?: Maybe<Post_Tag_Aggregate_Fields>;
+  nodes: Array<Post_Tag>;
+};
+
+/** aggregate fields of "post_tag" */
+export type Post_Tag_Aggregate_Fields = {
+  __typename?: 'post_tag_aggregate_fields';
+  avg?: Maybe<Post_Tag_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Post_Tag_Max_Fields>;
+  min?: Maybe<Post_Tag_Min_Fields>;
+  stddev?: Maybe<Post_Tag_Stddev_Fields>;
+  stddev_pop?: Maybe<Post_Tag_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Post_Tag_Stddev_Samp_Fields>;
+  sum?: Maybe<Post_Tag_Sum_Fields>;
+  var_pop?: Maybe<Post_Tag_Var_Pop_Fields>;
+  var_samp?: Maybe<Post_Tag_Var_Samp_Fields>;
+  variance?: Maybe<Post_Tag_Variance_Fields>;
+};
+
+
+/** aggregate fields of "post_tag" */
+export type Post_Tag_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "post_tag" */
+export type Post_Tag_Aggregate_Order_By = {
+  avg?: InputMaybe<Post_Tag_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Post_Tag_Max_Order_By>;
+  min?: InputMaybe<Post_Tag_Min_Order_By>;
+  stddev?: InputMaybe<Post_Tag_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Post_Tag_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Post_Tag_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Post_Tag_Sum_Order_By>;
+  var_pop?: InputMaybe<Post_Tag_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Post_Tag_Var_Samp_Order_By>;
+  variance?: InputMaybe<Post_Tag_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Post_Tag_Avg_Fields = {
+  __typename?: 'post_tag_avg_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "post_tag" */
+export type Post_Tag_Avg_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "post_tag". All fields are combined with a logical 'AND'. */
+export type Post_Tag_Bool_Exp = {
+  _and?: InputMaybe<Array<Post_Tag_Bool_Exp>>;
+  _not?: InputMaybe<Post_Tag_Bool_Exp>;
+  _or?: InputMaybe<Array<Post_Tag_Bool_Exp>>;
+  post?: InputMaybe<Post_Bool_Exp>;
+  post_id?: InputMaybe<Bigint_Comparison_Exp>;
+  tag?: InputMaybe<Tag_Bool_Exp>;
+  tag_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Post_Tag_Max_Fields = {
+  __typename?: 'post_tag_max_fields';
+  post_id?: Maybe<Scalars['bigint']>;
+  tag_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "post_tag" */
+export type Post_Tag_Max_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Post_Tag_Min_Fields = {
+  __typename?: 'post_tag_min_fields';
+  post_id?: Maybe<Scalars['bigint']>;
+  tag_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "post_tag" */
+export type Post_Tag_Min_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "post_tag". */
+export type Post_Tag_Order_By = {
+  post?: InputMaybe<Post_Order_By>;
+  post_id?: InputMaybe<Order_By>;
+  tag?: InputMaybe<Tag_Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "post_tag" */
+export enum Post_Tag_Select_Column {
+  /** column name */
+  PostId = 'post_id',
+  /** column name */
+  TagId = 'tag_id'
+}
+
+/** aggregate stddev on columns */
+export type Post_Tag_Stddev_Fields = {
+  __typename?: 'post_tag_stddev_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "post_tag" */
+export type Post_Tag_Stddev_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Post_Tag_Stddev_Pop_Fields = {
+  __typename?: 'post_tag_stddev_pop_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "post_tag" */
+export type Post_Tag_Stddev_Pop_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Post_Tag_Stddev_Samp_Fields = {
+  __typename?: 'post_tag_stddev_samp_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "post_tag" */
+export type Post_Tag_Stddev_Samp_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Post_Tag_Sum_Fields = {
+  __typename?: 'post_tag_sum_fields';
+  post_id?: Maybe<Scalars['bigint']>;
+  tag_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "post_tag" */
+export type Post_Tag_Sum_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Post_Tag_Var_Pop_Fields = {
+  __typename?: 'post_tag_var_pop_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "post_tag" */
+export type Post_Tag_Var_Pop_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Post_Tag_Var_Samp_Fields = {
+  __typename?: 'post_tag_var_samp_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "post_tag" */
+export type Post_Tag_Var_Samp_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Post_Tag_Variance_Fields = {
+  __typename?: 'post_tag_variance_fields';
+  post_id?: Maybe<Scalars['Float']>;
+  tag_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "post_tag" */
+export type Post_Tag_Variance_Order_By = {
+  post_id?: InputMaybe<Order_By>;
+  tag_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "post_type" */
@@ -1211,22 +1691,46 @@ export enum Post_Value_Select_Column {
 /** aggregate var_pop on columns */
 export type Post_Var_Pop_Fields = {
   __typename?: 'post_var_pop_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "post" */
+export type Post_Var_Pop_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Post_Var_Samp_Fields = {
   __typename?: 'post_var_samp_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "post" */
+export type Post_Var_Samp_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Post_Variance_Fields = {
   __typename?: 'post_variance_fields';
+  category_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   post_type_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "post" */
+export type Post_Variance_Order_By = {
+  category_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_type_id?: InputMaybe<Order_By>;
 };
 
 export type Query_Root = {
@@ -1237,6 +1741,8 @@ export type Query_Root = {
   boolean_value_by_pk?: Maybe<Boolean_Value>;
   /** fetch data from the table: "category" */
   category: Array<Category>;
+  /** fetch aggregated fields from the table: "category" */
+  category_aggregate: Category_Aggregate;
   /** fetch data from the table: "category" using primary key columns */
   category_by_pk?: Maybe<Category>;
   /** fetch data from the table: "content" */
@@ -1279,6 +1785,12 @@ export type Query_Root = {
   post_aggregate: Post_Aggregate;
   /** fetch data from the table: "post" using primary key columns */
   post_by_pk?: Maybe<Post>;
+  /** fetch data from the table: "post_tag" */
+  post_tag: Array<Post_Tag>;
+  /** fetch aggregated fields from the table: "post_tag" */
+  post_tag_aggregate: Post_Tag_Aggregate;
+  /** fetch data from the table: "post_tag" using primary key columns */
+  post_tag_by_pk?: Maybe<Post_Tag>;
   /** fetch data from the table: "post_type" */
   post_type: Array<Post_Type>;
   /** fetch data from the table: "post_type" using primary key columns */
@@ -1287,8 +1799,16 @@ export type Query_Root = {
   post_value: Array<Post_Value>;
   /** fetch data from the table: "post_value" using primary key columns */
   post_value_by_pk?: Maybe<Post_Value>;
+  /** fetch data from the table: "revision" */
+  revision: Array<Revision>;
+  /** fetch aggregated fields from the table: "revision" */
+  revision_aggregate: Revision_Aggregate;
+  /** fetch data from the table: "revision" using primary key columns */
+  revision_by_pk?: Maybe<Revision>;
   /** fetch data from the table: "tag" */
   tag: Array<Tag>;
+  /** fetch aggregated fields from the table: "tag" */
+  tag_aggregate: Tag_Aggregate;
   /** fetch data from the table: "tag" using primary key columns */
   tag_by_pk?: Maybe<Tag>;
   /** fetch data from the table: "text_value" */
@@ -1321,6 +1841,15 @@ export type Query_RootBoolean_Value_By_PkArgs = {
 
 
 export type Query_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
+};
+
+
+export type Query_RootCategory_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1479,6 +2008,30 @@ export type Query_RootPost_By_PkArgs = {
 };
 
 
+export type Query_RootPost_TagArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+export type Query_RootPost_Tag_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+export type Query_RootPost_Tag_By_PkArgs = {
+  post_id: Scalars['bigint'];
+  tag_id: Scalars['Int'];
+};
+
+
 export type Query_RootPost_TypeArgs = {
   distinct_on?: InputMaybe<Array<Post_Type_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1507,7 +2060,39 @@ export type Query_RootPost_Value_By_PkArgs = {
 };
 
 
+export type Query_RootRevisionArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+export type Query_RootRevision_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+export type Query_RootRevision_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
 export type Query_RootTagArgs = {
+  distinct_on?: InputMaybe<Array<Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Tag_Order_By>>;
+  where?: InputMaybe<Tag_Bool_Exp>;
+};
+
+
+export type Query_RootTag_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Tag_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1562,6 +2147,234 @@ export type Query_RootValue_By_PkArgs = {
   id: Scalars['bigint'];
 };
 
+/** columns and relationships of "revision" */
+export type Revision = {
+  __typename?: 'revision';
+  created_at: Scalars['timestamptz'];
+  id: Scalars['bigint'];
+  post_id: Scalars['bigint'];
+  /** An array relationship */
+  values: Array<Value>;
+};
+
+
+/** columns and relationships of "revision" */
+export type RevisionValuesArgs = {
+  distinct_on?: InputMaybe<Array<Value_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Value_Order_By>>;
+  where?: InputMaybe<Value_Bool_Exp>;
+};
+
+/** aggregated selection of "revision" */
+export type Revision_Aggregate = {
+  __typename?: 'revision_aggregate';
+  aggregate?: Maybe<Revision_Aggregate_Fields>;
+  nodes: Array<Revision>;
+};
+
+/** aggregate fields of "revision" */
+export type Revision_Aggregate_Fields = {
+  __typename?: 'revision_aggregate_fields';
+  avg?: Maybe<Revision_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Revision_Max_Fields>;
+  min?: Maybe<Revision_Min_Fields>;
+  stddev?: Maybe<Revision_Stddev_Fields>;
+  stddev_pop?: Maybe<Revision_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Revision_Stddev_Samp_Fields>;
+  sum?: Maybe<Revision_Sum_Fields>;
+  var_pop?: Maybe<Revision_Var_Pop_Fields>;
+  var_samp?: Maybe<Revision_Var_Samp_Fields>;
+  variance?: Maybe<Revision_Variance_Fields>;
+};
+
+
+/** aggregate fields of "revision" */
+export type Revision_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Revision_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "revision" */
+export type Revision_Aggregate_Order_By = {
+  avg?: InputMaybe<Revision_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Revision_Max_Order_By>;
+  min?: InputMaybe<Revision_Min_Order_By>;
+  stddev?: InputMaybe<Revision_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Revision_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Revision_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Revision_Sum_Order_By>;
+  var_pop?: InputMaybe<Revision_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Revision_Var_Samp_Order_By>;
+  variance?: InputMaybe<Revision_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Revision_Avg_Fields = {
+  __typename?: 'revision_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "revision" */
+export type Revision_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "revision". All fields are combined with a logical 'AND'. */
+export type Revision_Bool_Exp = {
+  _and?: InputMaybe<Array<Revision_Bool_Exp>>;
+  _not?: InputMaybe<Revision_Bool_Exp>;
+  _or?: InputMaybe<Array<Revision_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  post_id?: InputMaybe<Bigint_Comparison_Exp>;
+  values?: InputMaybe<Value_Bool_Exp>;
+};
+
+/** aggregate max on columns */
+export type Revision_Max_Fields = {
+  __typename?: 'revision_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['bigint']>;
+  post_id?: Maybe<Scalars['bigint']>;
+};
+
+/** order by max() on columns of table "revision" */
+export type Revision_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Revision_Min_Fields = {
+  __typename?: 'revision_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['bigint']>;
+  post_id?: Maybe<Scalars['bigint']>;
+};
+
+/** order by min() on columns of table "revision" */
+export type Revision_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "revision". */
+export type Revision_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+  values_aggregate?: InputMaybe<Value_Aggregate_Order_By>;
+};
+
+/** select columns of table "revision" */
+export enum Revision_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PostId = 'post_id'
+}
+
+/** aggregate stddev on columns */
+export type Revision_Stddev_Fields = {
+  __typename?: 'revision_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "revision" */
+export type Revision_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Revision_Stddev_Pop_Fields = {
+  __typename?: 'revision_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "revision" */
+export type Revision_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Revision_Stddev_Samp_Fields = {
+  __typename?: 'revision_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "revision" */
+export type Revision_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Revision_Sum_Fields = {
+  __typename?: 'revision_sum_fields';
+  id?: Maybe<Scalars['bigint']>;
+  post_id?: Maybe<Scalars['bigint']>;
+};
+
+/** order by sum() on columns of table "revision" */
+export type Revision_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Revision_Var_Pop_Fields = {
+  __typename?: 'revision_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "revision" */
+export type Revision_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Revision_Var_Samp_Fields = {
+  __typename?: 'revision_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "revision" */
+export type Revision_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Revision_Variance_Fields = {
+  __typename?: 'revision_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  post_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "revision" */
+export type Revision_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "boolean_value" */
@@ -1570,6 +2383,8 @@ export type Subscription_Root = {
   boolean_value_by_pk?: Maybe<Boolean_Value>;
   /** fetch data from the table: "category" */
   category: Array<Category>;
+  /** fetch aggregated fields from the table: "category" */
+  category_aggregate: Category_Aggregate;
   /** fetch data from the table: "category" using primary key columns */
   category_by_pk?: Maybe<Category>;
   /** fetch data from the table: "content" */
@@ -1612,6 +2427,12 @@ export type Subscription_Root = {
   post_aggregate: Post_Aggregate;
   /** fetch data from the table: "post" using primary key columns */
   post_by_pk?: Maybe<Post>;
+  /** fetch data from the table: "post_tag" */
+  post_tag: Array<Post_Tag>;
+  /** fetch aggregated fields from the table: "post_tag" */
+  post_tag_aggregate: Post_Tag_Aggregate;
+  /** fetch data from the table: "post_tag" using primary key columns */
+  post_tag_by_pk?: Maybe<Post_Tag>;
   /** fetch data from the table: "post_type" */
   post_type: Array<Post_Type>;
   /** fetch data from the table: "post_type" using primary key columns */
@@ -1620,8 +2441,16 @@ export type Subscription_Root = {
   post_value: Array<Post_Value>;
   /** fetch data from the table: "post_value" using primary key columns */
   post_value_by_pk?: Maybe<Post_Value>;
+  /** fetch data from the table: "revision" */
+  revision: Array<Revision>;
+  /** fetch aggregated fields from the table: "revision" */
+  revision_aggregate: Revision_Aggregate;
+  /** fetch data from the table: "revision" using primary key columns */
+  revision_by_pk?: Maybe<Revision>;
   /** fetch data from the table: "tag" */
   tag: Array<Tag>;
+  /** fetch aggregated fields from the table: "tag" */
+  tag_aggregate: Tag_Aggregate;
   /** fetch data from the table: "tag" using primary key columns */
   tag_by_pk?: Maybe<Tag>;
   /** fetch data from the table: "text_value" */
@@ -1654,6 +2483,15 @@ export type Subscription_RootBoolean_Value_By_PkArgs = {
 
 
 export type Subscription_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
+};
+
+
+export type Subscription_RootCategory_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1812,6 +2650,30 @@ export type Subscription_RootPost_By_PkArgs = {
 };
 
 
+export type Subscription_RootPost_TagArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+export type Subscription_RootPost_Tag_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+export type Subscription_RootPost_Tag_By_PkArgs = {
+  post_id: Scalars['bigint'];
+  tag_id: Scalars['Int'];
+};
+
+
 export type Subscription_RootPost_TypeArgs = {
   distinct_on?: InputMaybe<Array<Post_Type_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1840,7 +2702,39 @@ export type Subscription_RootPost_Value_By_PkArgs = {
 };
 
 
+export type Subscription_RootRevisionArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+export type Subscription_RootRevision_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Revision_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Revision_Order_By>>;
+  where?: InputMaybe<Revision_Bool_Exp>;
+};
+
+
+export type Subscription_RootRevision_By_PkArgs = {
+  id: Scalars['bigint'];
+};
+
+
 export type Subscription_RootTagArgs = {
+  distinct_on?: InputMaybe<Array<Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Tag_Order_By>>;
+  where?: InputMaybe<Tag_Bool_Exp>;
+};
+
+
+export type Subscription_RootTag_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Tag_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1900,7 +2794,67 @@ export type Tag = {
   __typename?: 'tag';
   id: Scalars['Int'];
   name: Scalars['String'];
+  /** An array relationship */
+  posts: Array<Post_Tag>;
+  /** An aggregate relationship */
+  posts_aggregate: Post_Tag_Aggregate;
   slug: Scalars['String'];
+};
+
+
+/** columns and relationships of "tag" */
+export type TagPostsArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+
+/** columns and relationships of "tag" */
+export type TagPosts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Post_Tag_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By>>;
+  where?: InputMaybe<Post_Tag_Bool_Exp>;
+};
+
+/** aggregated selection of "tag" */
+export type Tag_Aggregate = {
+  __typename?: 'tag_aggregate';
+  aggregate?: Maybe<Tag_Aggregate_Fields>;
+  nodes: Array<Tag>;
+};
+
+/** aggregate fields of "tag" */
+export type Tag_Aggregate_Fields = {
+  __typename?: 'tag_aggregate_fields';
+  avg?: Maybe<Tag_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Tag_Max_Fields>;
+  min?: Maybe<Tag_Min_Fields>;
+  stddev?: Maybe<Tag_Stddev_Fields>;
+  stddev_pop?: Maybe<Tag_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Tag_Stddev_Samp_Fields>;
+  sum?: Maybe<Tag_Sum_Fields>;
+  var_pop?: Maybe<Tag_Var_Pop_Fields>;
+  var_samp?: Maybe<Tag_Var_Samp_Fields>;
+  variance?: Maybe<Tag_Variance_Fields>;
+};
+
+
+/** aggregate fields of "tag" */
+export type Tag_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Tag_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Tag_Avg_Fields = {
+  __typename?: 'tag_avg_fields';
+  id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "tag". All fields are combined with a logical 'AND'. */
@@ -1910,13 +2864,31 @@ export type Tag_Bool_Exp = {
   _or?: InputMaybe<Array<Tag_Bool_Exp>>;
   id?: InputMaybe<Int_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  posts?: InputMaybe<Post_Tag_Bool_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Tag_Max_Fields = {
+  __typename?: 'tag_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Tag_Min_Fields = {
+  __typename?: 'tag_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
 };
 
 /** Ordering options when selecting data from "tag". */
 export type Tag_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  posts_aggregate?: InputMaybe<Post_Tag_Aggregate_Order_By>;
   slug?: InputMaybe<Order_By>;
 };
 
@@ -1929,6 +2901,48 @@ export enum Tag_Select_Column {
   /** column name */
   Slug = 'slug'
 }
+
+/** aggregate stddev on columns */
+export type Tag_Stddev_Fields = {
+  __typename?: 'tag_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Tag_Stddev_Pop_Fields = {
+  __typename?: 'tag_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Tag_Stddev_Samp_Fields = {
+  __typename?: 'tag_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Tag_Sum_Fields = {
+  __typename?: 'tag_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type Tag_Var_Pop_Fields = {
+  __typename?: 'tag_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Tag_Var_Samp_Fields = {
+  __typename?: 'tag_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Tag_Variance_Fields = {
+  __typename?: 'tag_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
 
 /** columns and relationships of "text_value" */
 export type Text_Value = {
@@ -2008,7 +3022,6 @@ export type Value = {
   __typename?: 'value';
   /** An object relationship */
   boolean?: Maybe<Boolean_Value>;
-  content_id: Scalars['bigint'];
   created_at: Scalars['timestamptz'];
   /** An object relationship */
   field: Field;
@@ -2022,6 +3035,9 @@ export type Value = {
   numeric?: Maybe<Numeric_Value>;
   /** An object relationship */
   post?: Maybe<Post_Value>;
+  /** An object relationship */
+  revision: Revision;
+  revision_id: Scalars['bigint'];
   /** An object relationship */
   text?: Maybe<Text_Value>;
   /** An object relationship */
@@ -2045,9 +3061,9 @@ export type Value_Aggregate_Order_By = {
 
 /** order by avg() on columns of table "value" */
 export type Value_Avg_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "value". All fields are combined with a logical 'AND'. */
@@ -2056,7 +3072,6 @@ export type Value_Bool_Exp = {
   _not?: InputMaybe<Value_Bool_Exp>;
   _or?: InputMaybe<Array<Value_Bool_Exp>>;
   boolean?: InputMaybe<Boolean_Value_Bool_Exp>;
-  content_id?: InputMaybe<Bigint_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   field?: InputMaybe<Field_Bool_Exp>;
   field_id?: InputMaybe<Bigint_Comparison_Exp>;
@@ -2065,30 +3080,31 @@ export type Value_Bool_Exp = {
   media?: InputMaybe<Media_Value_Bool_Exp>;
   numeric?: InputMaybe<Numeric_Value_Bool_Exp>;
   post?: InputMaybe<Post_Value_Bool_Exp>;
+  revision?: InputMaybe<Revision_Bool_Exp>;
+  revision_id?: InputMaybe<Bigint_Comparison_Exp>;
   text?: InputMaybe<Text_Value_Bool_Exp>;
   timestamp?: InputMaybe<Timestamp_Value_Bool_Exp>;
 };
 
 /** order by max() on columns of table "value" */
 export type Value_Max_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by min() on columns of table "value" */
 export type Value_Min_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** Ordering options when selecting data from "value". */
 export type Value_Order_By = {
   boolean?: InputMaybe<Boolean_Value_Order_By>;
-  content_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   field?: InputMaybe<Field_Order_By>;
   field_id?: InputMaybe<Order_By>;
@@ -2097,6 +3113,8 @@ export type Value_Order_By = {
   media?: InputMaybe<Media_Value_Order_By>;
   numeric?: InputMaybe<Numeric_Value_Order_By>;
   post?: InputMaybe<Post_Value_Order_By>;
+  revision?: InputMaybe<Revision_Order_By>;
+  revision_id?: InputMaybe<Order_By>;
   text?: InputMaybe<Text_Value_Order_By>;
   timestamp?: InputMaybe<Timestamp_Value_Order_By>;
 };
@@ -2104,70 +3122,81 @@ export type Value_Order_By = {
 /** select columns of table "value" */
 export enum Value_Select_Column {
   /** column name */
-  ContentId = 'content_id',
-  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   FieldId = 'field_id',
   /** column name */
-  Id = 'id'
+  Id = 'id',
+  /** column name */
+  RevisionId = 'revision_id'
 }
 
 /** order by stddev() on columns of table "value" */
 export type Value_Stddev_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by stddev_pop() on columns of table "value" */
 export type Value_Stddev_Pop_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by stddev_samp() on columns of table "value" */
 export type Value_Stddev_Samp_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by sum() on columns of table "value" */
 export type Value_Sum_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by var_pop() on columns of table "value" */
 export type Value_Var_Pop_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by var_samp() on columns of table "value" */
 export type Value_Var_Samp_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 /** order by variance() on columns of table "value" */
 export type Value_Variance_Order_By = {
-  content_id?: InputMaybe<Order_By>;
   field_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  revision_id?: InputMaybe<Order_By>;
 };
 
 export type GetCategoriesQueryVariables = Exact<{
-  post_type_id?: InputMaybe<Scalars['Int']>;
+  post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
 
 
 export type GetCategoriesQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', id: number, slug: string, name: string }> };
+
+export type GetCategorizedPostsQueryVariables = Exact<{
+  category_id: Scalars['Int'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Order_By> | Post_Order_By>;
+  post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type GetCategorizedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, category_by_pk?: { __typename?: 'category', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, posts_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } } | null };
 
 export type GetMediaQueryVariables = Exact<{
   id: Scalars['bigint'];
@@ -2181,7 +3210,7 @@ export type GetPostQueryVariables = Exact<{
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', post_by_pk?: { __typename?: 'post', id: any, created_at: any, deleted_at?: any | null, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, category_id: number, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', title: string }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }>, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'content_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string, fields: Array<{ __typename?: 'field', id: any, slug: string, name: string, field_type_id: number, required: boolean, multiple: boolean, order: number, field_post_type_id?: number | null, field_type: { __typename?: 'field_type', id: number, slug: string, name: string, order: number, is_post: boolean }, field_post_type?: { __typename?: 'post_type', id: number, slug: string, name: string } | null }> } } | null };
+export type GetPostQuery = { __typename?: 'query_root', post_by_pk?: { __typename?: 'post', id: any, title: string, category_id: number, created_at: any, deleted_at?: any | null, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string, fields: Array<{ __typename?: 'field', id: any, slug: string, name: string, field_type_id: number, required: boolean, multiple: boolean, order: number, field_post_type_id?: number | null, field_type: { __typename?: 'field_type', id: number, slug: string, name: string, order: number, is_post: boolean }, field_post_type?: { __typename?: 'post_type', id: number, slug: string, name: string } | null }> } } | null };
 
 export type GetPostsQueryVariables = Exact<{
   post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
@@ -2191,28 +3220,31 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, post: Array<{ __typename?: 'post', id: any, created_at: any, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', title: string }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }>, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'content_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, post_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } };
+export type GetPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, post: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, post_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } };
+
+export type GetTaggedPostsQueryVariables = Exact<{
+  tag_id: Scalars['Int'];
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Post_Tag_Order_By> | Post_Tag_Order_By>;
+  post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type GetTaggedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, tag_by_pk?: { __typename?: 'tag', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post_tag', post: { __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } } }>, posts_aggregate: { __typename?: 'post_tag_aggregate', aggregate?: { __typename?: 'post_tag_aggregate_fields', count: number } | null } } | null };
 
 export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetTagsQuery = { __typename?: 'query_root', tag: Array<{ __typename?: 'tag', id: number, slug: string, name: string }> };
 
-export type SearchPostQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-  category_ids?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
-  tag_ids?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
-}>;
-
-
-export type SearchPostQuery = { __typename?: 'query_root', content: Array<{ __typename?: 'content', post: { __typename?: 'post', id: any, created_at: any, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', id: any, title: string, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, contents: Array<{ __typename?: 'content', title: string }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }>, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'content_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } } }>, content_aggregate: { __typename?: 'content_aggregate', aggregate?: { __typename?: 'content_aggregate_fields', count: number } | null } };
-
 
 export const GetCategoriesDocument = `
-    query GetCategories($post_type_id: Int) {
-  category(order_by: {id: asc}, where: {post_type_id: {_eq: $post_type_id}}) {
+    query GetCategories($post_type_slug: [String!] = []) {
+  category(
+    order_by: {id: asc}
+    where: {post_type: {slug: {_in: $post_type_slug}}}
+  ) {
     id
     slug
     name
@@ -2258,6 +3290,180 @@ useInfiniteGetCategoriesQuery.getKey = (variables?: GetCategoriesQueryVariables)
 ;
 
 useGetCategoriesQuery.fetcher = (client: GraphQLClient, variables?: GetCategoriesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategoriesQuery, GetCategoriesQueryVariables>(client, GetCategoriesDocument, variables, headers);
+export const GetCategorizedPostsDocument = `
+    query GetCategorizedPosts($category_id: Int!, $limit: Int = 10, $offset: Int = 0, $order_by: [post_order_by!] = {created_at: desc}, $post_type_slug: [String!] = []) {
+  post_type(where: {slug: {_in: $post_type_slug}}) {
+    id
+    slug
+    name
+  }
+  category_by_pk(id: $category_id) {
+    id
+    slug
+    name
+    posts(
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}
+    ) {
+      id
+      title
+      category {
+        id
+        slug
+        name
+      }
+      tags(order_by: {tag_id: asc}) {
+        tag {
+          id
+          slug
+          name
+        }
+      }
+      revisions(order_by: {created_at: desc}) {
+        id
+        created_at
+        values {
+          id
+          field_id
+          field {
+            id
+            slug
+            name
+          }
+          text {
+            body
+          }
+          numeric {
+            body
+          }
+          integer {
+            body
+          }
+          media {
+            body {
+              id
+              name
+              url
+              media_type
+              size
+            }
+          }
+          post {
+            body {
+              id
+              title
+              created_at
+              revisions(order_by: {created_at: desc}) {
+                id
+                created_at
+                values {
+                  id
+                  field_id
+                  field {
+                    id
+                    slug
+                    name
+                  }
+                  text {
+                    body
+                  }
+                  numeric {
+                    body
+                  }
+                  integer {
+                    body
+                  }
+                  media {
+                    body {
+                      id
+                      name
+                      url
+                      media_type
+                      size
+                    }
+                  }
+                  post {
+                    body {
+                      id
+                      title
+                    }
+                  }
+                  timestamp {
+                    body
+                  }
+                  boolean {
+                    body
+                  }
+                }
+              }
+            }
+          }
+          timestamp {
+            body
+          }
+          boolean {
+            body
+          }
+        }
+      }
+      post_type {
+        id
+        slug
+        name
+      }
+      created_at
+    }
+    posts_aggregate(
+      where: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    `;
+export const useGetCategorizedPostsQuery = <
+      TData = GetCategorizedPostsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCategorizedPostsQueryVariables,
+      options?: UseQueryOptions<GetCategorizedPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCategorizedPostsQuery, TError, TData>(
+      ['GetCategorizedPosts', variables],
+      fetcher<GetCategorizedPostsQuery, GetCategorizedPostsQueryVariables>(client, GetCategorizedPostsDocument, variables, headers),
+      options
+    );
+
+useGetCategorizedPostsQuery.getKey = (variables: GetCategorizedPostsQueryVariables) => ['GetCategorizedPosts', variables];
+;
+
+export const useInfiniteGetCategorizedPostsQuery = <
+      TData = GetCategorizedPostsQuery,
+      TError = unknown
+    >(
+      _pageParamKey: keyof GetCategorizedPostsQueryVariables,
+      client: GraphQLClient,
+      variables: GetCategorizedPostsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetCategorizedPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useInfiniteQuery<GetCategorizedPostsQuery, TError, TData>(
+      ['GetCategorizedPosts.infinite', variables],
+      (metaData) => fetcher<GetCategorizedPostsQuery, GetCategorizedPostsQueryVariables>(client, GetCategorizedPostsDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
+      options
+    );
+
+
+useInfiniteGetCategorizedPostsQuery.getKey = (variables: GetCategorizedPostsQueryVariables) => ['GetCategorizedPosts.infinite', variables];
+;
+
+useGetCategorizedPostsQuery.fetcher = (client: GraphQLClient, variables: GetCategorizedPostsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategorizedPostsQuery, GetCategorizedPostsQueryVariables>(client, GetCategorizedPostsDocument, variables, headers);
 export const GetMediaDocument = `
     query GetMedia($id: bigint!) {
   media_by_pk(id: $id) {
@@ -2313,9 +3519,22 @@ export const GetPostDocument = `
     query GetPost($id: bigint!) {
   post_by_pk(id: $id) {
     id
-    contents(order_by: {created_at: desc}) {
+    title
+    category_id
+    category {
       id
-      title
+      slug
+      name
+    }
+    tags(order_by: {tag_id: asc}) {
+      tag {
+        id
+        slug
+        name
+      }
+    }
+    revisions(order_by: {created_at: desc}) {
+      id
       created_at
       values {
         id
@@ -2346,9 +3565,10 @@ export const GetPostDocument = `
         post {
           body {
             id
-            contents(order_by: {created_at: desc}) {
+            title
+            created_at
+            revisions(order_by: {created_at: desc}) {
               id
-              title
               created_at
               values {
                 id
@@ -2379,9 +3599,7 @@ export const GetPostDocument = `
                 post {
                   body {
                     id
-                    contents {
-                      title
-                    }
+                    title
                   }
                 }
                 timestamp {
@@ -2399,19 +3617,6 @@ export const GetPostDocument = `
         }
         boolean {
           body
-        }
-      }
-      category_id
-      category {
-        id
-        slug
-        name
-      }
-      tags(order_by: {tag_id: asc}) {
-        tag {
-          id
-          slug
-          name
         }
       }
     }
@@ -2500,9 +3705,21 @@ export const GetPostsDocument = `
     where: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}
   ) {
     id
-    contents(order_by: {created_at: desc}) {
+    title
+    category {
       id
-      title
+      slug
+      name
+    }
+    tags(order_by: {tag_id: asc}) {
+      tag {
+        id
+        slug
+        name
+      }
+    }
+    revisions(order_by: {created_at: desc}) {
+      id
       created_at
       values {
         id
@@ -2533,9 +3750,10 @@ export const GetPostsDocument = `
         post {
           body {
             id
-            contents(order_by: {created_at: desc}) {
+            title
+            created_at
+            revisions(order_by: {created_at: desc}) {
               id
-              title
               created_at
               values {
                 id
@@ -2566,9 +3784,7 @@ export const GetPostsDocument = `
                 post {
                   body {
                     id
-                    contents {
-                      title
-                    }
+                    title
                   }
                 }
                 timestamp {
@@ -2586,18 +3802,6 @@ export const GetPostsDocument = `
         }
         boolean {
           body
-        }
-      }
-      category {
-        id
-        slug
-        name
-      }
-      tags(order_by: {tag_id: asc}) {
-        tag {
-          id
-          slug
-          name
         }
       }
     }
@@ -2656,6 +3860,182 @@ useInfiniteGetPostsQuery.getKey = (variables?: GetPostsQueryVariables) => variab
 ;
 
 useGetPostsQuery.fetcher = (client: GraphQLClient, variables?: GetPostsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetPostsQuery, GetPostsQueryVariables>(client, GetPostsDocument, variables, headers);
+export const GetTaggedPostsDocument = `
+    query GetTaggedPosts($tag_id: Int!, $limit: Int = 10, $offset: Int = 0, $order_by: [post_tag_order_by!] = {post: {created_at: desc}}, $post_type_slug: [String!] = []) {
+  post_type(where: {slug: {_in: $post_type_slug}}) {
+    id
+    slug
+    name
+  }
+  tag_by_pk(id: $tag_id) {
+    id
+    slug
+    name
+    posts(
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: {post: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}}
+    ) {
+      post {
+        id
+        title
+        category {
+          id
+          slug
+          name
+        }
+        tags(order_by: {tag_id: asc}) {
+          tag {
+            id
+            slug
+            name
+          }
+        }
+        revisions(order_by: {created_at: desc}) {
+          id
+          created_at
+          values {
+            id
+            field_id
+            field {
+              id
+              slug
+              name
+            }
+            text {
+              body
+            }
+            numeric {
+              body
+            }
+            integer {
+              body
+            }
+            media {
+              body {
+                id
+                name
+                url
+                media_type
+                size
+              }
+            }
+            post {
+              body {
+                id
+                title
+                created_at
+                revisions(order_by: {created_at: desc}) {
+                  id
+                  created_at
+                  values {
+                    id
+                    field_id
+                    field {
+                      id
+                      slug
+                      name
+                    }
+                    text {
+                      body
+                    }
+                    numeric {
+                      body
+                    }
+                    integer {
+                      body
+                    }
+                    media {
+                      body {
+                        id
+                        name
+                        url
+                        media_type
+                        size
+                      }
+                    }
+                    post {
+                      body {
+                        id
+                        title
+                      }
+                    }
+                    timestamp {
+                      body
+                    }
+                    boolean {
+                      body
+                    }
+                  }
+                }
+              }
+            }
+            timestamp {
+              body
+            }
+            boolean {
+              body
+            }
+          }
+        }
+        post_type {
+          id
+          slug
+          name
+        }
+        created_at
+      }
+    }
+    posts_aggregate(
+      where: {post: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}}
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    `;
+export const useGetTaggedPostsQuery = <
+      TData = GetTaggedPostsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetTaggedPostsQueryVariables,
+      options?: UseQueryOptions<GetTaggedPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetTaggedPostsQuery, TError, TData>(
+      ['GetTaggedPosts', variables],
+      fetcher<GetTaggedPostsQuery, GetTaggedPostsQueryVariables>(client, GetTaggedPostsDocument, variables, headers),
+      options
+    );
+
+useGetTaggedPostsQuery.getKey = (variables: GetTaggedPostsQueryVariables) => ['GetTaggedPosts', variables];
+;
+
+export const useInfiniteGetTaggedPostsQuery = <
+      TData = GetTaggedPostsQuery,
+      TError = unknown
+    >(
+      _pageParamKey: keyof GetTaggedPostsQueryVariables,
+      client: GraphQLClient,
+      variables: GetTaggedPostsQueryVariables,
+      options?: UseInfiniteQueryOptions<GetTaggedPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useInfiniteQuery<GetTaggedPostsQuery, TError, TData>(
+      ['GetTaggedPosts.infinite', variables],
+      (metaData) => fetcher<GetTaggedPostsQuery, GetTaggedPostsQueryVariables>(client, GetTaggedPostsDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
+      options
+    );
+
+
+useInfiniteGetTaggedPostsQuery.getKey = (variables: GetTaggedPostsQueryVariables) => ['GetTaggedPosts.infinite', variables];
+;
+
+useGetTaggedPostsQuery.fetcher = (client: GraphQLClient, variables: GetTaggedPostsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTaggedPostsQuery, GetTaggedPostsQueryVariables>(client, GetTaggedPostsDocument, variables, headers);
 export const GetTagsDocument = `
     query GetTags {
   tag(order_by: {id: asc}) {
@@ -2704,172 +4084,3 @@ useInfiniteGetTagsQuery.getKey = (variables?: GetTagsQueryVariables) => variable
 ;
 
 useGetTagsQuery.fetcher = (client: GraphQLClient, variables?: GetTagsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTagsQuery, GetTagsQueryVariables>(client, GetTagsDocument, variables, headers);
-export const SearchPostDocument = `
-    query SearchPost($limit: Int = 10, $offset: Int = 0, $post_type_slug: [String!] = [], $category_ids: [Int!] = [], $tag_ids: [Int!] = []) {
-  content(
-    distinct_on: post_id
-    limit: $limit
-    offset: $offset
-    order_by: {post_id: asc, created_at: desc}
-    where: {_and: {post: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}, category_id: {_in: $category_ids}, tags: {tag_id: {_in: $tag_ids}}}}
-  ) {
-    post {
-      id
-      contents(order_by: {created_at: desc}) {
-        id
-        title
-        created_at
-        values {
-          id
-          field_id
-          field {
-            id
-            slug
-            name
-          }
-          text {
-            body
-          }
-          numeric {
-            body
-          }
-          integer {
-            body
-          }
-          media {
-            body {
-              id
-              name
-              url
-              media_type
-              size
-            }
-          }
-          post {
-            body {
-              id
-              contents(order_by: {created_at: desc}) {
-                id
-                title
-                created_at
-                values {
-                  id
-                  field_id
-                  field {
-                    id
-                    slug
-                    name
-                  }
-                  text {
-                    body
-                  }
-                  numeric {
-                    body
-                  }
-                  integer {
-                    body
-                  }
-                  media {
-                    body {
-                      id
-                      name
-                      url
-                      media_type
-                      size
-                    }
-                  }
-                  post {
-                    body {
-                      id
-                      contents {
-                        title
-                      }
-                    }
-                  }
-                  timestamp {
-                    body
-                  }
-                  boolean {
-                    body
-                  }
-                }
-              }
-            }
-          }
-          timestamp {
-            body
-          }
-          boolean {
-            body
-          }
-        }
-        category {
-          id
-          slug
-          name
-        }
-        tags(order_by: {tag_id: asc}) {
-          tag {
-            id
-            slug
-            name
-          }
-        }
-      }
-      post_type {
-        id
-        slug
-        name
-      }
-      created_at
-    }
-  }
-  content_aggregate(
-    distinct_on: post_id
-    where: {_and: {post: {_and: {deleted_at: {_is_null: true}, post_type: {slug: {_in: $post_type_slug}}}}, category_id: {_in: $category_ids}, tags: {tag_id: {_in: $tag_ids}}}}
-  ) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useSearchPostQuery = <
-      TData = SearchPostQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables?: SearchPostQueryVariables,
-      options?: UseQueryOptions<SearchPostQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<SearchPostQuery, TError, TData>(
-      variables === undefined ? ['SearchPost'] : ['SearchPost', variables],
-      fetcher<SearchPostQuery, SearchPostQueryVariables>(client, SearchPostDocument, variables, headers),
-      options
-    );
-
-useSearchPostQuery.getKey = (variables?: SearchPostQueryVariables) => variables === undefined ? ['SearchPost'] : ['SearchPost', variables];
-;
-
-export const useInfiniteSearchPostQuery = <
-      TData = SearchPostQuery,
-      TError = unknown
-    >(
-      _pageParamKey: keyof SearchPostQueryVariables,
-      client: GraphQLClient,
-      variables?: SearchPostQueryVariables,
-      options?: UseInfiniteQueryOptions<SearchPostQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useInfiniteQuery<SearchPostQuery, TError, TData>(
-      variables === undefined ? ['SearchPost.infinite'] : ['SearchPost.infinite', variables],
-      (metaData) => fetcher<SearchPostQuery, SearchPostQueryVariables>(client, SearchPostDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
-      options
-    );
-
-
-useInfiniteSearchPostQuery.getKey = (variables?: SearchPostQueryVariables) => variables === undefined ? ['SearchPost.infinite'] : ['SearchPost.infinite', variables];
-;
-
-useSearchPostQuery.fetcher = (client: GraphQLClient, variables?: SearchPostQueryVariables, headers?: RequestInit['headers']) => fetcher<SearchPostQuery, SearchPostQueryVariables>(client, SearchPostDocument, variables, headers);

@@ -50,7 +50,7 @@ export async function getStaticProps({ params }: any) {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -62,7 +62,7 @@ export async function getStaticProps({ params }: any) {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -92,13 +92,13 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   return (
@@ -109,7 +109,7 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
         extractDescription(event?.details || "") ||
         "ヤナガワ村のイベント情報です。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」では、お子さまからご高齢の方まで、男女問わず楽しんでいただけるイベントを開催しています。その最新情報をお届けします。"
       }
-      path={`/event/${event?.id} || "/event"`}
+      path={`event/${event?.id || ""}`}
       ogType="article"
       header={<Header title={`${event?.title || "イベント"} | ヤナガワ村`} />}
       footer={<Footer />}

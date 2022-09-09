@@ -30,7 +30,7 @@ export async function getStaticProps() {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -42,7 +42,7 @@ export async function getStaticProps() {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -77,13 +77,13 @@ const WantedPage: NextPage = () => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -96,7 +96,7 @@ const WantedPage: NextPage = () => {
     <Page
       title="協力してくれる方募集 | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街"
       description="ヤナガワ村に協力してくれる方を募集しています。ヤナガワ村への加盟、イベントへの出店・協賛、スポンサー登録、村役場メンバーへの参加等様々な形で群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリア「ヤナガワ村」にご協力していただけます。"
-      path="/wanted"
+      path="wanted"
       ogType="article"
       header={
         <Header title="協力してくれる方募集 | 群馬県高崎市の飲み屋街【ヤナガワ村】" />
@@ -105,7 +105,7 @@ const WantedPage: NextPage = () => {
       fixHeader
     >
       <Main color={colors.background} avoidHeader>
-        <PageTitle title="協力してくれる方を募集します！" />
+        <PageTitle title="協力してくれる方募集中！" />
 
         <Stacked paddingPos="top" wrap isSection>
           <PlainText

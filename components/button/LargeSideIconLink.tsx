@@ -75,6 +75,8 @@ const Component = styled.a<ComponentProps>`
   }
 
   @media only screen and (max-width: ${screens.s}px) {
+    padding: ${sizes.gapS};
+
     .icon {
       width: 45px;
       height: 45px;

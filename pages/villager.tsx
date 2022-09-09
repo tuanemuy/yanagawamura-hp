@@ -29,7 +29,7 @@ export async function getStaticProps() {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -41,7 +41,7 @@ export async function getStaticProps() {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -76,13 +76,13 @@ const VillagerPage: NextPage = () => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -95,7 +95,7 @@ const VillagerPage: NextPage = () => {
     <Page
       title="ヤナガワ村民募集 | 群馬県高崎市の飲み屋街「ヤナガワ村」"
       description="ヤナガワ村"
-      path="/villager"
+      path="villager"
       ogType="article"
       header={
         <Header title="ヤナガワ村民募集 | 群馬県高崎市の飲み屋街「ヤナガワ村」" />

@@ -37,7 +37,10 @@ export const ListWithTitle = ({
         <ul>
           {items.slice(0, 3).map((node: ReactNode, index: number) => {
             return (
-              <li key={index} className={`inview inview__scale0010 inview__delay${index + 2}`}>
+              <li
+                key={index}
+                className={`inview inview__scale0010 inview__delay${index + 1}`}
+              >
                 {node}
               </li>
             );
@@ -83,7 +86,7 @@ const Component = styled.div<ComponentProps>`
   @media only screen and (max-width: ${screens.s}px) {
     .title {
       position: relative;
-      ${p => p.reverse && `justify-content: flex-end;`}
+      ${(p) => p.reverse && `justify-content: flex-end;`}
 
       > h2 {
         writing-mode: horizontal-tb;
@@ -123,19 +126,28 @@ const Component = styled.div<ComponentProps>`
     }
   }
 
+  @media only screen and (max-width: ${screens.l}px) {
+    .list {
+      > ul {
+        gap: ${sizes.gapM};
+      }
+    }
+  }
+
   @media only screen and (max-width: ${screens.m}px) {
     .list {
       ${(p) =>
-        !p.reverse && `transform: translateX(calc(3.5rem * 1.3 + ${sizes.gapL}));`}
+        !p.reverse &&
+        `transform: translateX(calc(3.5rem * 1.3 + ${sizes.gapL}));`}
       ${(p) =>
-        p.reverse && `transform: translateX(calc(-3.5rem * 1.3 - ${sizes.gapL}));`}
+        p.reverse &&
+        `transform: translateX(calc(-3.5rem * 1.3 - ${sizes.gapL}));`}
 
       > p {
         font-size: 1.75rem;
       }
 
       > ul {
-        gap: ${sizes.gapM};
         margin-top: ${sizes.gapM};
       }
     }

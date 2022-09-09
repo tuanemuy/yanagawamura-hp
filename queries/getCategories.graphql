@@ -1,7 +1,7 @@
-query GetCategories($post_type_id: Int) {
+query GetCategories($post_type_slug: [String!] = []) {
   category(
     order_by: { id: asc }
-    where: { post_type_id: { _eq: $post_type_id } }
+    where: { post_type: { slug: { _in: $post_type_slug } } }
   ) {
     id
     slug

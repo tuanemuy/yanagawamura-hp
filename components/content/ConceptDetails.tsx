@@ -177,12 +177,16 @@ const Component = styled.div<ComponentProps>`
 
   @media only screen and (max-width: ${screens.l}px) {
     .gallery {
-      height: 300px;
+      height: 290px;
       margin-top: ${sizes.gapL};
 
+      ul {
+        gap: ${sizes.gapM};
+      }
+
       img {
-        width: 300px;
-        height: 300px;
+        width: 290px;
+        height: 290px;
       }
     }
   }
@@ -194,10 +198,6 @@ const Component = styled.div<ComponentProps>`
       img {
         width: 270px;
         height: 270px;
-      }
-
-      ul {
-        gap: ${sizes.gapM};
       }
     }
   }

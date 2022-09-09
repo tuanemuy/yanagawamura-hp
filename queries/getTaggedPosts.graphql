@@ -1,0 +1,157 @@
+query GetTaggedPosts(
+  $tag_id: Int!
+  $limit: Int = 10
+  $offset: Int = 0
+  $order_by: [post_tag_order_by!] = { post: { created_at: desc } }
+  $post_type_slug: [String!] = []
+) {
+  post_type(where: { slug: { _in: $post_type_slug } }) {
+    id
+    slug
+    name
+  }
+
+  tag_by_pk(id: $tag_id) {
+    id
+    slug
+    name
+    posts(
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: {
+        post: {
+          _and: {
+            deleted_at: { _is_null: true }
+            post_type: { slug: { _in: $post_type_slug } }
+          }
+        }
+      }
+    ) {
+      post {
+        id
+        title
+        category {
+          id
+          slug
+          name
+        }
+        tags(order_by: { tag_id: asc }) {
+          tag {
+            id
+            slug
+            name
+          }
+        }
+        revisions(order_by: { created_at: desc }) {
+          id
+          created_at
+          values {
+            id
+            field_id
+            field {
+              id
+              slug
+              name
+            }
+            text {
+              body
+            }
+            numeric {
+              body
+            }
+            integer {
+              body
+            }
+            media {
+              body {
+                id
+                name
+                url
+                media_type
+                size
+              }
+            }
+            post {
+              body {
+                id
+                title
+                created_at
+                revisions(order_by: { created_at: desc }) {
+                  id
+                  created_at
+                  values {
+                    id
+                    field_id
+                    field {
+                      id
+                      slug
+                      name
+                    }
+                    text {
+                      body
+                    }
+                    numeric {
+                      body
+                    }
+                    integer {
+                      body
+                    }
+                    media {
+                      body {
+                        id
+                        name
+                        url
+                        media_type
+                        size
+                      }
+                    }
+                    post {
+                      body {
+                        id
+                        title
+                      }
+                    }
+                    timestamp {
+                      body
+                    }
+                    boolean {
+                      body
+                    }
+                  }
+                }
+              }
+            }
+            timestamp {
+              body
+            }
+            boolean {
+              body
+            }
+          }
+        }
+        post_type {
+          id
+          slug
+          name
+        }
+        created_at
+      }
+    }
+
+    posts_aggregate(
+      where: {
+        post: {
+          _and: {
+            deleted_at: { _is_null: true }
+            post_type: { slug: { _in: $post_type_slug } }
+          }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+}

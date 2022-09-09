@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         },
         {
           threshold: 0,
-          rootMargin: '0px 300px 0px 300px'
+          rootMargin: "0px 300px 0px 300px",
         }
       );
 
@@ -63,10 +63,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <script
-          type="text/javascript"
-          src="//typesquare.com/3/tsst/script/ja/typesquare.js?63104b46f704485a989c4d33ac1e02e5"
-        ></script>
       </Head>
 
       <UnflexibleProvider config={config}>

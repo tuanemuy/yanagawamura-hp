@@ -1,11 +1,5 @@
 import { Post, Category, Tag } from "lib/graphql";
-import {
-  getTitle,
-  getCategory,
-  getTags,
-  getUpdatedAt,
-  getValueOfField,
-} from "lib/cms";
+import { getTags, getUpdatedAt, getValueOfField } from "lib/cms";
 
 export type { Tag, Category } from "lib/graphql";
 
@@ -59,25 +53,23 @@ export class News {
   }
 
   static fromPost(post: Post): News {
-    const title = getTitle(post);
     const body = getValueOfField(post, "body")?.text?.body;
     const slug = getValueOfField(post, "slug")?.text?.body;
     const overview = getValueOfField(post, "overview")?.text?.body || "";
-    const category = getCategory(post);
     const tags = getTags(post) || [];
     const updatedAt = getUpdatedAt(post);
 
-    if (!title || !body || !slug || !category || !updatedAt) {
+    if (!body || !slug || !updatedAt) {
       throw new Error("Failed to generate News from Post.");
     }
 
     return News.generate({
       id: post.id,
       body,
-      title,
+      title: post.title,
       slug,
       overview,
-      category,
+      category: post.category,
       tags,
       createdAt: new Date(post.created_at),
       updatedAt,

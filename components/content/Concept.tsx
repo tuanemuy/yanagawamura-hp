@@ -107,6 +107,7 @@ const Component = styled.div`
       h2 {
         writing-mode: horizontal-tb;
         font-size: 4rem;
+        font-size: 4.5rem;
         transform: translateX(0.5em);
         text-shadow: 1px 1px 0px ${colors.background},
           5px 0px 0 ${colors.background}, 5px -5px 0 ${colors.background},
@@ -280,11 +281,15 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.l}px) {
     .gallery {
       margin-top: 10rem;
-      height: 300px;
+      height: 290px;
+
+      ul {
+        gap: ${sizes.gapM};
+      }
 
       img {
-        width: 300px;
-        height: 300px;
+        width: 290px;
+        height: 290px;
       }
     }
   }
@@ -297,10 +302,6 @@ const Component = styled.div`
       img {
         width: 270px;
         height: 270px;
-      }
-
-      ul {
-        gap: ${sizes.gapM};
       }
     }
   }

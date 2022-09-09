@@ -1,33 +1,47 @@
-query SearchPost(
+query GetCategorizedPosts(
+  $category_id: Int!
   $limit: Int = 10
   $offset: Int = 0
+  $order_by: [post_order_by!] = { created_at: desc }
   $post_type_slug: [String!] = []
-  $category_ids: [Int!] = []
-  $tag_ids: [Int!] = []
 ) {
-  content(
-    distinct_on: post_id
-    limit: $limit
-    offset: $offset
-    order_by: { post_id: asc, created_at: desc }
-    where: {
-      _and: {
-        post: {
-          _and: {
-            deleted_at: { _is_null: true }
-            post_type: { slug: { _in: $post_type_slug } }
-          }
+  post_type(where: { slug: { _in: $post_type_slug } }) {
+    id
+    slug
+    name
+  }
+
+  category_by_pk(id: $category_id) {
+    id
+    slug
+    name
+    posts(
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: {
+        _and: {
+          deleted_at: { _is_null: true }
+          post_type: { slug: { _in: $post_type_slug } }
         }
-        category_id: { _in: $category_ids }
-        tags: { tag_id: { _in: $tag_ids } }
       }
-    }
-  ) {
-    post {
+    ) {
       id
-      contents(order_by: { created_at: desc }) {
+      title
+      category {
         id
-        title
+        slug
+        name
+      }
+      tags(order_by: { tag_id: asc }) {
+        tag {
+          id
+          slug
+          name
+        }
+      }
+      revisions(order_by: { created_at: desc }) {
+        id
         created_at
         values {
           id
@@ -58,9 +72,10 @@ query SearchPost(
           post {
             body {
               id
-              contents(order_by: { created_at: desc }) {
+              title
+              created_at
+              revisions(order_by: { created_at: desc }) {
                 id
-                title
                 created_at
                 values {
                   id
@@ -91,9 +106,7 @@ query SearchPost(
                   post {
                     body {
                       id
-                      contents {
-                        title
-                      }
+                      title
                     }
                   }
                   timestamp {
@@ -113,18 +126,6 @@ query SearchPost(
             body
           }
         }
-        category {
-          id
-          slug
-          name
-        }
-        tags(order_by: { tag_id: asc }) {
-          tag {
-            id
-            slug
-            name
-          }
-        }
       }
       post_type {
         id
@@ -133,25 +134,18 @@ query SearchPost(
       }
       created_at
     }
-  }
 
-  content_aggregate(
-    distinct_on: post_id
-    where: {
-      _and: {
-        post: {
-          _and: {
-            deleted_at: { _is_null: true }
-            post_type: { slug: { _in: $post_type_slug } }
-          }
+    posts_aggregate(
+      where: {
+        _and: {
+          deleted_at: { _is_null: true }
+          post_type: { slug: { _in: $post_type_slug } }
         }
-        category_id: { _in: $category_ids }
-        tags: { tag_id: { _in: $tag_ids } }
       }
-    }
-  ) {
-    aggregate {
-      count
+    ) {
+      aggregate {
+        count
+      }
     }
   }
 }

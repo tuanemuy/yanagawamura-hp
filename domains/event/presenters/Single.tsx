@@ -23,7 +23,7 @@ export const Single = ({ event }: Props) => {
 
           <div className="meta">
             <p>
-              <a href={`/event/category/${event.category.slug}`}>
+              <a href={`/event/category/${event.category.id}`}>
                 {event.category.name}
               </a>
             </p>
@@ -31,7 +31,7 @@ export const Single = ({ event }: Props) => {
               {event.tags.map((tag: Tag) => {
                 return (
                   <li key={tag.id}>
-                    <a href={`/event/tag/${tag.slug}`}>{tag.name}</a>
+                    <a href={`/event/tag/${tag.id}`}>{tag.name}</a>
                   </li>
                 );
               })}
@@ -101,16 +101,15 @@ const Component = styled.article`
 
   .title {
     h1 {
-      font-size: 3.5rem;
-      font-family: ${fonts.heading};
-      line-height: 1.25;
+      font-size: 2.5rem;
+      line-height: 1.5;
     }
   }
 
   @media only screen and (max-width: ${screens.m}px) {
     .title {
       h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
     }
   }
@@ -118,7 +117,7 @@ const Component = styled.article`
   @media only screen and (max-width: ${screens.s}px) {
     .title {
       h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
       }
     }
   }
@@ -186,7 +185,7 @@ const Component = styled.article`
     }
 
     ul {
-      margin: 0 -0.25rem;
+      margin: 0 -0.5rem;
       margin-left: 1rem;
       display: flex;
       align-items: center;
@@ -196,11 +195,11 @@ const Component = styled.article`
 
     li {
       flex-shrink: 0;
+      padding: 0 0.5rem;
       line-height: 1.5;
 
       a {
         display: block;
-        padding: 0 0.5rem;
         color: ${colors.black};
 
         &::before {
@@ -213,7 +212,7 @@ const Component = styled.article`
   @media only screen and (max-width: ${screens.xs}px) {
     .meta {
       ul {
-        margin-left: .75rem;
+        margin-left: 0.75rem;
       }
     }
   }

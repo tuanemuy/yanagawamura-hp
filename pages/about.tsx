@@ -30,7 +30,7 @@ export async function getStaticProps() {
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -42,7 +42,7 @@ export async function getStaticProps() {
   const getShopsPrefetcher = getGetShopsPrefetcher({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
   prefetches.push(
     queryClient.prefetchQuery(
@@ -77,13 +77,13 @@ const AboutPage: NextPage = () => {
   const { restaurants } = useGetRestaurants({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { shops } = useGetShops({
     limit: 3,
     offset: 0,
-    orderBy: { contents_aggregate: { max: { title: Order_By.Asc } } },
+    orderBy: { title: Order_By.Asc },
   });
 
   const { events } = useGetEvents({
@@ -96,7 +96,7 @@ const AboutPage: NextPage = () => {
     <Page
       title="ヤナガワ村とは | 群馬県高崎市の商店街・飲み屋街"
       description="群馬県高崎市のヤナガワ村のご紹介です。柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。昔ながらの味わいのある風景と、関係の生まれる明るい街をお楽しみください。"
-      path="/about"
+      path="about"
       ogType="article"
       header={
         <Header title="ヤナガワ村とは | 群馬県高崎市の商店街・飲み屋街" />
@@ -241,7 +241,7 @@ const AboutPage: NextPage = () => {
               </Block>
 
               <Block>
-                <div className="inview inview__bt inview__delay3">
+                <div className="inview inview__bt inview__delay2">
                   <Figure src="images/sample.jpg" width="100%" lazy />
                 </div>
               </Block>

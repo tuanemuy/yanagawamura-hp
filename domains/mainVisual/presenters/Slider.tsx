@@ -3,6 +3,7 @@ import { colors, sizes, screens } from "variables";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 
+import { useEffect, useState } from "react";
 import { MainVisual } from "../";
 
 type Props = {
@@ -10,9 +11,15 @@ type Props = {
 };
 
 export const Slider = ({ mainVisuals }: Props) => {
+  const [width, setWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
   return (
     <Component className="inview inview__scale0910">
-      {mainVisuals.length > 0 && (
+      {width && mainVisuals.length > 0 && (
         <Swiper
           spaceBetween={30}
           slidesPerView={"auto"}
@@ -26,19 +33,35 @@ export const Slider = ({ mainVisuals }: Props) => {
           }}
           modules={[Navigation, Pagination, Autoplay]}
         >
-          {mainVisuals.map((mv: MainVisual, index: number) => {
-            return (
-              <SwiperSlide key={mv.id}>
-                <Slide href={mv.url}>
-                  <img
-                    src={mv.image.url}
-                    alt={mv.image.name}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                </Slide>
-              </SwiperSlide>
-            );
-          })}
+          {width > screens.s &&
+            mainVisuals.map((mv: MainVisual, index: number) => {
+              return (
+                <SwiperSlide key={mv.id}>
+                  <Slide href={mv.url}>
+                    <img
+                      src={mv.image.url}
+                      alt={mv.image.name}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  </Slide>
+                </SwiperSlide>
+              );
+            })}
+
+          {width <= screens.s &&
+            mainVisuals.map((mv: MainVisual, index: number) => {
+              return (
+                <SwiperSlide key={mv.id}>
+                  <Slide href={mv.url}>
+                    <img
+                      src={mv.mobileImage.url}
+                      alt={mv.mobileImage.name}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  </Slide>
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       )}
     </Component>

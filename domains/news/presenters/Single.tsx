@@ -26,11 +26,19 @@ export const Single = ({ news }: Props) => {
         <h1>{news.title}</h1>
 
         <div className="meta">
-          <p>{news.category.name}</p>
+          <p>
+            <a href={`/news/category/${news.category.id}`}>
+              {news.category.name}
+            </a>
+          </p>
 
           <ul>
             {news.tags.map((tag: Tag) => {
-              return <li key={tag.id}>{tag.name}</li>;
+              return (
+                <li key={tag.id}>
+                  <a href={`/news/tag/${tag.id}`}>{tag.name}</a>
+                </li>
+              );
             })}
           </ul>
         </div>
@@ -101,29 +109,40 @@ const Component = styled.article`
     margin-top: ${sizes.gapM};
 
     p {
-      padding: ${sizes.gapXS} ${sizes.gapS};
-      color: ${colors.white};
-      background-color: ${colors.theme};
-      line-height: 1.5;
-      border-radius: 3px;
+      flex-shrink: 0;
+
+      a {
+        display: block;
+        color: ${colors.white};
+        padding: ${sizes.gapXS} ${sizes.gapS};
+        background-color: ${colors.theme};
+        line-height: 1.5;
+        border-radius: 3px;
+        text-decoration: none;
+      }
     }
 
     ul {
+      margin: 0 -0.5rem;
       margin-left: 1rem;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       list-style: none;
     }
 
     li {
+      flex-shrink: 0;
+      padding: 0 0.5rem;
       line-height: 1.5;
 
-      &::before {
-        content: "#";
-      }
+      a {
+        display: block;
+        color: ${colors.black};
 
-      &:not(:first-child) {
-        margin-left: 0.5rem;
+        &::before {
+          content: "#";
+        }
       }
     }
   }
