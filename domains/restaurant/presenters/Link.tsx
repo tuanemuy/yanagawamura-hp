@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { sizes, colors, fonts } from "variables";
 
+import { extractFile } from "lib/cms";
 import { Restaurant, Tag } from "../";
 
 type Props = {
@@ -16,7 +17,10 @@ export const Link = ({ restaurant, className }: Props) => {
     >
       <div className="thumbnail">
         <img
-          src={restaurant.keyVisual.url}
+          src={
+            extractFile(restaurant.keyVisual, "800")?.url ||
+            restaurant.keyVisual.url
+          }
           alt={restaurant.title}
           loading="lazy"
         />

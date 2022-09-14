@@ -5,8 +5,9 @@ import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
 
 import { useRouter } from "next/router";
-import { Restaurant, Tag } from "../";
 import { nl2br } from "lib/util";
+import { extractFile } from "lib/cms";
+import { Restaurant, Tag } from "../";
 
 type Props = {
   restaurant: Restaurant;
@@ -44,7 +45,10 @@ export const Single = ({ restaurant }: Props) => {
         <div className="header">
           <div className="thumbnail">
             <img
-              src={restaurant.keyVisual.url}
+              src={
+                extractFile(restaurant.keyVisual, "1200")?.url ||
+                restaurant.keyVisual.url
+              }
               alt={restaurant.title}
               loading="lazy"
             />

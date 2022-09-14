@@ -911,6 +911,132 @@ export type Field_Variance_Order_By = {
   post_type_id?: InputMaybe<Order_By>;
 };
 
+/** columns and relationships of "file" */
+export type File = {
+  __typename?: 'file';
+  firebase_path: Scalars['String'];
+  id: Scalars['bigint'];
+  label: Scalars['String'];
+  media_id: Scalars['bigint'];
+  url: Scalars['String'];
+};
+
+/** order by aggregate values of table "file" */
+export type File_Aggregate_Order_By = {
+  avg?: InputMaybe<File_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<File_Max_Order_By>;
+  min?: InputMaybe<File_Min_Order_By>;
+  stddev?: InputMaybe<File_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<File_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<File_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<File_Sum_Order_By>;
+  var_pop?: InputMaybe<File_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<File_Var_Samp_Order_By>;
+  variance?: InputMaybe<File_Variance_Order_By>;
+};
+
+/** order by avg() on columns of table "file" */
+export type File_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "file". All fields are combined with a logical 'AND'. */
+export type File_Bool_Exp = {
+  _and?: InputMaybe<Array<File_Bool_Exp>>;
+  _not?: InputMaybe<File_Bool_Exp>;
+  _or?: InputMaybe<Array<File_Bool_Exp>>;
+  firebase_path?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  media_id?: InputMaybe<Bigint_Comparison_Exp>;
+  url?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** order by max() on columns of table "file" */
+export type File_Max_Order_By = {
+  firebase_path?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+};
+
+/** order by min() on columns of table "file" */
+export type File_Min_Order_By = {
+  firebase_path?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "file". */
+export type File_Order_By = {
+  firebase_path?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "file" */
+export enum File_Select_Column {
+  /** column name */
+  FirebasePath = 'firebase_path',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  MediaId = 'media_id',
+  /** column name */
+  Url = 'url'
+}
+
+/** order by stddev() on columns of table "file" */
+export type File_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_pop() on columns of table "file" */
+export type File_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by stddev_samp() on columns of table "file" */
+export type File_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by sum() on columns of table "file" */
+export type File_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by var_pop() on columns of table "file" */
+export type File_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by var_samp() on columns of table "file" */
+export type File_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
+/** order by variance() on columns of table "file" */
+export type File_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  media_id?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "integer_value" */
 export type Integer_Value = {
   __typename?: 'integer_value';
@@ -945,11 +1071,23 @@ export enum Integer_Value_Select_Column {
 export type Media = {
   __typename?: 'media';
   created_at: Scalars['timestamptz'];
+  /** An array relationship */
+  files: Array<File>;
   id: Scalars['bigint'];
   media_type: Scalars['String'];
   name: Scalars['String'];
-  size: Scalars['Int'];
+  size?: Maybe<Scalars['Int']>;
   url: Scalars['String'];
+};
+
+
+/** columns and relationships of "media" */
+export type MediaFilesArgs = {
+  distinct_on?: InputMaybe<Array<File_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Order_By>>;
+  where?: InputMaybe<File_Bool_Exp>;
 };
 
 /** Boolean expression to filter rows from the table "media". All fields are combined with a logical 'AND'. */
@@ -958,6 +1096,7 @@ export type Media_Bool_Exp = {
   _not?: InputMaybe<Media_Bool_Exp>;
   _or?: InputMaybe<Array<Media_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  files?: InputMaybe<File_Bool_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   media_type?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -968,6 +1107,7 @@ export type Media_Bool_Exp = {
 /** Ordering options when selecting data from "media". */
 export type Media_Order_By = {
   created_at?: InputMaybe<Order_By>;
+  files_aggregate?: InputMaybe<File_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   media_type?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1763,6 +1903,10 @@ export type Query_Root = {
   field_type: Array<Field_Type>;
   /** fetch data from the table: "field_type" using primary key columns */
   field_type_by_pk?: Maybe<Field_Type>;
+  /** fetch data from the table: "file" */
+  file: Array<File>;
+  /** fetch data from the table: "file" using primary key columns */
+  file_by_pk?: Maybe<File>;
   /** fetch data from the table: "integer_value" */
   integer_value: Array<Integer_Value>;
   /** fetch data from the table: "integer_value" using primary key columns */
@@ -1926,6 +2070,20 @@ export type Query_RootField_TypeArgs = {
 
 export type Query_RootField_Type_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Query_RootFileArgs = {
+  distinct_on?: InputMaybe<Array<File_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Order_By>>;
+  where?: InputMaybe<File_Bool_Exp>;
+};
+
+
+export type Query_RootFile_By_PkArgs = {
+  id: Scalars['bigint'];
 };
 
 
@@ -2405,6 +2563,10 @@ export type Subscription_Root = {
   field_type: Array<Field_Type>;
   /** fetch data from the table: "field_type" using primary key columns */
   field_type_by_pk?: Maybe<Field_Type>;
+  /** fetch data from the table: "file" */
+  file: Array<File>;
+  /** fetch data from the table: "file" using primary key columns */
+  file_by_pk?: Maybe<File>;
   /** fetch data from the table: "integer_value" */
   integer_value: Array<Integer_Value>;
   /** fetch data from the table: "integer_value" using primary key columns */
@@ -2568,6 +2730,20 @@ export type Subscription_RootField_TypeArgs = {
 
 export type Subscription_RootField_Type_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootFileArgs = {
+  distinct_on?: InputMaybe<Array<File_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Order_By>>;
+  where?: InputMaybe<File_Bool_Exp>;
+};
+
+
+export type Subscription_RootFile_By_PkArgs = {
+  id: Scalars['bigint'];
 };
 
 
@@ -3196,21 +3372,21 @@ export type GetCategorizedPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetCategorizedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, category_by_pk?: { __typename?: 'category', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, posts_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } } | null };
+export type GetCategorizedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, category_by_pk?: { __typename?: 'category', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size?: number | null } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size?: number | null } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, posts_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } } | null };
 
 export type GetMediaQueryVariables = Exact<{
   id: Scalars['bigint'];
 }>;
 
 
-export type GetMediaQuery = { __typename?: 'query_root', media_by_pk?: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number, created_at: any } | null };
+export type GetMediaQuery = { __typename?: 'query_root', media_by_pk?: { __typename?: 'media', id: any, name: string, url: string, media_type: string, created_at: any, files: Array<{ __typename?: 'file', id: any, label: string, url: string, firebase_path: string }> } | null };
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['bigint'];
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', post_by_pk?: { __typename?: 'post', id: any, title: string, category_id: number, created_at: any, deleted_at?: any | null, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string, fields: Array<{ __typename?: 'field', id: any, slug: string, name: string, field_type_id: number, required: boolean, multiple: boolean, order: number, field_post_type_id?: number | null, field_type: { __typename?: 'field_type', id: number, slug: string, name: string, order: number, is_post: boolean }, field_post_type?: { __typename?: 'post_type', id: number, slug: string, name: string } | null }> } } | null };
+export type GetPostQuery = { __typename?: 'query_root', post_by_pk?: { __typename?: 'post', id: any, title: string, category_id: number, created_at: any, deleted_at?: any | null, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, created_at: any, files: Array<{ __typename?: 'file', id: any, label: string, url: string, firebase_path: string }> } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, created_at: any, files: Array<{ __typename?: 'file', id: any, label: string, url: string, firebase_path: string }> } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string, fields: Array<{ __typename?: 'field', id: any, slug: string, name: string, field_type_id: number, required: boolean, multiple: boolean, order: number, field_post_type_id?: number | null, field_type: { __typename?: 'field_type', id: number, slug: string, name: string, order: number, is_post: boolean }, field_post_type?: { __typename?: 'post_type', id: number, slug: string, name: string } | null }> } } | null };
 
 export type GetPostsQueryVariables = Exact<{
   post_type_slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
@@ -3220,7 +3396,7 @@ export type GetPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, post: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, post_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } };
+export type GetPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, post: Array<{ __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, created_at: any, files: Array<{ __typename?: 'file', id: any, label: string, url: string, firebase_path: string }> } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, created_at: any, files: Array<{ __typename?: 'file', id: any, label: string, url: string, firebase_path: string }> } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } }>, post_aggregate: { __typename?: 'post_aggregate', aggregate?: { __typename?: 'post_aggregate_fields', count: number } | null } };
 
 export type GetTaggedPostsQueryVariables = Exact<{
   tag_id: Scalars['Int'];
@@ -3231,7 +3407,7 @@ export type GetTaggedPostsQueryVariables = Exact<{
 }>;
 
 
-export type GetTaggedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, tag_by_pk?: { __typename?: 'tag', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post_tag', post: { __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size: number } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } } }>, posts_aggregate: { __typename?: 'post_tag_aggregate', aggregate?: { __typename?: 'post_tag_aggregate_fields', count: number } | null } } | null };
+export type GetTaggedPostsQuery = { __typename?: 'query_root', post_type: Array<{ __typename?: 'post_type', id: number, slug: string, name: string }>, tag_by_pk?: { __typename?: 'tag', id: number, slug: string, name: string, posts: Array<{ __typename?: 'post_tag', post: { __typename?: 'post', id: any, title: string, created_at: any, category: { __typename?: 'category', id: number, slug: string, name: string }, tags: Array<{ __typename?: 'post_tag', tag: { __typename?: 'tag', id: number, slug: string, name: string } }>, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size?: number | null } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string, created_at: any, revisions: Array<{ __typename?: 'revision', id: any, created_at: any, values: Array<{ __typename?: 'value', id: any, field_id: any, field: { __typename?: 'field', id: any, slug: string, name: string }, text?: { __typename?: 'text_value', body: string } | null, numeric?: { __typename?: 'numeric_value', body: any } | null, integer?: { __typename?: 'integer_value', body: number } | null, media?: { __typename?: 'media_value', body: { __typename?: 'media', id: any, name: string, url: string, media_type: string, size?: number | null } } | null, post?: { __typename?: 'post_value', body: { __typename?: 'post', id: any, title: string } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }> } } | null, timestamp?: { __typename?: 'timestamp_value', body: any } | null, boolean?: { __typename?: 'boolean_value', body: boolean } | null }> }>, post_type: { __typename?: 'post_type', id: number, slug: string, name: string } } }>, posts_aggregate: { __typename?: 'post_tag_aggregate', aggregate?: { __typename?: 'post_tag_aggregate_fields', count: number } | null } } | null };
 
 export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3471,8 +3647,13 @@ export const GetMediaDocument = `
     name
     url
     media_type
-    size
     created_at
+    files {
+      id
+      label
+      url
+      firebase_path
+    }
   }
 }
     `;
@@ -3559,7 +3740,13 @@ export const GetPostDocument = `
             name
             url
             media_type
-            size
+            created_at
+            files {
+              id
+              label
+              url
+              firebase_path
+            }
           }
         }
         post {
@@ -3593,7 +3780,13 @@ export const GetPostDocument = `
                     name
                     url
                     media_type
-                    size
+                    created_at
+                    files {
+                      id
+                      label
+                      url
+                      firebase_path
+                    }
                   }
                 }
                 post {
@@ -3744,7 +3937,13 @@ export const GetPostsDocument = `
             name
             url
             media_type
-            size
+            created_at
+            files {
+              id
+              label
+              url
+              firebase_path
+            }
           }
         }
         post {
@@ -3778,7 +3977,13 @@ export const GetPostsDocument = `
                     name
                     url
                     media_type
-                    size
+                    created_at
+                    files {
+                      id
+                      label
+                      url
+                      firebase_path
+                    }
                   }
                 }
                 post {

@@ -61,7 +61,13 @@ query GetPosts(
             name
             url
             media_type
-            size
+            created_at
+            files {
+              id
+              label
+              url
+              firebase_path
+            }
           }
         }
         post {
@@ -95,7 +101,13 @@ query GetPosts(
                     name
                     url
                     media_type
-                    size
+                    created_at
+                    files {
+                      id
+                      label
+                      url
+                      firebase_path
+                    }
                   }
                 }
                 post {

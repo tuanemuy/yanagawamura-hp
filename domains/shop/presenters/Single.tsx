@@ -5,8 +5,9 @@ import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
 
 import { useRouter } from "next/router";
-import { Shop, Tag } from "../";
 import { nl2br } from "lib/util";
+import { extractFile } from "lib/cms";
+import { Shop, Tag } from "../";
 
 type Props = {
   shop: Shop;
@@ -43,7 +44,13 @@ export const Single = ({ shop }: Props) => {
       <Stacked paddingPos="top" paddingSize="thin">
         <div className="header">
           <div className="thumbnail">
-            <img src={shop.keyVisual.url} alt={shop.title} loading="lazy" />
+            <img
+              src={
+                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+              }
+              alt={shop.title}
+              loading="lazy"
+            />
           </div>
 
           <div className="info">

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { sizes, colors, fonts } from "variables";
 
+import { extractFile } from "lib/cms";
 import { Shop, Tag } from "../";
 
 type Props = {
@@ -12,7 +13,13 @@ export const Link = ({ shop, className }: Props) => {
   return (
     <Component href={`/shop/${shop.id}`} className={className || ""}>
       <div className="thumbnail">
-        <img src={shop.keyVisual.url} alt={shop.title} loading="lazy" />
+        <img
+          src={
+            extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
+          }
+          alt={shop.title}
+          loading="lazy"
+        />
       </div>
 
       <div className="meta">

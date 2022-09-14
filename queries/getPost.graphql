@@ -41,7 +41,13 @@ query GetPost($id: bigint!) {
             name
             url
             media_type
-            size
+            created_at
+            files {
+              id
+              label
+              url
+              firebase_path
+            }
           }
         }
         post {
@@ -75,7 +81,13 @@ query GetPost($id: bigint!) {
                     name
                     url
                     media_type
-                    size
+                    created_at
+                    files {
+                      id
+                      label
+                      url
+                      firebase_path
+                    }
                   }
                 }
                 post {

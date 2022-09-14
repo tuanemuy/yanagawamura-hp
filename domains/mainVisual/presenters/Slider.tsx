@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 
 import { useEffect, useState } from "react";
+import { extractFile } from "lib/cms";
 import { MainVisual } from "../";
 
 type Props = {
@@ -39,7 +40,7 @@ export const Slider = ({ mainVisuals }: Props) => {
                 <SwiperSlide key={mv.id}>
                   <Slide href={mv.url}>
                     <img
-                      src={mv.image.url}
+                      src={extractFile(mv.image, "1600")?.url || mv.image.url}
                       alt={mv.image.name}
                       loading={index === 0 ? "eager" : "lazy"}
                     />
@@ -54,7 +55,9 @@ export const Slider = ({ mainVisuals }: Props) => {
                 <SwiperSlide key={mv.id}>
                   <Slide href={mv.url}>
                     <img
-                      src={mv.mobileImage.url}
+                      src={
+                        extractFile(mv.image, "800")?.url || mv.mobileImage.url
+                      }
                       alt={mv.mobileImage.name}
                       loading={index === 0 ? "eager" : "lazy"}
                     />

@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { colors, sizes, screens, fonts } from "variables";
+import { colors, sizes, screens } from "variables";
 import { Columns, Stacked } from "unflexible-ui-core";
 import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
 
 import { useRouter } from "next/router";
-import { Event, Tag } from "../";
 import { nl2br } from "lib/util";
+import { extractFile } from "lib/cms";
+import { Event, Tag } from "../";
 
 type Props = {
   event: Event;
@@ -43,7 +44,13 @@ export const Single = ({ event }: Props) => {
       <Stacked paddingPos="top" paddingSize="thin">
         <div className="header">
           <div className="thumbnail">
-            <img src={event.keyVisual.url} alt={event.title} loading="lazy" />
+            <img
+              src={
+                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+              }
+              alt={event.title}
+              loading="lazy"
+            />
           </div>
 
           <div className="info">

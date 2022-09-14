@@ -135,7 +135,7 @@ const Component = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${screens.m}px) {
+  @media only screen and (max-width: ${screens.s}px) {
     .body {
       margin-left: 0;
 
@@ -149,7 +149,7 @@ const Component = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${screens.m}px) {
+  @media only screen and (max-width: ${screens.xs}px) {
     .body {
       h3 {
         font-size: .9rem;

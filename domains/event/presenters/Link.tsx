@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { sizes, colors, fonts } from "variables";
 
+import { extractFile } from "lib/cms";
 import { Event } from "../";
 
 type Props = {
@@ -12,7 +13,11 @@ export const Link = ({ event, className }: Props) => {
   return (
     <Component href={`/event/${event.id}`} className={className || ""}>
       <div className="thumbnail">
-        <img src={event.keyVisual.url} alt={event.title} loading="lazy" />
+        <img
+          src={extractFile(event.keyVisual, "800")?.url || event.keyVisual.url}
+          alt={event.title}
+          loading="lazy"
+        />
       </div>
 
       <div className="info">
