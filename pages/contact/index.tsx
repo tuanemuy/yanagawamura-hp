@@ -125,7 +125,7 @@ const ContactPage: NextPage = () => {
                   <div className="input checkbox">
                     <input type="checkbox" id="privacy" required />
                     <label htmlFor="privacy">
-                      <a href={url("privacy-policy")} target="_blank">
+                      <a href={url("privacy-policy")} target="_blank" rel="noreferrer">
                         個人情報保護方針
                       </a>
                       に同意します

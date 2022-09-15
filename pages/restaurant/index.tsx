@@ -18,8 +18,6 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { Order_By } from "lib/graphql";
 import {
   Restaurant,
-  Category,
-  Tag,
   useGetRestaurants,
   getGetRestaurantsPrefetcher,
   useGetCategories,
@@ -36,18 +34,6 @@ export async function getStaticProps() {
   const queryClient = new QueryClient();
   const prefetches = [];
   const limit = 9;
-
-  const categoriesResult = fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE || ""}/category?post_type=restaurant`
-  );
-  const tagsResult = fetch(`${process.env.NEXT_PUBLIC_API_BASE || ""}/tag`);
-
-  const results = await Promise.all([categoriesResult, tagsResult]);
-  const categories = await results[0].json();
-  const tags = await results[1].json();
-
-  const categoryIds = categories.category.map((v: any) => v.id);
-  const tagIds = tags.tag.map((v: any) => v.id);
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
     limit,
@@ -104,8 +90,6 @@ export async function getStaticProps() {
     props: {
       dehydratedState: dehydrate(queryClient),
       limit,
-      allCategories: categories.category,
-      allTags: tags.tag,
     },
     revalidate: 60,
   };
@@ -113,26 +97,14 @@ export async function getStaticProps() {
 
 type Props = {
   limit: number;
-  allCategories: Category[];
-  allTags: Tag[];
 };
 
-const RestaurantArchivePage: NextPage<Props> = ({
-  limit,
-  allCategories,
-  allTags,
-}) => {
+const RestaurantArchivePage: NextPage<Props> = ({ limit }) => {
   const router = useRouter();
-  const { page, category, tag } = router.query;
+  const { page } = router.query;
   const pageNumber: number = Array.isArray(page)
     ? parseInt(page[0] || "1", 10) || 1
     : parseInt(page || "1", 10) || 1;
-  const categoryId: number | null = Array.isArray(category)
-    ? parseInt(category[0] || "", 10) || null
-    : parseInt(category || "", 10) || null;
-  const tagId: number | null = Array.isArray(tag)
-    ? parseInt(tag[0] || "", 10) || null
-    : parseInt(tag || "", 10) || null;
 
   const store = useContext(StoreContext);
 
@@ -253,7 +225,7 @@ const RestaurantArchivePage: NextPage<Props> = ({
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
           />
@@ -264,7 +236,7 @@ const RestaurantArchivePage: NextPage<Props> = ({
             title="イベント"
             subtitle="一緒に盛り上がろう！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
             reverse

@@ -249,7 +249,11 @@ const CategorizedShopsPage: NextPage<Props> = ({ id, categoryName, limit }) => {
             </Stacked>
 
             <Stacked paddingPos="top" paddingSize="thin">
-              <ToCategories postType="shop" categories={categories} selected={id} />
+              <ToCategories
+                postType="shop"
+                categories={categories}
+                selected={id}
+              />
             </Stacked>
 
             <Stacked paddingPos="top" paddingSize="narrow">
@@ -269,7 +273,7 @@ const CategorizedShopsPage: NextPage<Props> = ({ id, categoryName, limit }) => {
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
           />
@@ -280,7 +284,7 @@ const CategorizedShopsPage: NextPage<Props> = ({ id, categoryName, limit }) => {
             title="イベント"
             subtitle="一緒に盛り上がろう！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
             reverse

@@ -259,7 +259,11 @@ const CategorizedEventsPage: NextPage<Props> = ({
             </Stacked>
 
             <Stacked paddingPos="top" paddingSize="thin">
-              <ToCategories postType="event" categories={categories} selected={id} />
+              <ToCategories
+                postType="event"
+                categories={categories}
+                selected={id}
+              />
             </Stacked>
 
             <Stacked paddingPos="top" paddingSize="narrow">
@@ -279,7 +283,7 @@ const CategorizedEventsPage: NextPage<Props> = ({
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
           />
@@ -290,7 +294,7 @@ const CategorizedEventsPage: NextPage<Props> = ({
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
             reverse
@@ -302,7 +306,7 @@ const CategorizedEventsPage: NextPage<Props> = ({
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
           />

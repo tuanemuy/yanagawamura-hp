@@ -79,10 +79,6 @@ export default class MyDocument extends Document {
         <body id="myapp">
           <Main />
           <NextScript />
-          <script
-            type="text/javascript"
-            src="//typesquare.com/3/tsst/script/ja/typesquare.js?63104b46f704485a989c4d33ac1e02e5"
-          ></script>
         </body>
       </Html>
     );
