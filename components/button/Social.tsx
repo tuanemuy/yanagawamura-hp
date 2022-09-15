@@ -11,7 +11,7 @@ type Props = {
 export const Social = ({ name, icon, to, scale }: Props) => {
   return (
     <Component href={to} target="_blank" scale={scale || 1}>
-      <img src={icon} alt={name} width="72" />
+      <img src={icon} alt={name} width="72" height="72" loading="lazy" />
     </Component>
   );
 };
