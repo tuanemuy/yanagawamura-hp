@@ -184,7 +184,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
           />
@@ -195,7 +195,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
             title="イベント"
             subtitle="笑顔でお待ちしております！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
             reverse

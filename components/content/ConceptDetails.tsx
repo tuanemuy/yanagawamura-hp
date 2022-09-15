@@ -77,6 +77,7 @@ const Component = styled.div<ComponentProps>`
       writing-mode: vertical-rl;
       font-size: 4.8rem;
       font-family: ${fonts.heading};
+      font-feature-settings: initial;
       line-height: 1.3;
       white-space: nowrap;
     }
@@ -85,7 +86,7 @@ const Component = styled.div<ComponentProps>`
   @media only screen and (max-width: ${screens.l}px) {
     .header {
       h2 {
-        font-size: 4.5rem;
+        font-size: 5rem;
       }
     }
   }
@@ -97,7 +98,8 @@ const Component = styled.div<ComponentProps>`
 
       h2 {
         writing-mode: horizontal-tb;
-        font-size: 3.5rem;
+        font-size: 4rem;
+        font-feature-settings: "palt";
         text-align: ${(p) => (p.reverse ? "left" : "right")};
         text-shadow: 1px 1px 0px ${colors.background},
           5px 0px 0 ${colors.background}, 5px -5px 0 ${colors.background},
@@ -107,18 +109,10 @@ const Component = styled.div<ComponentProps>`
     }
   }
 
-  @media only screen and (max-width: ${screens.s}px) {
-    .header {
-      h2 {
-        font-size: 3.25rem;
-      }
-    }
-  }
-
   @media only screen and (max-width: ${screens.xs}px) {
     .header {
       h2 {
-        font-size: 2.75rem;
+        font-size: 3rem;
       }
     }
   }

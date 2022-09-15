@@ -70,6 +70,7 @@ const Component = styled.div<ComponentProps>`
       writing-mode: vertical-rl;
       font-size: 5rem;
       font-family: ${fonts.heading};
+      font-feature-settings: initial;
       line-height: 1.3;
       white-space: nowrap;
     }
@@ -90,7 +91,8 @@ const Component = styled.div<ComponentProps>`
 
       > h2 {
         writing-mode: horizontal-tb;
-        font-size: 2.5rem;
+        font-size: 3rem;
+        font-feature-settings: "palt";
       }
     }
   }

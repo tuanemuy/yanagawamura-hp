@@ -154,7 +154,7 @@ const AboutPage: NextPage = () => {
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
             reverse
@@ -166,7 +166,7 @@ const AboutPage: NextPage = () => {
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
           />
@@ -177,7 +177,7 @@ const AboutPage: NextPage = () => {
             title="イベント"
             subtitle="一緒に盛り上がろう！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
             reverse
@@ -191,7 +191,7 @@ const AboutPage: NextPage = () => {
         <Stacked wrap isSection color={colors.deepBlack}>
           <Stacked paddingPos="none">
             <PlainText
-              h2SizeXL="3rem"
+              h2SizeXL="3.25rem"
               h2SizeM="2.5rem"
               h2SizeXS="2.25rem"
               h2Family={fonts.heading}

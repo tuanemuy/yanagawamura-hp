@@ -140,9 +140,7 @@ const HomePage: NextPage = () => {
       description="群馬県高崎市のヤナガワ村です。柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします。"
       path=""
       ogType="website"
-      header={
-        <Header title="群馬県高崎市の商店街・飲み屋街【ヤナガワ村】" />
-      }
+      header={<Header title="群馬県高崎市の商店街・飲み屋街【ヤナガワ村】" />}
       footer={<Footer />}
       fixHeader
     >
@@ -164,7 +162,7 @@ const HomePage: NextPage = () => {
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
           />
@@ -175,7 +173,7 @@ const HomePage: NextPage = () => {
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
             reverse
@@ -187,7 +185,7 @@ const HomePage: NextPage = () => {
             title="イベント"
             subtitle="一緒に盛り上がろう！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
           />
@@ -200,7 +198,7 @@ const HomePage: NextPage = () => {
         <Stacked wrap isSection color={colors.deepBlack}>
           <Stacked paddingPos="none">
             <PlainText
-              h2SizeXL="3rem"
+              h2SizeXL="3.25rem"
               h2SizeM="2.5rem"
               h2SizeXS="2.25rem"
               h2Family={fonts.heading}

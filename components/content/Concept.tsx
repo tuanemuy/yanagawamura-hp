@@ -86,6 +86,7 @@ const Component = styled.div`
       writing-mode: vertical-rl;
       font-size: 6.4rem;
       font-family: ${fonts.heading};
+      font-feature-settings: initial;
       line-height: 1.3;
       white-space: nowrap;
     }
@@ -106,8 +107,8 @@ const Component = styled.div`
 
       h2 {
         writing-mode: horizontal-tb;
-        font-size: 4rem;
         font-size: 4.5rem;
+        font-feature-settings: "palt";
         transform: translateX(0.5em);
         text-shadow: 1px 1px 0px ${colors.background},
           5px 0px 0 ${colors.background}, 5px -5px 0 ${colors.background},
@@ -122,7 +123,7 @@ const Component = styled.div`
       justify-content: flex-start;
 
       h2 {
-        font-size: 3.5rem;
+        font-size: 4rem;
         transform: translateX(0);
       }
     }

@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "styles/global.scss";
 import "styles/inview.scss";
+import "styles/font.scss";
 
 const config = {
   stacked: {

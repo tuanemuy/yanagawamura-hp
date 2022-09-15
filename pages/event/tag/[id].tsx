@@ -267,7 +267,7 @@ const TaggedEventsPage: NextPage<Props> = ({ id, tagName, limit }) => {
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
             reverse
@@ -279,7 +279,7 @@ const TaggedEventsPage: NextPage<Props> = ({ id, tagName, limit }) => {
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
           />

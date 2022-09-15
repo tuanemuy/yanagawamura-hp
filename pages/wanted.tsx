@@ -188,7 +188,7 @@ const WantedPage: NextPage = () => {
             title="飲食店"
             subtitle="笑顔でお待ちしております！"
             items={restaurants.map((r: Restaurant) => (
-              <RestaurantLink restaurant={r} />
+              <RestaurantLink restaurant={r} key={r.id} />
             ))}
             more={url("restaurant")}
           />
@@ -199,7 +199,7 @@ const WantedPage: NextPage = () => {
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
             items={shops.map((s: Shop) => (
-              <ShopLink shop={s} />
+              <ShopLink shop={s} key={s.id} />
             ))}
             more={url("shop")}
             reverse
@@ -211,7 +211,7 @@ const WantedPage: NextPage = () => {
             title="イベント"
             subtitle="一緒に盛り上がろう！"
             items={events.map((e: Event) => (
-              <EventLink event={e} />
+              <EventLink event={e} key={e.id} />
             ))}
             more={url("event")}
           />
