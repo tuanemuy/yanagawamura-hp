@@ -22,6 +22,7 @@ export const Footer = ({}: Props) => {
                   <img
                     src={url("images/icon_yanagawa_icon.png")}
                     alt="アイコン"
+                    width="70"
                   />
                 </div>
 
@@ -29,6 +30,7 @@ export const Footer = ({}: Props) => {
                   <img
                     src={url("images/icon_yanagawa_text_cloud.png")}
                     alt="ヤナガワ村役場"
+                    width="300"
                   />
                   <p>YANAGAWA VILLAGE OFFICE</p>
                 </div>
@@ -105,31 +107,31 @@ export const Footer = ({}: Props) => {
         <Sitemap>
           <ul>
             <li>
-              <a href={url('about')}>ヤナガワ村とは</a>
+              <a href={url("about")}>ヤナガワ村とは</a>
             </li>
             <li>
-              <a href={url('restaurant')}>飲食</a>
+              <a href={url("restaurant")}>飲食</a>
             </li>
             <li>
-              <a href={url('shop')}>物販・サービス</a>
+              <a href={url("shop")}>物販・サービス</a>
             </li>
             <li>
-              <a href={url('event')}>イベント</a>
+              <a href={url("event")}>イベント</a>
             </li>
             <li>
-              <a href={url('news')}>お知らせ</a>
+              <a href={url("news")}>お知らせ</a>
             </li>
             <li>
-              <a href={url('villager')}>ヤナガワ村民について</a>
+              <a href={url("villager")}>ヤナガワ村民について</a>
             </li>
             <li>
-              <a href={url('wanted')}>協力してくれる方募集</a>
+              <a href={url("wanted")}>協力してくれる方募集</a>
             </li>
             <li>
-              <a href={url('contact')}>お問い合わせ</a>
+              <a href={url("contact")}>お問い合わせ</a>
             </li>
             <li>
-              <a href={url('privacy-policy')}>個人情報保護方針</a>
+              <a href={url("privacy-policy")}>個人情報保護方針</a>
             </li>
           </ul>
         </Sitemap>
