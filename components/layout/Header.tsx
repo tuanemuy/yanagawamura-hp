@@ -94,7 +94,7 @@ export const Header = ({ title }: Props) => {
       </div>
 
       <Hamburger expanded={expanded}>
-        <button type="button" onClick={() => setExpanded((v) => !v)}>
+        <button type="button" onClick={() => setExpanded((v) => !v)} aria-label="メニューを開く">
           <div className="icon">
             <span></span>
             <span></span>
