@@ -243,13 +243,23 @@ const HomePage: NextPage = () => {
             <Columns justify="center" repeat={2} repeatS={1} gap="normal">
               <Block>
                 <div className="inview inview__bt inview__delay1">
-                  <Figure src="images/sample.jpg" width="100%" lazy />
+                  <Figure
+                    src="images/sample.jpg"
+                    width="100%"
+                    name="メンバー募集"
+                    lazy
+                  />
                 </div>
               </Block>
 
               <Block>
                 <div className="inview inview__bt inview__delay2">
-                  <Figure src="images/sample.jpg" width="100%" lazy />
+                  <Figure
+                    src="images/sample.jpg"
+                    width="100%"
+                    name="メンバー募集"
+                    lazy
+                  />
                 </div>
               </Block>
             </Columns>
