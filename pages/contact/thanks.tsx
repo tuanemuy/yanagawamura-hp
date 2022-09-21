@@ -31,7 +31,6 @@ const ContactThanksPage: NextPage = () => {
               <PlainText
                 baseAlign="center"
                 h2Align="center"
-                h2Family={fonts.heading}
                 h2SizeXL="2.5rem"
                 h2SizeM="1.75rem"
               >
