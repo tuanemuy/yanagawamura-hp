@@ -56,7 +56,7 @@ export const Slider = ({ mainVisuals }: Props) => {
                   <Slide href={mv.url}>
                     <img
                       src={
-                        extractFile(mv.image, "800")?.url || mv.mobileImage.url
+                        extractFile(mv.image, "1200")?.url || mv.mobileImage.url
                       }
                       alt={mv.mobileImage.name}
                       loading={index === 0 ? "eager" : "lazy"}
