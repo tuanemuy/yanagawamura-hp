@@ -110,7 +110,7 @@ const Component = styled.div`
         font-size: 4.5rem;
         font-feature-settings: "palt";
         transform: translateX(0.5em);
-        text-shadow: 1px 1px 0px ${colors.background},
+        text-shadow: 5px 5px 0px ${colors.background},
           5px 0px 0 ${colors.background}, 5px -5px 0 ${colors.background},
           -5px 5px ${colors.background}, -5px 0px ${colors.background},
           -5px -5px ${colors.background};
