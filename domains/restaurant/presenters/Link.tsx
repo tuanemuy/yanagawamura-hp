@@ -76,6 +76,7 @@ const Component = styled.a`
       width: 100%;
       height: 100%;
       transition-duration: 0.3s;
+      object-fit: cover;
     }
   }
 
