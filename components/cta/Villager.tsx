@@ -10,7 +10,7 @@ export const Villager = ({}: Props) => {
   return (
     <Component className="inview inview__bt inview__delay1">
       <div className="image">
-        <img src={url("images/sample.jpg")} alt="ヤナガワ村民募集中" loading="lazy" />
+        <img src={url("images/villager.jpg")} alt="ヤナガワ村民募集中" loading="lazy" />
       </div>
 
       <div className="body">

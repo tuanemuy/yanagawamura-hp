@@ -244,7 +244,7 @@ const HomePage: NextPage = () => {
               <Block>
                 <div className="inview inview__bt inview__delay1">
                   <Figure
-                    src="images/sample.jpg"
+                    src="images/member_01.jpg"
                     width="100%"
                     name="メンバー募集"
                     lazy
@@ -255,7 +255,7 @@ const HomePage: NextPage = () => {
               <Block>
                 <div className="inview inview__bt inview__delay2">
                   <Figure
-                    src="images/sample.jpg"
+                    src="images/member_02.jpg"
                     width="100%"
                     name="メンバー募集"
                     lazy
