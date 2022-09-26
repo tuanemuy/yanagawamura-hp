@@ -197,6 +197,7 @@ const AboutPage: NextPage = () => {
               h2Family={fonts.heading}
               h2Color={colors.white}
               h2Align="center"
+              h2Weight={400}
               h3Color={colors.white}
               h3Align="center"
               h3Weight="400"
