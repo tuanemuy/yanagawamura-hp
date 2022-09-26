@@ -257,7 +257,7 @@ const Component = styled.div`
     z-index: 2;
     width: 100%;
     height: 360px;
-    margin-top: 15rem;
+    margin-top: 13rem;
 
     ul {
       position: absolute;
@@ -273,8 +273,8 @@ const Component = styled.div`
     }
 
     img {
-      width: 360px;
-      height: 360px;
+      width: 380px;
+      height: 380px;
       border-radius: 20px;
       object-fit: cover;
     }
