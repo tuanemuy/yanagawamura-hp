@@ -116,9 +116,9 @@ const AboutPage: NextPage = () => {
             title="個性あふれる<br/>街のお店"
             description="お得さや目新しさを求めて比較的若い世代が飲みに出る駅周辺エリアとは異なり、このエリアには、チェーン店はほとんどありません。その代わりに様々な個性溢れる店舗が立ち並び、「誰々さんのお店に飲みに行く」というように「人」を動機に飲みに出かけられるお店が多いのが、ヤナガワ村の特徴です。"
             images={[
-              "images/sample.jpg",
-              "images/sample.jpg",
-              "images/sample.jpg",
+              "images/shop_01.jpg",
+              "images/shop_02.jpg",
+              "images/shop_03.jpg",
             ]}
             reverse
           />
@@ -129,9 +129,9 @@ const AboutPage: NextPage = () => {
             title="人とつながる<br/>飲み屋街"
             description="定住人口は少ないですし、交流人口においても駅周辺には到底敵いません。しかし、このエリアは高崎市で最も「関係人口」が多い地域だと言う事ができると思うのです。頻繁にこのエリアに飲みに出かける人の事を、冗談まじりに「ヤナガワ村長」と表現する事がその象徴でもあります。ヤナガワ村長やヤナガワ村民が市内外に溢れているという事が、このエリアが持つ何よりの財産です。"
             images={[
-              "images/sample.jpg",
-              "images/sample.jpg",
-              "images/sample.jpg",
+              "images/restaurant_01.jpg",
+              "images/restaurant_02.jpg",
+              "images/restaurant_03.jpg",
             ]}
           />
         </Stacked>
@@ -141,9 +141,9 @@ const AboutPage: NextPage = () => {
             title="昔ながらの雰囲気に<br/>身を委ねる"
             description="昔ながらのディープで笑顔あふれるその雰囲気に、あなたも身を委ねてみませんか？<br/>飲み屋が好きな方に限らず、多くの方に楽しんでいただきたいとの思いから、ヤナガワ村では多くのイベントを開催しています。食べ歩きや音楽ステージ、スケートボード、縁日など様々な企画があり、お子さまから大人までお楽しみいただけます。昭和の香りが漂うこの街にぜひお越しください。"
             images={[
-              "images/sample.jpg",
-              "images/sample.jpg",
-              "images/sample.jpg",
+              "images/atmos_01.jpg",
+              "images/atmos_02.jpg",
+              "images/atmos_03.jpg",
             ]}
             reverse
           />
@@ -236,13 +236,13 @@ const AboutPage: NextPage = () => {
             <Columns justify="center" repeat={2} repeatS={1} gap="normal">
               <Block>
                 <div className="inview inview__bt inview__delay1">
-                  <Figure src="images/sample.jpg" width="100%" lazy />
+                  <Figure src="images/member_01.jpg" width="100%" lazy />
                 </div>
               </Block>
 
               <Block>
                 <div className="inview inview__bt inview__delay2">
-                  <Figure src="images/sample.jpg" width="100%" lazy />
+                  <Figure src="images/member_02.jpg" width="100%" lazy />
                 </div>
               </Block>
             </Columns>

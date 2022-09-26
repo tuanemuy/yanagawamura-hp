@@ -86,6 +86,7 @@ const Component = styled.div`
       writing-mode: vertical-rl;
       font-size: 6.4rem;
       font-family: ${fonts.heading};
+      font-weight: 400;
       font-feature-settings: initial;
       line-height: 1.3;
       white-space: nowrap;
@@ -256,7 +257,7 @@ const Component = styled.div`
     z-index: 2;
     width: 100%;
     height: 360px;
-    margin-top: 15rem;
+    margin-top: 13rem;
 
     ul {
       position: absolute;
@@ -272,8 +273,8 @@ const Component = styled.div`
     }
 
     img {
-      width: 360px;
-      height: 360px;
+      width: 380px;
+      height: 380px;
       border-radius: 20px;
       object-fit: cover;
     }

@@ -76,7 +76,7 @@ const Component = styled.div`
   width: 100%;
 
   .swiper-slide {
-    width: 1240px;
+    width: 1180px;
     overflow: hidden;
   }
 
