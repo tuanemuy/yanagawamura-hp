@@ -326,6 +326,7 @@ const Component = styled.div`
       img {
         width: 30vw;
         height: 30vw;
+        border-radius: 10px;
       }
     }
   }
