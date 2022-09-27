@@ -35,7 +35,7 @@ export const Concept = ({}: Props) => {
           <ul>
             <li className="inview inview__scale0010 inview__delay1">
               <img
-                src="images/concept_01.jpg"
+                src="images/concept_03.jpg"
                 alt="ヤナガワ村の雰囲気"
                 loading="lazy"
               />
@@ -49,7 +49,7 @@ export const Concept = ({}: Props) => {
             </li>
             <li className="inview inview__scale0010 inview__delay3">
               <img
-                src="images/concept_03.jpg"
+                src="images/concept_01.jpg"
                 alt="ヤナガワ村の雰囲気"
                 loading="lazy"
               />
@@ -256,7 +256,7 @@ const Component = styled.div`
     position: relative;
     z-index: 2;
     width: 100%;
-    height: 360px;
+    height: 390px;
     margin-top: 13rem;
 
     ul {
@@ -273,10 +273,21 @@ const Component = styled.div`
     }
 
     img {
-      width: 380px;
-      height: 380px;
+      width: 390px;
+      height: 390px;
       border-radius: 20px;
       object-fit: cover;
+    }
+  }
+
+  @media only screen and (max-width: 1500px) {
+    .gallery {
+      height: 360px;
+
+      img {
+        width: 360px;
+        height: 360px;
+      }
     }
   }
 
