@@ -41,6 +41,15 @@ export const Slider = ({ mainVisuals }: Props) => {
                   <Slide href={mv.url}>
                     <img
                       src={extractFile(mv.image, "1600")?.url || mv.image.url}
+                      srcSet={`${
+                        extractFile(mv.image, "2000")?.url || mv.image.url
+                      } 2000w, ${
+                        extractFile(mv.image, "1600")?.url || mv.image.url
+                      } 1600w, ${
+                        extractFile(mv.image, "1200")?.url || mv.image.url
+                      } 1200w, ${
+                        extractFile(mv.image, "800")?.url || mv.image.url
+                      } 800w`}
                       alt={mv.image.name}
                       loading={index === 0 ? "eager" : "lazy"}
                     />
@@ -56,8 +65,22 @@ export const Slider = ({ mainVisuals }: Props) => {
                   <Slide href={mv.url}>
                     <img
                       src={
-                        extractFile(mv.image, "1200")?.url || mv.mobileImage.url
+                        extractFile(mv.mobileImage, "1200")?.url ||
+                        mv.mobileImage.url
                       }
+                      srcSet={`${
+                        extractFile(mv.mobileImage, "2000")?.url ||
+                        mv.mobileImage.url
+                      } 2000w, ${
+                        extractFile(mv.mobileImage, "1600")?.url ||
+                        mv.mobileImage.url
+                      } 1600w, ${
+                        extractFile(mv.mobileImage, "1200")?.url ||
+                        mv.mobileImage.url
+                      } 1200w, ${
+                        extractFile(mv.mobileImage, "800")?.url ||
+                        mv.mobileImage.url
+                      } 800w`}
                       alt={mv.mobileImage.name}
                       loading={index === 0 ? "eager" : "lazy"}
                     />
