@@ -14,9 +14,7 @@ export const Link = ({ shop, className }: Props) => {
     <Component href={`/shop/${shop.id}`} className={className || ""}>
       <div className="thumbnail">
         <img
-          src={
-            extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
-          }
+          src={extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url}
           alt={shop.title}
           loading="lazy"
         />
@@ -71,6 +69,7 @@ const Component = styled.a`
       left: 0;
       width: 100%;
       height: 100%;
+      border-radius: 20px;
       transition-duration: 0.3s;
       object-fit: cover;
     }
