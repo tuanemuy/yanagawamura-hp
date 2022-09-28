@@ -204,7 +204,6 @@ const CategorizedShopsPage: NextPage<Props> = ({ id, categoryName, limit }) => {
         />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title={`${categoryName} の物販・サービス店`} />

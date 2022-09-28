@@ -166,7 +166,6 @@ const ShopArchivePage: NextPage<Props> = ({ limit }) => {
         <Header title="物販・サービス店 | 群馬県高崎市の商店街【ヤナガワ村】" />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="物販・サービス店" />

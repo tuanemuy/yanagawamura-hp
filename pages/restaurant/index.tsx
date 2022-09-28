@@ -158,7 +158,6 @@ const RestaurantArchivePage: NextPage<Props> = ({ limit }) => {
       ogType="article"
       header={<Header title="飲食店 | 群馬県高崎市の飲み屋街「ヤナガワ村」" />}
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="飲食店" />

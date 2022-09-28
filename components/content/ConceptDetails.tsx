@@ -139,13 +139,14 @@ const Component = styled.div<ComponentProps>`
   .overview {
     line-height: 2;
     font-size: 1.1rem;
+    letter-spacing: .1em;
   }
 
   .gallery {
     position: relative;
     z-index: 2;
     width: 100%;
-    height: 360px;
+    height: 400px;
     margin-top: ${sizes.gapXL};
 
     ul {
@@ -154,7 +155,7 @@ const Component = styled.div<ComponentProps>`
       ${(p) => (p.reverse ? "left: 0;" : "right: 0;")};
       display: flex;
       flex-direction: ${(p) => (p.reverse ? "row" : "row-reverse")};
-      gap: ${sizes.gapL};
+      gap: calc(${sizes.gapM} * 1.5);
       list-style: none;
     }
 
@@ -163,10 +164,32 @@ const Component = styled.div<ComponentProps>`
     }
 
     img {
-      width: 360px;
-      height: 360px;
+      width: 400px;
+      height: 400px;
       border-radius: 20px;
       object-fit: cover;
+    }
+  }
+
+  @media only screen and (max-width: 1670px) {
+    .gallery {
+      height: 370px;
+
+      img {
+        width: 370px;
+        height: 370px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1530px) {
+    .gallery {
+      height: 360px;
+
+      img {
+        width: 360px;
+        height: 360px;
+      }
     }
   }
 

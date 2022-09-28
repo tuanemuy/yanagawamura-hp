@@ -46,8 +46,17 @@ export const Single = ({ event }: Props) => {
           <div className="thumbnail">
             <img
               src={
-                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+                extractFile(event.keyVisual, "1600")?.url || event.keyVisual.url
               }
+              srcSet={`${
+                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+              } 2000w, ${
+                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+              } 1600w, ${
+                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+              } 1200w, ${
+                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+              } 800w`}
               alt={event.title}
               loading="lazy"
             />

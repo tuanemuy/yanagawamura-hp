@@ -48,6 +48,15 @@ export const Single = ({ shop }: Props) => {
               src={
                 extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
               }
+              srcSet={`${
+                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+              } 2000w, ${
+                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+              } 1600w, ${
+                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+              } 1200w, ${
+                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+              } 800w`}
               alt={shop.title}
               loading="lazy"
             />

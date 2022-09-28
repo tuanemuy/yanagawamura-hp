@@ -162,7 +162,6 @@ const EventArchivePage: NextPage<Props> = ({ limit }) => {
         <Header title="イベント | 群馬県高崎市の飲み屋街【ヤナガワ村】" />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="イベント" />

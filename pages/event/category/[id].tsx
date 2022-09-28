@@ -214,7 +214,6 @@ const CategorizedEventsPage: NextPage<Props> = ({
         />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title={`${categoryName || ""} のイベント`} />

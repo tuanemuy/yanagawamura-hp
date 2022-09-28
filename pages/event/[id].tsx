@@ -113,7 +113,6 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
       ogType="article"
       header={<Header title={`${event?.title || "イベント"} | ヤナガワ村`} />}
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="イベント" />

@@ -27,13 +27,16 @@ const Component = styled.main<ComponentProps>`
     p.avoidHeader &&
     `
     padding-top: 110.39px;
+    padding-top: 0px;
 
     @media only screen and (max-width: ${screens.l}px) {
       padding-top: 102.39px;
+      padding-top: 0px;
     }
 
     @media only screen and (max-width: ${screens.s}px) {
       padding-top: 80.59px;
+      padding-top: 0px;
     }
   `}
 `;

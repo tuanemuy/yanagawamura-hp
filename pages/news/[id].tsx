@@ -136,7 +136,6 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
       ogType="article"
       header={<Header title={`${news?.title || "お知らせ"} | ヤナガワ村`} />}
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="お知らせ" />

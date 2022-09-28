@@ -181,6 +181,7 @@ const Component = styled.div`
       flex-grow: 1;
       width: 450px;
       font-size: 1.1rem;
+      letter-spacing: .1em;
       line-height: 2;
     }
   }
@@ -256,15 +257,15 @@ const Component = styled.div`
     position: relative;
     z-index: 2;
     width: 100%;
-    height: 390px;
-    margin-top: 13rem;
+    height: 420px;
+    margin-top: 12rem;
 
     ul {
       position: absolute;
       top: 0;
       right: 0;
       display: flex;
-      gap: ${sizes.gapL};
+      gap: calc(${sizes.gapM} * 1.5);
       list-style: none;
     }
 
@@ -273,14 +274,25 @@ const Component = styled.div`
     }
 
     img {
-      width: 390px;
-      height: 390px;
+      width: 420px;
+      height: 420px;
       border-radius: 20px;
       object-fit: cover;
     }
   }
 
-  @media only screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1670px) {
+    .gallery {
+      height: 390px;
+
+      img {
+        width: 390px;
+        height: 390px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1530px) {
     .gallery {
       height: 360px;
 
@@ -334,7 +346,7 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.xs}px) {
     .gallery {
       height: 34vw;
-      margin-top: 20rem;
+      margin-top: 19rem;
 
       ul {
         gap: ${sizes.gapM};

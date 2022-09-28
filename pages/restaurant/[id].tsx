@@ -136,7 +136,6 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
         <Header title={`${restaurant?.title || "飲食店"} | ヤナガワ村`} />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="飲食店" />

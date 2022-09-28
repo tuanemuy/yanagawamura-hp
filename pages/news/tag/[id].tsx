@@ -222,7 +222,6 @@ const TaggedNewsArchivePage: NextPage<Props> = ({ id, tagName, limit }) => {
         />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title={`#${tagName} のお知らせ`} />

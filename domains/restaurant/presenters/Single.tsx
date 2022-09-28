@@ -49,6 +49,15 @@ export const Single = ({ restaurant }: Props) => {
                 extractFile(restaurant.keyVisual, "1200")?.url ||
                 restaurant.keyVisual.url
               }
+              srcSet={`${
+                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+              } 2000w, ${
+                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+              } 1600w, ${
+                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+              } 1200w, ${
+                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+              } 800w`}
               alt={restaurant.title}
               loading="lazy"
             />
