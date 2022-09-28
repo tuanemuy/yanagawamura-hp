@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "variables";
+import { colors, screens } from "variables";
 import { Stacked, PlainText } from "unflexible-ui-core";
 
 import { url } from "lib/util";
@@ -56,4 +56,9 @@ const Overlay = styled.div`
     );
   background-position: 0 0, 1.5px 1.5px;
   background-size: 3px 3px;
+
+  @media only screen and (max-width: ${screens.s}px) {
+    background-position: 0 0, .75px .75px;
+    background-size: 1.5px 1.5px;
+  }
 `;

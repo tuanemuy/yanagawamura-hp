@@ -156,6 +156,7 @@ const Slide = styled.a`
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: ${sizes.rounded};
     object-fit: cover;
     transition-duration: 0.3s;
   }

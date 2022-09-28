@@ -209,7 +209,6 @@ const CategorizedRestaurantsPage: NextPage<Props> = ({
         />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title={`${categoryName} の飲食店`} />

@@ -58,6 +58,7 @@ const Component = styled.a`
       left: 0;
       width: 100%;
       height: 100%;
+      border-radius: 20px;
       transition-duration: 0.3s;
       object-fit: cover;
     }

@@ -71,7 +71,6 @@ const ContactPage: NextPage = () => {
           <Header title="お問い合わせ | 群馬県高崎市の飲み屋街【ヤナガワ村】" />
         }
         footer={<Footer />}
-        fixHeader
       >
         <Main color={colors.background} avoidHeader>
           <PageTitle title="お問い合わせ" />

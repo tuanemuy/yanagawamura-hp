@@ -233,7 +233,6 @@ const CategorizedNewsArchivePage: NextPage<Props> = ({
         />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title={`${categoryName} のお知らせ`} />

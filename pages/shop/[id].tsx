@@ -112,7 +112,6 @@ const ShopSinglePage: NextPage<Props> = ({ id }) => {
         <Header title={`${shop?.title || "物販・サービス店"} | ヤナガワ村`} />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="物販・サービス店" />

@@ -101,7 +101,6 @@ const VillagerPage: NextPage = () => {
         <Header title="ヤナガワ村民募集 | 群馬県高崎市の飲み屋街「ヤナガワ村」" />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="ヤナガワ村民募集" />

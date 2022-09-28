@@ -142,7 +142,6 @@ const HomePage: NextPage = () => {
       ogType="website"
       header={<Header title="群馬県高崎市の商店街・飲み屋街【ヤナガワ村】" />}
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <Stacked paddingPos="none" isSection>

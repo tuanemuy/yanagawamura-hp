@@ -102,7 +102,6 @@ const AboutPage: NextPage = () => {
         <Header title="ヤナガワ村とは | 群馬県高崎市の商店街・飲み屋街" />
       }
       footer={<Footer />}
-      fixHeader
     >
       <Main color={colors.background} avoidHeader>
         <PageTitle title="ヤナガワ村とは" />
