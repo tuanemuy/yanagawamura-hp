@@ -103,7 +103,7 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
 
   return (
     <Page
-      title={`${event?.title || "イベント"} | ヤナガワ村`}
+      title={`${event?.title || "イベント"} | 群馬県高崎市のヤナガワ村`}
       description={
         event?.overview ||
         extractDescription(event?.details || "") ||
@@ -111,7 +111,7 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
       }
       path={`event/${event?.id || ""}`}
       ogType="article"
-      header={<Header title={`${event?.title || "イベント"} | ヤナガワ村`} />}
+      header={<Header title={`${event?.title || "イベント"} | 群馬県高崎市のヤナガワ村`} />}
       footer={<Footer />}
     >
       <Main color={colors.background} avoidHeader>

@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { colors, sizes, screens } from "variables";
-import { Columns, Stacked } from "unflexible-ui-core";
+import { Columns, Stacked, Block } from "unflexible-ui-core";
 import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
+import { ListItem as MediaItem } from "domains/media";
 
 import { useRouter } from "next/router";
 import { nl2br } from "lib/util";
 import { extractFile } from "lib/cms";
 import { Restaurant, Tag } from "../";
+import { Media } from "domains/media";
 
 type Props = {
   restaurant: Restaurant;
@@ -50,13 +52,17 @@ export const Single = ({ restaurant }: Props) => {
                 restaurant.keyVisual.url
               }
               srcSet={`${
-                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+                extractFile(restaurant.keyVisual, "2000")?.url ||
+                restaurant.keyVisual.url
               } 2000w, ${
-                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+                extractFile(restaurant.keyVisual, "1600")?.url ||
+                restaurant.keyVisual.url
               } 1600w, ${
-                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+                extractFile(restaurant.keyVisual, "1200")?.url ||
+                restaurant.keyVisual.url
               } 1200w, ${
-                extractFile(restaurant.keyVisual, "1200")?.url || restaurant.keyVisual.url
+                extractFile(restaurant.keyVisual, "800")?.url ||
+                restaurant.keyVisual.url
               } 800w`}
               alt={restaurant.title}
               loading="lazy"
@@ -85,17 +91,29 @@ export const Single = ({ restaurant }: Props) => {
                 <dt>定休日</dt>
                 <dd dangerouslySetInnerHTML={{ __html: restaurant.holidays }} />
               </div>
+              <div>
+                <dt>公式サイト</dt>
+                <dd>
+                  {restaurant.website ? (
+                    <a href={restaurant.website} target="_blank">
+                      {restaurant.website}
+                    </a>
+                  ) : (
+                    "-"
+                  )}
+                </dd>
+              </div>
             </dl>
           </div>
         </div>
       </Stacked>
 
-      <Stacked paddingPos="top" paddingSize="thin">
+      <Stacked paddingPos="top" paddingSize="narrow">
         <PlainText text={restaurant.details} />
       </Stacked>
 
       {restaurant.menu.length > 0 && (
-        <Stacked paddingPos="top" paddingSize="thin">
+        <Stacked paddingPos="top" paddingSize="narrow">
           <div className="menu">
             <h2>メニュー</h2>
           </div>
@@ -103,7 +121,7 @@ export const Single = ({ restaurant }: Props) => {
       )}
 
       {restaurant.staff.length > 0 && (
-        <Stacked paddingPos="top" paddingSize="thin">
+        <Stacked paddingPos="top" paddingSize="narrow">
           <div className="staff">
             <h2>スタッフ</h2>
           </div>
@@ -111,10 +129,30 @@ export const Single = ({ restaurant }: Props) => {
       )}
 
       {restaurant.googleMap && (
-        <Stacked paddingPos="top" paddingSize="thin">
+        <Stacked paddingPos="top" paddingSize="narrow">
           <div className="map">
             <h2>マップ</h2>
             <div dangerouslySetInnerHTML={{ __html: restaurant.googleMap }} />
+          </div>
+        </Stacked>
+      )}
+
+      {restaurant.gallery.length > 0 && (
+        <Stacked paddingPos="top" paddingSize="narrow">
+          <div className="gallery">
+            <Stacked paddingPos="none">
+              <h2>ギャラリー</h2>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <Columns repeatXL={3} repeatS={2} gap="narrow">
+                {restaurant.gallery.map((m: Media) => (
+                  <Block>
+                    <MediaItem media={m} />
+                  </Block>
+                ))}
+              </Columns>
+            </Stacked>
           </div>
         </Stacked>
       )}
@@ -291,10 +329,11 @@ const Component = styled.article`
 
   .menu,
   .staff,
-  .map {
+  .map,
+  .gallery {
     h2 {
-      padding: ${sizes.gapXS} 0;
-      font-size: 1.5rem;
+      padding: ${sizes.gapS} 0;
+      font-size: 1.25rem;
       text-align: center;
       border-top: 5px solid ${colors.gray};
       border-bottom: 5px solid ${colors.gray};

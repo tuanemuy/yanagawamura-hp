@@ -15,6 +15,7 @@ import "swiper/css/free-mode";
 import "styles/global.scss";
 import "styles/inview.scss";
 import "styles/font.scss";
+import { fonts } from "variables";
 
 const config = {
   stacked: {
@@ -30,6 +31,14 @@ const config = {
       narrow: ".75rem",
       thin: ".5rem",
     },
+  },
+  plainText: {
+    baseFamily: fonts.sansSerif,
+    h1Family: fonts.sansSerif,
+    h2Family: fonts.sansSerif,
+    h3Family: fonts.sansSerif,
+    h4Family: fonts.sansSerif,
+    h5Family: fonts.sansSerif,
   },
 };
 
