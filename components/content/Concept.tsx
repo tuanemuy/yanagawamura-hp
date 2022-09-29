@@ -181,7 +181,7 @@ const Component = styled.div`
       flex-grow: 1;
       width: 450px;
       font-size: 1.1rem;
-      letter-spacing: .1em;
+      font-weight: 400;
       line-height: 2;
     }
   }

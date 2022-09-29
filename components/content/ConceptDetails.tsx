@@ -139,7 +139,6 @@ const Component = styled.div<ComponentProps>`
   .overview {
     line-height: 2;
     font-size: 1.1rem;
-    letter-spacing: .1em;
   }
 
   .gallery {

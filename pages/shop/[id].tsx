@@ -100,7 +100,7 @@ const ShopSinglePage: NextPage<Props> = ({ id }) => {
 
   return (
     <Page
-      title={`${shop?.title || "物販・サービス店"} | ヤナガワ村`}
+      title={`${shop?.title || "物販・サービス店"} | 群馬県高崎市のヤナガワ村`}
       description={
         shop?.overview ||
         extractDescription(shop?.details || "") ||
@@ -109,7 +109,7 @@ const ShopSinglePage: NextPage<Props> = ({ id }) => {
       path={`shop/${shop?.id || ""}`}
       ogType="article"
       header={
-        <Header title={`${shop?.title || "物販・サービス店"} | ヤナガワ村`} />
+        <Header title={`${shop?.title || "物販・サービス店"} | 群馬県高崎市のヤナガワ村`} />
       }
       footer={<Footer />}
     >

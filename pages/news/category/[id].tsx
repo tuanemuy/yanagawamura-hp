@@ -219,23 +219,23 @@ const CategorizedNewsArchivePage: NextPage<Props> = ({
     <Page
       title={`${
         categoryName || ""
-      } のお知らせ | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街`}
+      } のニュース | ヤナガワ村 | 群馬県高崎市の商店街・飲み屋街`}
       description={`「${
         categoryName || ""
-      }」カテゴリーのヤナガワ村からのお知らせです。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします`}
+      }」カテゴリーのヤナガワ村のニュースです。群馬県高崎市柳川町や中央銀座通り周辺の商店街・飲み屋街エリアを「ヤナガワ村」と呼び、より愛される街にしたいと考えています。高崎市で人気の観光スポットや、美味しい飲食店・居酒屋、イベント等の情報をお届けします`}
       path={`news/category/${id}`}
       ogType="article"
       header={
         <Header
           title={`${
             categoryName || ""
-          } のお知らせ | 群馬県高崎市の飲み屋街【ヤナガワ村】`}
+          } のニュース | 群馬県高崎市の飲み屋街【ヤナガワ村】`}
         />
       }
       footer={<Footer />}
     >
       <Main color={colors.background} avoidHeader>
-        <PageTitle title={`${categoryName} のお知らせ`} />
+        <PageTitle title={`${categoryName} のニュース`} />
 
         <Stacked paddingPos="top" paddingSize="narrow" wrap isSection>
           <Columns justify="center">

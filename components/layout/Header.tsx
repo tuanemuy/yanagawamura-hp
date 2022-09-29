@@ -76,7 +76,7 @@ export const Header = ({ title }: Props) => {
           <li>
             <SideIconLink
               iconTag='<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2 4v16.002c0 .385.22.735.567.902.346.166.758.119 1.058-.121l4.725-3.781h12.65c.552 0 1-.448 1-1v-12.002c0-.552-.448-1-1-1h-18c-.552 0-1 .448-1 1zm9.998 5.002c.414 0 .75.336.75.75v3.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-3.5c0-.414.336-.75.75-.75zm.002-3c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z" fill-rule="nonzero"/></svg>'
-              name="お知らせ"
+              name="ニュース"
               to={url("news")}
               active={router.pathname.includes("news")}
             />
@@ -94,7 +94,11 @@ export const Header = ({ title }: Props) => {
       </div>
 
       <Hamburger expanded={expanded}>
-        <button type="button" onClick={() => setExpanded((v) => !v)} aria-label="メニューを開く">
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-label="メニューを開く"
+        >
           <div className="icon">
             <span></span>
             <span></span>
@@ -104,6 +108,15 @@ export const Header = ({ title }: Props) => {
 
         <div className="menu">
           <ul>
+            <li>
+              <LargeSideIconLink
+                iconTag='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 9.185l7 6.514v6.301h-3v-5h-8v5h-3v-6.301l7-6.514zm0-2.732l-9 8.375v9.172h7v-5h4v5h7v-9.172l-9-8.375zm12 5.695l-12-11.148-12 11.133 1.361 1.465 10.639-9.868 10.639 9.883 1.361-1.465z"/></svg>'
+                name="ホーム"
+                to={url("")}
+                active={false}
+              />
+            </li>
+
             <li>
               <LargeSideIconLink
                 iconTag='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.601 21.5c0 1.38-1.116 2.5-2.499 2.5-1.378 0-2.499-1.12-2.499-2.5s1.121-2.5 2.499-2.5c1.383 0 2.499 1.119 2.499 2.5zm-2.42-21.5c-4.029 0-7.06 2.693-7.06 8h3.955c0-2.304.906-4.189 3.024-4.189 1.247 0 2.57.828 2.684 2.411.123 1.666-.767 2.511-1.892 3.582-2.924 2.78-2.816 4.049-2.816 7.196h3.943c0-1.452-.157-2.508 1.838-4.659 1.331-1.436 2.986-3.222 3.021-5.943.047-3.963-2.751-6.398-6.697-6.398z"/></svg>'
@@ -143,7 +156,7 @@ export const Header = ({ title }: Props) => {
             <li>
               <LargeSideIconLink
                 iconTag='<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2 4v16.002c0 .385.22.735.567.902.346.166.758.119 1.058-.121l4.725-3.781h12.65c.552 0 1-.448 1-1v-12.002c0-.552-.448-1-1-1h-18c-.552 0-1 .448-1 1zm9.998 5.002c.414 0 .75.336.75.75v3.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-3.5c0-.414.336-.75.75-.75zm.002-3c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z" fill-rule="nonzero"/></svg>'
-                name="お知らせ"
+                name="ニュース"
                 to={url("news")}
                 active={router.pathname.includes("news")}
               />

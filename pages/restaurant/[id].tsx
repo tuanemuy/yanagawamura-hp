@@ -124,7 +124,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
 
   return (
     <Page
-      title={`${restaurant?.title || "飲食店"} | ヤナガワ村`}
+      title={`${restaurant?.title || "飲食店"} | 群馬県高崎市のヤナガワ村`}
       description={
         restaurant?.overview ||
         extractDescription(restaurant?.details || "") ||
@@ -133,7 +133,7 @@ const RestaurantSinglePage: NextPage<Props> = ({ id }) => {
       path={`restaurant/${restaurant?.id || ""}`}
       ogType="article"
       header={
-        <Header title={`${restaurant?.title || "飲食店"} | ヤナガワ村`} />
+        <Header title={`${restaurant?.title || "飲食店"} | 群馬県高崎市のヤナガワ村`} />
       }
       footer={<Footer />}
     >

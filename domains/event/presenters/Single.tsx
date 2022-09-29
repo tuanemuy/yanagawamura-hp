@@ -172,6 +172,10 @@ const Component = styled.article`
 
   .info {
     margin-left: ${sizes.gapL};
+
+    .overview {
+      line-height: 1.75;
+    }
   }
 
   @media only screen and (max-width: ${screens.m}px) {

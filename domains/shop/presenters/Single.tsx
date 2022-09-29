@@ -82,6 +82,18 @@ export const Single = ({ shop }: Props) => {
                 <dt>定休日</dt>
                 <dd dangerouslySetInnerHTML={{ __html: shop.holidays }} />
               </div>
+              <div>
+                <dt>公式サイト</dt>
+                <dd>
+                  {shop.website ? (
+                    <a href={shop.website} target="_blank">
+                      {shop.website}
+                    </a>
+                  ) : (
+                    "-"
+                  )}
+                </dd>
+              </div>
             </dl>
           </div>
         </div>
@@ -190,6 +202,10 @@ const Component = styled.article`
 
   .info {
     margin-left: ${sizes.gapL};
+
+    .overview {
+      line-height: 1.75;
+    }
   }
 
   @media only screen and (max-width: ${screens.m}px) {

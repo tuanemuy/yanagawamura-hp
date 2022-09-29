@@ -125,6 +125,7 @@ type GenerateRestaurantVariables = {
   address: string;
   hours: string;
   holidays: string;
+  website?: string;
   keyVisual: Media;
   overview?: string;
   details: string;
@@ -145,6 +146,7 @@ export class Restaurant {
     public readonly address: string,
     public readonly hours: string,
     public readonly holidays: string,
+    public readonly website: string | null,
     public readonly keyVisual: Media,
     public readonly overview: string | null,
     public readonly details: string,
@@ -164,6 +166,7 @@ export class Restaurant {
     address,
     hours,
     holidays,
+    website,
     keyVisual,
     overview,
     details,
@@ -182,6 +185,7 @@ export class Restaurant {
       address,
       hours,
       holidays,
+      website || null,
       keyVisual,
       overview || null,
       details,
@@ -200,6 +204,7 @@ export class Restaurant {
     const address = getValueOfField(post, "address")?.text?.body;
     const hours = getValueOfField(post, "hours")?.text?.body;
     const holidays = getValueOfField(post, "holidays")?.text?.body;
+    const website = getValueOfField(post, "website")?.text?.body;
     const keyVisual = getValueOfField(post, "key_visual")?.media?.body;
     const overview = getValueOfField(post, "overview")?.text?.body;
     const details = getValueOfField(post, "details")?.text?.body;
@@ -259,6 +264,7 @@ export class Restaurant {
       address,
       hours,
       holidays,
+      website,
       keyVisual,
       overview,
       details,
