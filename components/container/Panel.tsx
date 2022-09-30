@@ -13,6 +13,7 @@ export const Panel = ({ className, children }: Props) => {
 };
 
 const Component = styled.div`
+  width: 100%;
   position: relative;
   padding: ${sizes.gapXL};
   background-color: ${colors.white};

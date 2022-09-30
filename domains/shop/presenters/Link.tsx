@@ -55,6 +55,7 @@ const Component = styled.a`
     position: relative;
     border-radius: 20px;
     overflow: hidden;
+    isolation: isolate;
 
     &::before {
       position: relative;
@@ -69,7 +70,6 @@ const Component = styled.a`
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 20px;
       transition-duration: 0.3s;
       object-fit: cover;
     }

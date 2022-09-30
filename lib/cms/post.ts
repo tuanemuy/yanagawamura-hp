@@ -9,7 +9,7 @@ export function getUpdatedAt(post: Post): Date | null {
 }
 
 export function getTags(post: Post): Tag[] | null {
-  return post.tags.map((pt: Post_Tag) => pt.tag);
+  return post.tags?.map((pt: Post_Tag) => pt.tag) || null;
 }
 
 export function getValueOfField(post: Post, slug: string): Value | null {
