@@ -4,11 +4,15 @@ import { Columns, Stacked, Block } from "unflexible-ui-core";
 import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
 import { ListItem as MediaItem } from "domains/media";
+import { ListItem as MenuItem } from "domains/menu";
+import { ListItem as StaffItem } from "domains/staff";
 
 import { useRouter } from "next/router";
 import { nl2br } from "lib/util";
 import { extractFile } from "lib/cms";
 import { Restaurant, Tag } from "../";
+import { Menu } from "domains/menu";
+import { Staff } from "domains/staff";
 import { Media } from "domains/media";
 
 type Props = {
@@ -115,7 +119,19 @@ export const Single = ({ restaurant }: Props) => {
       {restaurant.menu.length > 0 && (
         <Stacked paddingPos="top" paddingSize="narrow">
           <div className="menu">
-            <h2>メニュー</h2>
+            <Stacked paddingPos="none">
+              <h2>イチオシメニュー</h2>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <Columns repeatXL={3} repeatS={1} gap="normal">
+                {restaurant.menu.map((m: Menu) => (
+                  <Block>
+                    <MenuItem menu={m} />
+                  </Block>
+                ))}
+              </Columns>
+            </Stacked>
           </div>
         </Stacked>
       )}
@@ -123,7 +139,19 @@ export const Single = ({ restaurant }: Props) => {
       {restaurant.staff.length > 0 && (
         <Stacked paddingPos="top" paddingSize="narrow">
           <div className="staff">
-            <h2>スタッフ</h2>
+            <Stacked paddingPos="none">
+              <h2>スタッフ</h2>
+            </Stacked>
+
+            <Stacked paddingPos="top" paddingSize="thin">
+              <Columns repeatXL={1} gap="normal">
+                {restaurant.staff.map((s: Staff) => (
+                  <Block>
+                    <StaffItem staff={s} />
+                  </Block>
+                ))}
+              </Columns>
+            </Stacked>
           </div>
         </Stacked>
       )}
@@ -264,9 +292,9 @@ const Component = styled.article`
     }
 
     ul {
-      margin: 0 -0.5rem;
-      margin-left: 1rem;
+      margin-left: 1.5rem;
       display: flex;
+      gap: 1rem;
       align-items: center;
       flex-wrap: wrap;
       list-style: none;
@@ -274,7 +302,6 @@ const Component = styled.article`
 
     li {
       flex-shrink: 0;
-      padding: 0 0.5rem;
       line-height: 1.5;
 
       a {
@@ -290,8 +317,12 @@ const Component = styled.article`
 
   @media only screen and (max-width: ${screens.xs}px) {
     .meta {
+      flex-direction: column;
+      align-items: flex-start;
+
       ul {
-        margin-left: 0.75rem;
+        margin-left: 0;
+        margin-top: 1rem;
       }
     }
   }
@@ -324,6 +355,23 @@ const Component = styled.article`
       margin-left: ${sizes.gapS};
       padding: ${sizes.gapXS};
       line-height: 1.5;
+    }
+  }
+
+  @media only screen and (max-width: ${screens.s}px) {
+    dl {
+      > div {
+        display: block;
+      }
+
+      dt {
+        width: 100%;
+      }
+
+      dd {
+        margin-left: 0;
+        margin-top: ${sizes.gapS};
+      }
     }
   }
 

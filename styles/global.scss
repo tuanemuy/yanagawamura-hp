@@ -16,6 +16,10 @@ body {
   overflow: hidden;
 }
 
+a {
+  word-break: break-word;
+}
+
 @media only screen and (max-width: $s) {
   html,
   body {

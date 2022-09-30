@@ -31,13 +31,12 @@ export const ToCategories = ({ postType, categories, selected }: Props) => {
 const Component = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin: -0.5rem;
+  gap: 1rem;
   align-items: center;
   list-style: none;
 
   li {
     flex-shrink: 0;
-    padding: 0.5rem;
     line-height: 1.5;
 
     a {

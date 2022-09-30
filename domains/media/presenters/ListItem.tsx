@@ -18,6 +18,7 @@ export const ListItem = ({ media }: Props) => {
           extractFile(media, "800")?.url || media.url
         } 800w`}
         alt={media.name}
+        loading="lazy"
       />
     </Component>
   );
