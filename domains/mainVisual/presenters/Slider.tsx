@@ -175,6 +175,7 @@ const Slide = styled.a`
   display: block;
   border-radius: ${sizes.rounded};
   overflow: hidden;
+  isolation: isolate;
 
   &::before {
     content: "";
