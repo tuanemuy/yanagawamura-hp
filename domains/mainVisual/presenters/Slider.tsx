@@ -39,20 +39,53 @@ export const Slider = ({ mainVisuals }: Props) => {
               return (
                 <SwiperSlide key={mv.id}>
                   <Slide href={mv.url}>
-                    <img
-                      src={extractFile(mv.image, "1600")?.url || mv.image.url}
-                      srcSet={`${
-                        extractFile(mv.image, "2000")?.url || mv.image.url
-                      } 2000w, ${
-                        extractFile(mv.image, "1600")?.url || mv.image.url
-                      } 1600w, ${
-                        extractFile(mv.image, "1200")?.url || mv.image.url
-                      } 1200w, ${
-                        extractFile(mv.image, "800")?.url || mv.image.url
-                      } 800w`}
-                      alt={mv.image.name}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
+                    <picture>
+                      <source
+                        type="image/webp"
+                        src={
+                          extractFile(mv.image, "1600-webp")?.url ||
+                          mv.image.url
+                        }
+                        srcSet={`${
+                          extractFile(mv.image, "2000-webp")?.url ||
+                          mv.image.url
+                        } 2000w, ${
+                          extractFile(mv.image, "1600-webp")?.url ||
+                          mv.image.url
+                        } 1600w, ${
+                          extractFile(mv.image, "1200-webp")?.url ||
+                          mv.image.url
+                        } 1200w, ${
+                          extractFile(mv.image, "800-webp")?.url || mv.image.url
+                        } 800w`}
+                      />
+                      <source
+                        src={extractFile(mv.image, "1600")?.url || mv.image.url}
+                        srcSet={`${
+                          extractFile(mv.image, "2000")?.url || mv.image.url
+                        } 2000w, ${
+                          extractFile(mv.image, "1600")?.url || mv.image.url
+                        } 1600w, ${
+                          extractFile(mv.image, "1200")?.url || mv.image.url
+                        } 1200w, ${
+                          extractFile(mv.image, "800")?.url || mv.image.url
+                        } 800w`}
+                      />
+                      <img
+                        src={extractFile(mv.image, "1600")?.url || mv.image.url}
+                        srcSet={`${
+                          extractFile(mv.image, "2000")?.url || mv.image.url
+                        } 2000w, ${
+                          extractFile(mv.image, "1600")?.url || mv.image.url
+                        } 1600w, ${
+                          extractFile(mv.image, "1200")?.url || mv.image.url
+                        } 1200w, ${
+                          extractFile(mv.image, "800")?.url || mv.image.url
+                        } 800w`}
+                        alt={mv.image.name}
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                    </picture>
                   </Slide>
                 </SwiperSlide>
               );

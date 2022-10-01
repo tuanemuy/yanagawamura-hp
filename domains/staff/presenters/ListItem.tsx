@@ -12,20 +12,61 @@ export const ListItem = ({ staff }: Props) => {
   return (
     <Component>
       <div className="image">
-        <img
-          src={extractFile(staff.keyVisual, "1200")?.url || staff.keyVisual.url}
-          srcSet={`${
-            extractFile(staff.keyVisual, "2000")?.url || staff.keyVisual.url
-          } 2000w, ${
-            extractFile(staff.keyVisual, "1600")?.url || staff.keyVisual.url
-          } 1600w, ${
-            extractFile(staff.keyVisual, "1200")?.url || staff.keyVisual.url
-          } 1200w, ${
-            extractFile(staff.keyVisual, "800")?.url || staff.keyVisual.url
-          } 800w`}
-          alt={staff.title}
-          loading="lazy"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            src={
+              extractFile(staff.keyVisual, "800-webp")?.url ||
+              staff.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(staff.keyVisual, "2000-webp")?.url ||
+              staff.keyVisual.url
+            } 2000w, ${
+              extractFile(staff.keyVisual, "1600-webp")?.url ||
+              staff.keyVisual.url
+            } 1600w, ${
+              extractFile(staff.keyVisual, "1200-webp")?.url ||
+              staff.keyVisual.url
+            } 1200w, ${
+              extractFile(staff.keyVisual, "800-webp")?.url ||
+              staff.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 50vw`}
+          />
+          <source
+            src={
+              extractFile(staff.keyVisual, "800")?.url || staff.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(staff.keyVisual, "2000")?.url || staff.keyVisual.url
+            } 2000w, ${
+              extractFile(staff.keyVisual, "1600")?.url || staff.keyVisual.url
+            } 1600w, ${
+              extractFile(staff.keyVisual, "1200")?.url || staff.keyVisual.url
+            } 1200w, ${
+              extractFile(staff.keyVisual, "800")?.url || staff.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 50vw`}
+          />
+          <img
+            src={
+              extractFile(staff.keyVisual, "1200")?.url || staff.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(staff.keyVisual, "2000")?.url || staff.keyVisual.url
+            } 2000w, ${
+              extractFile(staff.keyVisual, "1600")?.url || staff.keyVisual.url
+            } 1600w, ${
+              extractFile(staff.keyVisual, "1200")?.url || staff.keyVisual.url
+            } 1200w, ${
+              extractFile(staff.keyVisual, "800")?.url || staff.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 50vw`}
+            alt={staff.title}
+            loading="lazy"
+          />
+        </picture>
       </div>
 
       <div className="profile">

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { sizes, colors, fonts } from "variables";
+import { sizes, colors, fonts, screens } from "variables";
 
 import { extractFile } from "lib/cms";
 import { Restaurant, Tag } from "../";
@@ -16,14 +16,70 @@ export const Link = ({ restaurant, className }: Props) => {
       className={className || ""}
     >
       <div className="thumbnail">
-        <img
-          src={
-            extractFile(restaurant.keyVisual, "800")?.url ||
-            restaurant.keyVisual.url
-          }
-          alt={restaurant.title}
-          loading="lazy"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            src={
+              extractFile(restaurant.keyVisual, "800-webp")?.url ||
+              restaurant.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(restaurant.keyVisual, "2000-webp")?.url ||
+              restaurant.keyVisual.url
+            } 2000w, ${
+              extractFile(restaurant.keyVisual, "1600-webp")?.url ||
+              restaurant.keyVisual.url
+            } 1600w, ${
+              extractFile(restaurant.keyVisual, "1200-webp")?.url ||
+              restaurant.keyVisual.url
+            } 1200w, ${
+              extractFile(restaurant.keyVisual, "800-webp")?.url ||
+              restaurant.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <source
+            src={
+              extractFile(restaurant.keyVisual, "800")?.url ||
+              restaurant.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(restaurant.keyVisual, "2000")?.url ||
+              restaurant.keyVisual.url
+            } 2000w, ${
+              extractFile(restaurant.keyVisual, "1600")?.url ||
+              restaurant.keyVisual.url
+            } 1600w, ${
+              extractFile(restaurant.keyVisual, "1200")?.url ||
+              restaurant.keyVisual.url
+            } 1200w, ${
+              extractFile(restaurant.keyVisual, "800")?.url ||
+              restaurant.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <img
+            src={
+              extractFile(restaurant.keyVisual, "800")?.url ||
+              restaurant.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(restaurant.keyVisual, "2000")?.url ||
+              restaurant.keyVisual.url
+            } 2000w, ${
+              extractFile(restaurant.keyVisual, "1600")?.url ||
+              restaurant.keyVisual.url
+            } 1600w, ${
+              extractFile(restaurant.keyVisual, "1200")?.url ||
+              restaurant.keyVisual.url
+            } 1200w, ${
+              extractFile(restaurant.keyVisual, "800")?.url ||
+              restaurant.keyVisual.url
+            } 800w`}
+            alt={restaurant.title}
+            loading="lazy"
+          />
+        </picture>
       </div>
 
       <div className="meta">

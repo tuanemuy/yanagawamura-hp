@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { sizes, colors, fonts } from "variables";
+import { sizes, colors, fonts, screens } from "variables";
 
 import { extractFile } from "lib/cms";
 import { Shop, Tag } from "../";
@@ -13,11 +13,54 @@ export const Link = ({ shop, className }: Props) => {
   return (
     <Component href={`/shop/${shop.id}`} className={className || ""}>
       <div className="thumbnail">
-        <img
-          src={extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url}
-          alt={shop.title}
-          loading="lazy"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            src={
+              extractFile(shop.keyVisual, "800-webp")?.url || shop.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(shop.keyVisual, "2000-webp")?.url ||
+              shop.keyVisual.url
+            } 2000w, ${
+              extractFile(shop.keyVisual, "1600-webp")?.url ||
+              shop.keyVisual.url
+            } 1600w, ${
+              extractFile(shop.keyVisual, "1200-webp")?.url ||
+              shop.keyVisual.url
+            } 1200w, ${
+              extractFile(shop.keyVisual, "800-webp")?.url || shop.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <source
+            src={extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url}
+            srcSet={`${
+              extractFile(shop.keyVisual, "2000")?.url || shop.keyVisual.url
+            } 2000w, ${
+              extractFile(shop.keyVisual, "1600")?.url || shop.keyVisual.url
+            } 1600w, ${
+              extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+            } 1200w, ${
+              extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <img
+            src={extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url}
+            srcSet={`${
+              extractFile(shop.keyVisual, "2000")?.url || shop.keyVisual.url
+            } 2000w, ${
+              extractFile(shop.keyVisual, "1600")?.url || shop.keyVisual.url
+            } 1600w, ${
+              extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+            } 1200w, ${
+              extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
+            } 800w`}
+            alt={shop.title}
+            loading="lazy"
+          />
+        </picture>
       </div>
 
       <div className="meta">

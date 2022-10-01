@@ -44,22 +44,71 @@ export const Single = ({ event }: Props) => {
       <Stacked paddingPos="top" paddingSize="thin">
         <div className="header">
           <div className="thumbnail">
-            <img
-              src={
-                extractFile(event.keyVisual, "1600")?.url || event.keyVisual.url
-              }
-              srcSet={`${
-                extractFile(event.keyVisual, "2000")?.url || event.keyVisual.url
-              } 2000w, ${
-                extractFile(event.keyVisual, "1600")?.url || event.keyVisual.url
-              } 1600w, ${
-                extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
-              } 1200w, ${
-                extractFile(event.keyVisual, "800")?.url || event.keyVisual.url
-              } 800w`}
-              alt={event.title}
-              loading="lazy"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                src={
+                  extractFile(event.keyVisual, "1200-webp")?.url ||
+                  event.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(event.keyVisual, "2000-webp")?.url ||
+                  event.keyVisual.url
+                } 2000w, ${
+                  extractFile(event.keyVisual, "1600-webp")?.url ||
+                  event.keyVisual.url
+                } 1600w, ${
+                  extractFile(event.keyVisual, "1200-webp")?.url ||
+                  event.keyVisual.url
+                } 1200w, ${
+                  extractFile(event.keyVisual, "800-webp")?.url ||
+                  event.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+              />
+              <source
+                src={
+                  extractFile(event.keyVisual, "1200")?.url ||
+                  event.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(event.keyVisual, "2000")?.url ||
+                  event.keyVisual.url
+                } 2000w, ${
+                  extractFile(event.keyVisual, "1600")?.url ||
+                  event.keyVisual.url
+                } 1600w, ${
+                  extractFile(event.keyVisual, "1200")?.url ||
+                  event.keyVisual.url
+                } 1200w, ${
+                  extractFile(event.keyVisual, "800")?.url ||
+                  event.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+              />
+              <img
+                src={
+                  extractFile(event.keyVisual, "1200")?.url ||
+                  event.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(event.keyVisual, "2000")?.url ||
+                  event.keyVisual.url
+                } 2000w, ${
+                  extractFile(event.keyVisual, "1600")?.url ||
+                  event.keyVisual.url
+                } 1600w, ${
+                  extractFile(event.keyVisual, "1200")?.url ||
+                  event.keyVisual.url
+                } 1200w, ${
+                  extractFile(event.keyVisual, "800")?.url ||
+                  event.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+                alt={event.title}
+                loading="lazy"
+              />
+            </picture>
           </div>
 
           <div className="info">
