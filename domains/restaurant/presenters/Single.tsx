@@ -50,6 +50,47 @@ export const Single = ({ restaurant }: Props) => {
       <Stacked paddingPos="top" paddingSize="thin">
         <div className="header">
           <div className="thumbnail">
+            <source
+              type="image/webp"
+              src={
+                extractFile(restaurant.keyVisual, "1200-webp")?.url ||
+                restaurant.keyVisual.url
+              }
+              srcSet={`${
+                extractFile(restaurant.keyVisual, "2000-webp")?.url ||
+                restaurant.keyVisual.url
+              } 2000w, ${
+                extractFile(restaurant.keyVisual, "1600-webp")?.url ||
+                restaurant.keyVisual.url
+              } 1600w, ${
+                extractFile(restaurant.keyVisual, "1200-webp")?.url ||
+                restaurant.keyVisual.url
+              } 1200w, ${
+                extractFile(restaurant.keyVisual, "800-webp")?.url ||
+                restaurant.keyVisual.url
+              } 800w`}
+              sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+            />
+            <source
+              src={
+                extractFile(restaurant.keyVisual, "1200")?.url ||
+                restaurant.keyVisual.url
+              }
+              srcSet={`${
+                extractFile(restaurant.keyVisual, "2000")?.url ||
+                restaurant.keyVisual.url
+              } 2000w, ${
+                extractFile(restaurant.keyVisual, "1600")?.url ||
+                restaurant.keyVisual.url
+              } 1600w, ${
+                extractFile(restaurant.keyVisual, "1200")?.url ||
+                restaurant.keyVisual.url
+              } 1200w, ${
+                extractFile(restaurant.keyVisual, "800")?.url ||
+                restaurant.keyVisual.url
+              } 800w`}
+              sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+            />
             <img
               src={
                 extractFile(restaurant.keyVisual, "1200")?.url ||
@@ -68,6 +109,7 @@ export const Single = ({ restaurant }: Props) => {
                 extractFile(restaurant.keyVisual, "800")?.url ||
                 restaurant.keyVisual.url
               } 800w`}
+              sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
               alt={restaurant.title}
               loading="lazy"
             />

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { sizes, colors, fonts } from "variables";
+import { sizes, colors, fonts, screens } from "variables";
 
 import { extractFile } from "lib/cms";
 import { Event, Tag } from "../";
@@ -13,11 +13,60 @@ export const Link = ({ event, className }: Props) => {
   return (
     <Component href={`/event/${event.id}`} className={className || ""}>
       <div className="thumbnail">
-        <img
-          src={extractFile(event.keyVisual, "800")?.url || event.keyVisual.url}
-          alt={event.title}
-          loading="lazy"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            src={
+              extractFile(event.keyVisual, "800-webp")?.url ||
+              event.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(event.keyVisual, "2000-webp")?.url ||
+              event.keyVisual.url
+            } 2000w, ${
+              extractFile(event.keyVisual, "1600-webp")?.url ||
+              event.keyVisual.url
+            } 1600w, ${
+              extractFile(event.keyVisual, "1200-webp")?.url ||
+              event.keyVisual.url
+            } 1200w, ${
+              extractFile(event.keyVisual, "800-webp")?.url ||
+              event.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <source
+            src={
+              extractFile(event.keyVisual, "800")?.url || event.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(event.keyVisual, "2000")?.url || event.keyVisual.url
+            } 2000w, ${
+              extractFile(event.keyVisual, "1600")?.url || event.keyVisual.url
+            } 1600w, ${
+              extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+            } 1200w, ${
+              extractFile(event.keyVisual, "800")?.url || event.keyVisual.url
+            } 800w`}
+            sizes={`30vw, (max-width: ${screens.s}px) 100vw`}
+          />
+          <img
+            src={
+              extractFile(event.keyVisual, "800")?.url || event.keyVisual.url
+            }
+            srcSet={`${
+              extractFile(event.keyVisual, "2000")?.url || event.keyVisual.url
+            } 2000w, ${
+              extractFile(event.keyVisual, "1600")?.url || event.keyVisual.url
+            } 1600w, ${
+              extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+            } 1200w, ${
+              extractFile(event.keyVisual, "800")?.url || event.keyVisual.url
+            } 800w`}
+            alt={event.title}
+            loading="lazy"
+          />
+        </picture>
       </div>
 
       <div className="meta">

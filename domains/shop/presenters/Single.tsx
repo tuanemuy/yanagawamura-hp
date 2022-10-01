@@ -44,22 +44,61 @@ export const Single = ({ shop }: Props) => {
       <Stacked paddingPos="top" paddingSize="thin">
         <div className="header">
           <div className="thumbnail">
-            <img
-              src={
-                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
-              }
-              srcSet={`${
-                extractFile(shop.keyVisual, "2000")?.url || shop.keyVisual.url
-              } 2000w, ${
-                extractFile(shop.keyVisual, "1600")?.url || shop.keyVisual.url
-              } 1600w, ${
-                extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
-              } 1200w, ${
-                extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
-              } 800w`}
-              alt={shop.title}
-              loading="lazy"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                src={
+                  extractFile(shop.keyVisual, "1200-webp")?.url ||
+                  shop.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(shop.keyVisual, "2000-webp")?.url ||
+                  shop.keyVisual.url
+                } 2000w, ${
+                  extractFile(shop.keyVisual, "1600-webp")?.url ||
+                  shop.keyVisual.url
+                } 1600w, ${
+                  extractFile(shop.keyVisual, "1200-webp")?.url ||
+                  shop.keyVisual.url
+                } 1200w, ${
+                  extractFile(shop.keyVisual, "800-webp")?.url ||
+                  shop.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+              />
+              <source
+                src={
+                  extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(shop.keyVisual, "2000")?.url || shop.keyVisual.url
+                } 2000w, ${
+                  extractFile(shop.keyVisual, "1600")?.url || shop.keyVisual.url
+                } 1600w, ${
+                  extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+                } 1200w, ${
+                  extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+              />
+              <img
+                src={
+                  extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+                }
+                srcSet={`${
+                  extractFile(shop.keyVisual, "2000")?.url || shop.keyVisual.url
+                } 2000w, ${
+                  extractFile(shop.keyVisual, "1600")?.url || shop.keyVisual.url
+                } 1600w, ${
+                  extractFile(shop.keyVisual, "1200")?.url || shop.keyVisual.url
+                } 1200w, ${
+                  extractFile(shop.keyVisual, "800")?.url || shop.keyVisual.url
+                } 800w`}
+                sizes={`50vw, (max-width: ${screens.m}px) 100vw`}
+                alt={shop.title}
+                loading="lazy"
+              />
+            </picture>
           </div>
 
           <div className="info">
