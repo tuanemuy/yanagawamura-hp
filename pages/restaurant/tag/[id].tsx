@@ -214,7 +214,7 @@ const TaggedRestaurantsPage: NextPage<Props> = ({ id, tagName, limit }) => {
                     key={e.id}
                     restaurant={e}
                     className={`inview inview__scale0010 inview__delay${
-                      (index % 3) + 1
+                      index % 3
                     }`}
                   />
                 );

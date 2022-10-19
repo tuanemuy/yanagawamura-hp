@@ -115,6 +115,7 @@ const VillagerPage: NextPage = () => {
                 h2SizeXL="2.5rem"
                 h2SizeM="2rem"
                 h2SizeS="1.5rem"
+                h2Weight="400"
                 baseSizeXL="1.1rem"
                 baseSizeS="1rem"
                 baseLineHeight="2"

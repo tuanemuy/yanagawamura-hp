@@ -218,7 +218,7 @@ const TaggedEventsPage: NextPage<Props> = ({ id, tagName, limit }) => {
                     key={e.id}
                     event={e}
                     className={`inview inview__scale0010 inview__delay${
-                      (index % 3) + 1
+                      index % 3
                     }`}
                   />
                 );
