@@ -113,6 +113,7 @@ const WantedPage: NextPage = () => {
             h2SizeXL="3rem"
             h2SizeL="2.75rem"
             h2SizeXS="2rem"
+            h2Weight="400"
             h2Family={fonts.heading}
           >
             <h2 className="inview inview__rl inview__delay1">

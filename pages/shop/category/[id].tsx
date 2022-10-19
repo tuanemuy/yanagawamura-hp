@@ -220,7 +220,7 @@ const CategorizedShopsPage: NextPage<Props> = ({ id, categoryName, limit }) => {
                     key={s.id}
                     shop={s}
                     className={`inview inview__scale0010 inview__delay${
-                      (index % 3) + 1
+                      index % 3
                     }`}
                   />
                 );
