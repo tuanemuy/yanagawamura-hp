@@ -183,7 +183,7 @@ const ShopArchivePage: NextPage<Props> = ({ limit }) => {
                       key={r.id}
                       shop={r}
                       className={`inview inview__scale0010 inview__delay${
-                        (index % 3) + 1
+                        index % 3
                       }`}
                     />
                   );

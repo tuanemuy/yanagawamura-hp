@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { sizes, fonts, colors, screens } from "variables";
 import { MiniLink } from "components/button";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 type Props = {
   title: string;
@@ -19,6 +19,14 @@ export const ListWithTitle = ({
   more,
   reverse,
 }: Props) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth <= screens.s) {
+      setIsMobile(true);
+    }
+  }, []);
+
   return (
     <Component reverse={reverse || false}>
       <div className="title inview inview__bt">
@@ -39,7 +47,11 @@ export const ListWithTitle = ({
             return (
               <li
                 key={index}
-                className={`inview inview__scale0010 inview__delay${index + 1}`}
+                className={
+                  isMobile
+                    ? `inview inview__scale0510`
+                    : `inview inview__scale0010 inview__delay${index + 1}`
+                }
               >
                 {node}
               </li>

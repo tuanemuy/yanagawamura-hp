@@ -145,6 +145,9 @@ export const Footer = ({}: Props) => {
             <li>
               <a href={url("privacy-policy")}>個人情報保護方針</a>
             </li>
+            <li>
+              <a href={url("sponsor")}>スポンサー紹介</a>
+            </li>
           </ul>
         </Sitemap>
       </Stacked>
