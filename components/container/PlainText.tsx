@@ -68,7 +68,7 @@ const Component = styled.div`
   ol {
     margin: 1rem 0;
     padding-left: 1.5rem;
-    line-height: 1.75;
+    line-height: 2;
   }
 
   img {
@@ -83,5 +83,9 @@ const Component = styled.div`
     max-width: 100%;
     width: 600px;
     height: 400px;
+  }
+
+  > *:first-child {
+    margin-top: 0;
   }
 `;
