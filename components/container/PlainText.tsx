@@ -74,7 +74,7 @@ const Component = styled.div`
   img {
     display: block;
     margin: 1rem 0;
-    max-width: 100%;
+    max-width: 500px;
   }
 
   iframe {
