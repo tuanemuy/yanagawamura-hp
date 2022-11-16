@@ -20,6 +20,7 @@ import {
 } from "domains/restaurant";
 import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
 import { url, extractDescription } from "lib/util";
+import { extractFile } from "lib/cms";
 
 export async function getStaticPaths() {
   const result = await fetch(
@@ -111,7 +112,16 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
       }
       path={`event/${event?.id || ""}`}
       ogType="article"
-      header={<Header title={`${event?.title || "イベント"} | 群馬県高崎市のヤナガワ村`} />}
+      ogImage={
+        event
+          ? extractFile(event.keyVisual, "1200")?.url || event.keyVisual.url
+          : undefined
+      }
+      header={
+        <Header
+          title={`${event?.title || "イベント"} | 群馬県高崎市のヤナガワ村`}
+        />
+      }
       footer={<Footer />}
     >
       <Main color={colors.background} avoidHeader>
