@@ -175,7 +175,7 @@ const RestaurantArchivePage: NextPage<Props> = ({ limit }) => {
                       key={r.id}
                       restaurant={r}
                       className={`${
-                        page ? "inview" : ""
+                        page ? "inview__in" : "inview"
                       } inview__scale0010 inview__delay${index % 3}`}
                     />
                   );
