@@ -27,7 +27,7 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.s}px) {
     h2 {
       margin: 2rem 0 1.5rem 0;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
   }
 
@@ -42,7 +42,7 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.s}px) {
     h3 {
       margin: 2rem 0 1.5rem 0;
-      font-size: 1.25rem;
+      font-size: 1.5rem;
     }
   }
 
@@ -55,7 +55,7 @@ const Component = styled.div`
   @media only screen and (max-width: ${screens.s}px) {
     h4 {
       margin: 2rem 0 1.5rem 0;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
     }
   }
 
