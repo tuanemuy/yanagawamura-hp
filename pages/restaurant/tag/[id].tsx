@@ -213,9 +213,9 @@ const TaggedRestaurantsPage: NextPage<Props> = ({ id, tagName, limit }) => {
                   <RestaurantLink
                     key={e.id}
                     restaurant={e}
-                    className={`inview inview__scale0010 inview__delay${
-                      index % 3
-                    }`}
+                    className={`${
+                      page ? "inview__in" : "inview"
+                    } inview__scale0010 inview__delay${index % 3}`}
                   />
                 );
               })}
