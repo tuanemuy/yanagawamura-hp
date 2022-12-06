@@ -217,9 +217,9 @@ const TaggedShopsPage: NextPage<Props> = ({ id, tagName, limit }) => {
                   <ShopLink
                     key={e.id}
                     shop={e}
-                    className={`inview inview__scale0010 inview__delay${
-                      index % 3
-                    }`}
+                    className={`${
+                      page ? "inview__in" : "inview"
+                    } inview__scale0010 inview__delay${index % 3}`}
                   />
                 );
               })}
