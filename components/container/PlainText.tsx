@@ -71,7 +71,7 @@ const Component = styled.div`
   img {
     display: block;
     margin: 1rem 0;
-    width: 500px;
+    width: 100%;
     max-width: 100%;
   }
 
