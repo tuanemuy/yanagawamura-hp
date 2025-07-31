@@ -197,6 +197,7 @@ Email: ${process.env.CONTACT_NOTIFY_TO || ""}
       error: null,
     };
   } catch (e) {
+    console.error(e);
     return {
       isSuccess: false,
       error: "Failed to send mail.",
