@@ -59,7 +59,9 @@ const Component = styled.a<ComponentProps>`
       fill: ${colors.white};
     }
 
-    ${p => p.active && `
+    ${(p) =>
+      p.active &&
+      `
       background-color: ${colors.white};
 
       svg {

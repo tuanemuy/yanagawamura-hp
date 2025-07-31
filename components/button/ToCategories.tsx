@@ -1,7 +1,6 @@
+import type { Category } from "lib/graphql";
 import styled from "styled-components";
 import { colors, sizes } from "variables";
-
-import { Category } from "lib/graphql";
 
 type Props = {
   postType: string;

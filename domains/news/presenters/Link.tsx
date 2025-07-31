@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { format } from "date-fns";
-import { colors, sizes, screens } from "variables";
+import styled from "styled-components";
+import { colors, screens, sizes } from "variables";
 
-import { News, Tag } from "../";
+import type { News, Tag } from "../";
 
 type Props = {
   news: News;

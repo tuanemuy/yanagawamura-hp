@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { sizes, fonts, colors, screens } from "variables";
 import { MiniLink } from "components/button";
-
-import { ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
+import styled from "styled-components";
+import { colors, fonts, screens, sizes } from "variables";
 
 type Props = {
   title: string;
@@ -49,7 +48,7 @@ export const ListWithTitle = ({
                 key={index}
                 className={
                   isMobile
-                    ? `inview inview__scale0510`
+                    ? "inview inview__scale0510"
                     : `inview inview__scale0010 inview__delay${index + 1}`
                 }
               >
@@ -75,7 +74,7 @@ const Component = styled.div<ComponentProps>`
   .title {
     position: absolute;
     top: 0;
-    ${(p) => (p.reverse ? `right: 0;` : `left: 0;`)}
+    ${(p) => (p.reverse ? "right: 0;" : "left: 0;")}
     display: flex;
 
     > h2 {
@@ -100,7 +99,7 @@ const Component = styled.div<ComponentProps>`
   @media only screen and (max-width: ${screens.s}px) {
     .title {
       position: relative;
-      ${(p) => p.reverse && `justify-content: flex-end;`}
+      ${(p) => p.reverse && "justify-content: flex-end;"}
 
       > h2 {
         writing-mode: horizontal-tb;

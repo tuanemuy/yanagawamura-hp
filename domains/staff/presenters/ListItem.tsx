@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { sizes, screens } from "variables";
 import { extractFile } from "lib/cms";
+import styled from "styled-components";
+import { screens, sizes } from "variables";
 
-import { Staff } from "../";
+import type { Staff } from "../";
 
 type Props = {
   staff: Staff;

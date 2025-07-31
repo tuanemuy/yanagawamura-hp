@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
 import { MiniLink } from "components/button";
-
 import { url } from "lib/util";
+import styled from "styled-components";
+import { colors, screens, sizes } from "variables";
 
 type Props = {};
 
@@ -10,7 +9,11 @@ export const Villager = ({}: Props) => {
   return (
     <Component className="inview inview__bt inview__delay1">
       <div className="image">
-        <img src={url("images/villager.jpg")} alt="ヤナガワ村民募集中" loading="lazy" />
+        <img
+          src={url("images/villager.jpg")}
+          alt="ヤナガワ村民募集中"
+          loading="lazy"
+        />
       </div>
 
       <div className="body">

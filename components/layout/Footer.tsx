@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-import { Stacked, Columns, PlainText } from "unflexible-ui-core";
 import { SideIconLink, Social } from "components/button";
-
-import { useRouter } from "next/router";
 import { url } from "lib/util";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { colors, screens, sizes } from "variables";
 
 type Props = {};
 

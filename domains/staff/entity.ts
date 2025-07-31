@@ -1,7 +1,7 @@
-import { Post, Media } from "lib/graphql";
 import { getValueOfField } from "lib/cms";
+import type { Media, Post } from "lib/graphql";
 
-export type { Tag, Category } from "lib/graphql";
+export type { Category, Tag } from "lib/graphql";
 
 type GenerateStaffVariables = {
   id: number;
@@ -17,7 +17,7 @@ export class Staff {
     public readonly title: string,
     public readonly catchPhrase: string,
     public readonly message: string,
-    public readonly keyVisual: Media
+    public readonly keyVisual: Media,
   ) {}
 
   static generate({

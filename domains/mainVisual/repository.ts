@@ -1,13 +1,14 @@
-import { UseQueryOptions, QueryKey } from "@tanstack/react-query";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
+import { MainVisual } from "domains/mainVisual";
 import {
-  Order_By,
-  Post,
-  GetPostsQuery,
+  type GetPostsQuery,
   graphQLClient,
+  type InputMaybe,
+  Order_By,
+  type Post,
+  type Post_Order_By,
   useGetPostsQuery,
 } from "lib/graphql";
-import { MainVisual } from "domains/mainVisual";
-import { InputMaybe, Post_Order_By } from "lib/graphql";
 
 type GetMainVisualsVariables = {
   limit?: number;
@@ -55,7 +56,7 @@ export function useGetMainVisuals({
       offset: offset || 0,
       order_by: orderBy || { created_at: Order_By.Desc },
     },
-    options
+    options,
   );
 
   const mainVisuals = ((getMainVisuals.data?.post as Post[]) || [])

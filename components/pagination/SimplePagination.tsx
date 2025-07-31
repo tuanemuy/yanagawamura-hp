@@ -31,7 +31,7 @@ export const SimplePagination = ({ page, totalPages, setPage }: Props) => {
         >
           {index}
         </button>
-      </li>
+      </li>,
     );
   }
 

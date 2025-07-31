@@ -1,7 +1,6 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-
-import { ReactNode } from "react";
+import { colors, screens, sizes } from "variables";
 
 type Props = {
   className?: string;

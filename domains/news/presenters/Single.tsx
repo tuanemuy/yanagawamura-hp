@@ -1,12 +1,11 @@
-import styled from "styled-components";
-import { format } from "date-fns";
-import { colors, sizes, screens } from "variables";
-import { Stacked, Columns } from "unflexible-ui-core";
-import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
-
+import { PlainText } from "components/container";
+import { format } from "date-fns";
 import { useRouter } from "next/router";
-import { News, Tag } from "../";
+import styled from "styled-components";
+import { Columns, Stacked } from "unflexible-ui-core";
+import { colors, screens, sizes } from "variables";
+import type { News, Tag } from "../";
 
 type Props = {
   news: News;

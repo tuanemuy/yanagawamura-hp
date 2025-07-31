@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { colors, screens } from "variables";
-import { Stacked, PlainText } from "unflexible-ui-core";
-
 import { url } from "lib/util";
+import styled from "styled-components";
+import { PlainText, Stacked } from "unflexible-ui-core";
+import { colors, screens } from "variables";
 
 type Props = {
   title: string;

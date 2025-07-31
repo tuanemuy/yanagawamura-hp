@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
+import { colors, screens, sizes } from "variables";
 
 type Props = {
   name: string;
@@ -9,7 +9,13 @@ type Props = {
   active?: boolean;
 };
 
-export const LargeSideIconLink = ({ name, iconTag, to, target, active }: Props) => {
+export const LargeSideIconLink = ({
+  name,
+  iconTag,
+  to,
+  target,
+  active,
+}: Props) => {
   return (
     <Component href={to} target={target || "_self"} active={active || false}>
       <span className="icon" dangerouslySetInnerHTML={{ __html: iconTag }} />
@@ -59,7 +65,9 @@ const Component = styled.a<ComponentProps>`
       fill: ${colors.white};
     }
 
-    ${p => p.active && `
+    ${(p) =>
+      p.active &&
+      `
       background-color: ${colors.white};
 
       svg {

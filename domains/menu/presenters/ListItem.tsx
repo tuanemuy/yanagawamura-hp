@@ -1,8 +1,8 @@
+import { extractFile } from "lib/cms";
 import styled from "styled-components";
 import { screens } from "variables";
-import { extractFile } from "lib/cms";
 
-import { Menu } from "../";
+import type { Menu } from "../";
 
 type Props = {
   menu: Menu;

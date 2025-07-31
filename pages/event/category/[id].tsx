@@ -1,42 +1,45 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, PlainText } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
-import { ListWithTitle, PlainList, Panel } from "components/container";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ToCategories, ToTags } from "components/button";
-import { PageTitle } from "components/title";
+import { ListWithTitle, Panel, PlainList } from "components/container";
 import { Villager } from "components/cta";
+import { Footer, Header, Main } from "components/layout";
 import { SimplePagination } from "components/pagination";
-import { Link as RestaurantLink } from "domains/restaurant";
-import { Link as ShopLink } from "domains/shop";
-import { Link as EventLink } from "domains/event";
-
-import { useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { Order_By } from "lib/graphql";
+import { PageTitle } from "components/title";
 import {
-  Event,
-  useGetCategorizedEvents,
-  getGetCategorizedEventsPrefetcher,
-  useGetCategories,
+  type Event,
+  Link as EventLink,
   getGetCategoriesPrefetcher,
-  useGetTags,
+  getGetCategorizedEventsPrefetcher,
   getGetTagsPrefetcher,
+  useGetCategories,
+  useGetCategorizedEvents,
+  useGetTags,
 } from "domains/event";
 import {
-  Restaurant,
-  useGetRestaurants,
   getGetRestaurantsPrefetcher,
+  type Restaurant,
+  Link as RestaurantLink,
+  useGetRestaurants,
 } from "domains/restaurant";
-import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
-import { StoreContext } from "providers";
+import {
+  getGetShopsPrefetcher,
+  type Shop,
+  Link as ShopLink,
+  useGetShops,
+} from "domains/shop";
+import { Order_By } from "lib/graphql";
 import { url } from "lib/util";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { StoreContext } from "providers";
+import { useContext, useEffect } from "react";
+import { Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 export async function getStaticPaths() {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE || ""}/category?post_type=event`
+    `${process.env.NEXT_PUBLIC_API_BASE || ""}/category?post_type=event`,
   );
   const data = await result.json();
 
@@ -51,10 +54,10 @@ export async function getStaticProps({ params }: any) {
   const prefetches = [];
   const limit = 9;
 
-  const id = parseInt(params.id, 10) || 0;
+  const id = Number.parseInt(params.id, 10) || 0;
 
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE || ""}/category/${id}`
+    `${process.env.NEXT_PUBLIC_API_BASE || ""}/category/${id}`,
   );
   const category = await result.json();
 
@@ -73,8 +76,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getCategorizedEventsPrefetcher.key,
-      getCategorizedEventsPrefetcher.fetcher
-    )
+      getCategorizedEventsPrefetcher.fetcher,
+    ),
   );
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
@@ -85,8 +88,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getRestaurantsPrefetcher.key,
-      getRestaurantsPrefetcher.fetcher
-    )
+      getRestaurantsPrefetcher.fetcher,
+    ),
   );
 
   const getShopsPrefetcher = getGetShopsPrefetcher({
@@ -97,21 +100,21 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
-      getShopsPrefetcher.fetcher
-    )
+      getShopsPrefetcher.fetcher,
+    ),
   );
 
   const getCategoriesPrefetcher = getGetCategoriesPrefetcher();
   prefetches.push(
     queryClient.prefetchQuery(
       getCategoriesPrefetcher.key,
-      getCategoriesPrefetcher.fetcher
-    )
+      getCategoriesPrefetcher.fetcher,
+    ),
   );
 
   const getTagsPrefetcher = getGetTagsPrefetcher();
   prefetches.push(
-    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher)
+    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher),
   );
 
   await Promise.all(prefetches);
@@ -141,8 +144,8 @@ const CategorizedEventsPage: NextPage<Props> = ({
   const router = useRouter();
   const { page } = router.query;
   const pageNumber: number = Array.isArray(page)
-    ? parseInt(page[0] || "1", 10) || 1
-    : parseInt(page || "1", 10) || 1;
+    ? Number.parseInt(page[0] || "1", 10) || 1
+    : Number.parseInt(page || "1", 10) || 1;
 
   const store = useContext(StoreContext);
 
@@ -186,13 +189,15 @@ const CategorizedEventsPage: NextPage<Props> = ({
 
   useEffect(() => {
     store.busy.setIsBusy(
-      !getCategorizedEvents.categorizedEvents && getCategorizedEvents.isFetching
+      !getCategorizedEvents.categorizedEvents &&
+        getCategorizedEvents.isFetching,
     );
   }, [getCategorizedEvents.categorizedEvents, getCategorizedEvents.isFetching]);
 
   useEffect(() => {
     store.busy.setIsBusy(
-      !getCategorizedEvents.categorizedEvents && getCategorizedEvents.isFetching
+      !getCategorizedEvents.categorizedEvents &&
+        getCategorizedEvents.isFetching,
     );
   }, [getCategorizedEvents.categorizedEvents, getCategorizedEvents.isFetching]);
 
@@ -304,9 +309,7 @@ const CategorizedEventsPage: NextPage<Props> = ({
           <ListWithTitle
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
-            items={shops.map((s: Shop) => (
-              <ShopLink shop={s} key={s.id} />
-            ))}
+            items={shops.map((s: Shop) => <ShopLink shop={s} key={s.id} />)}
             more={url("shop")}
           />
         </Stacked>

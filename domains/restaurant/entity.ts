@@ -1,4 +1,3 @@
-import { Post, Media, Category, Tag, Value } from "lib/graphql";
 import { Menu } from "domains/menu";
 import { Staff } from "domains/staff";
 import {
@@ -7,8 +6,9 @@ import {
   getValueOfField,
   getValuesOfField,
 } from "lib/cms";
+import type { Category, Media, Post, Tag, Value } from "lib/graphql";
 
-export type { Tag, Category } from "lib/graphql";
+export type { Category, Tag } from "lib/graphql";
 
 type GenerateRestaurantVariables = {
   id: number;
@@ -48,7 +48,7 @@ export class Restaurant {
     public readonly category: Category,
     public readonly tags: Tag[],
     public readonly createdAt: Date,
-    public readonly updatedAt: Date
+    public readonly updatedAt: Date,
   ) {}
 
   static generate({
@@ -87,7 +87,7 @@ export class Restaurant {
       category,
       tags,
       createdAt,
-      updatedAt
+      updatedAt,
     );
   }
 

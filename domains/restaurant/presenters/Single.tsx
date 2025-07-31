@@ -1,19 +1,15 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-import { Columns, Stacked, Block } from "unflexible-ui-core";
-import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
-import { ListItem as MediaItem } from "domains/media";
-import { ListItem as MenuItem } from "domains/menu";
-import { ListItem as StaffItem } from "domains/staff";
-
-import { useRouter } from "next/router";
-import { nl2br } from "lib/util";
+import { PlainText } from "components/container";
+import { type Media, ListItem as MediaItem } from "domains/media";
+import { type Menu, ListItem as MenuItem } from "domains/menu";
+import { type Staff, ListItem as StaffItem } from "domains/staff";
 import { extractFile } from "lib/cms";
-import { Restaurant, Tag } from "../";
-import { Menu } from "domains/menu";
-import { Staff } from "domains/staff";
-import { Media } from "domains/media";
+import { nl2br } from "lib/util";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { Block, Columns, Stacked } from "unflexible-ui-core";
+import { colors, screens, sizes } from "variables";
+import type { Restaurant, Tag } from "../";
 
 type Props = {
   restaurant: Restaurant;

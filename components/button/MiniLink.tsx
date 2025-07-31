@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { lighten, rgba } from "polished";
-import { sizes, colors, screens } from "variables";
+import styled from "styled-components";
+import { colors, screens, sizes } from "variables";
 
 type Props = {
   name: string;
@@ -26,7 +26,7 @@ const Component = styled.a<ComponentProps>`
   padding: ${sizes.gapS} ${sizes.gapM};
   color: ${colors.white};
   background-color: ${(p) => p.color};
-  border: 4px solid ${p => rgba(p.color, .6)};
+  border: 4px solid ${(p) => rgba(p.color, 0.6)};
   background-clip: padding-box;
   font-size: 1.1rem;
   text-decoration: none;

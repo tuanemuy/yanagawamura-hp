@@ -1,7 +1,7 @@
-import { Post, Media, Category, Tag } from "lib/graphql";
 import { getTags, getUpdatedAt, getValueOfField } from "lib/cms";
+import type { Category, Media, Post, Tag } from "lib/graphql";
 
-export type { Media, Category, Tag } from "lib/graphql";
+export type { Category, Media, Tag } from "lib/graphql";
 
 type GenerateEventVariables = {
   id: number;
@@ -31,7 +31,7 @@ export class Event {
     public readonly category: Category,
     public readonly tags: Tag[],
     public readonly createdAt: Date,
-    public readonly updatedAt: Date
+    public readonly updatedAt: Date,
   ) {}
 
   static generate({
@@ -60,7 +60,7 @@ export class Event {
       category,
       tags,
       createdAt,
-      updatedAt
+      updatedAt,
     );
   }
 

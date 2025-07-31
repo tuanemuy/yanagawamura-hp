@@ -1,19 +1,19 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
-import { Panel, Form } from "components/container";
-import { PageTitle } from "components/title";
 import { MiniButton } from "components/button";
+import { Form, Panel } from "components/container";
+import { Footer, Header, Main } from "components/layout";
 import { Loader, Message } from "components/popup";
+import { PageTitle } from "components/title";
 import { App } from "domains/ui";
+import { url } from "lib/util";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { StoreContext } from "providers";
 
 import { useContext } from "react";
-import { useRouter } from "next/router";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { StoreContext } from "providers";
-import { url } from "lib/util";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 type FormFields = {
   name: string;
@@ -47,7 +47,7 @@ const ContactPage: NextPage = () => {
           <Message
             text="上手く問い合わせできませんでした。<br/>もう一度お試しください。"
             onClose={() => popup.setContent(null)}
-          />
+          />,
         );
       }
     } catch (e) {
@@ -55,7 +55,7 @@ const ContactPage: NextPage = () => {
         <Message
           text="上手く問い合わせできませんでした。<br/>もう一度お試しください。"
           onClose={() => popup.setContent(null)}
-        />
+        />,
       );
     }
   };
@@ -177,7 +177,7 @@ const ContactPage: NextPage = () => {
                   </div>
 
                   <div className="line">
-                    <div className="label"></div>
+                    <div className="label" />
 
                     <div className="input checkbox">
                       <input type="checkbox" id="privacy" required />

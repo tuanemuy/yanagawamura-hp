@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import sgMail from "@sendgrid/mail";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
@@ -10,7 +10,7 @@ type Result = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Result>
+  res: NextApiResponse<Result>,
 ) {
   if (req.method === "POST") {
     const body = JSON.parse(req.body);

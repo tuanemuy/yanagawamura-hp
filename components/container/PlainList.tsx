@@ -1,5 +1,5 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
-import { ReactNode } from "react";
 
 type Props = {
   items: ReactNode[];
