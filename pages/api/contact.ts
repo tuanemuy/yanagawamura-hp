@@ -1,7 +1,23 @@
-import sgMail from "@sendgrid/mail";
+import { createTransport } from "nodemailer";
+import type { SendMailOptions } from "nodemailer";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+const transport = createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
+
+export async function send(options: SendMailOptions) {
+  const result = await transport.sendMail(options);
+  const failed = result.rejected.concat(result.pending).filter(Boolean);
+  if (failed.length) {
+    throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
+  }
+}
 
 type Result = {
   isSuccess: boolean;
@@ -123,23 +139,13 @@ mutation CreateContact(
 
   try {
     const sendMails = [
-      sgMail.send({
-        to: {
-          email: body.email,
-          name: body.name,
-        },
-        from: {
-          email: process.env.CONTACT_MAIL_FROM || "",
-          name: "ヤナガワ村役場",
-        },
-        replyTo: {
-          email: process.env.CONTACT_NOTIFY_TO || "",
-          name: "ヤナガワ村役場",
-        },
+      send({
+        to: `${body.name} <${body.email}>`,
+        from: `ヤナガワ村役場 <${process.env.CONTACT_MAIL_FROM}>`,
         subject: "お問い合わせありがとうございます【ヤナガワ村役場】",
         text: `
-この度は、ヤナガワ村役場にお問い合わせくださり、誠にありがとうございます。
-返信があるまで、今しばらくお待ちください。
+この度はヤナガワ村役場にお問い合わせくださり、誠にありがとうございます。
+返信があるまで今しばらくお待ちください。
 
 == お問い合わせ内容 ===============
 
@@ -158,19 +164,9 @@ ${body.content}
 Email: ${process.env.CONTACT_NOTIFY_TO || ""}
       `,
       }),
-      sgMail.send({
-        to: {
-          email: process.env.CONTACT_NOTIFY_TO || "",
-          name: "ヤナガワ村役場",
-        },
-        from: {
-          email: process.env.CONTACT_MAIL_FROM || "",
-          name: "ヤナガワ村役場ホームページ",
-        },
-        replyTo: {
-          email: body.email,
-          name: body.name,
-        },
+      send({
+        to: process.env.CONTACT_NOTIFY_TO || "",
+        from: `ヤナガワ村役場 <${process.env.CONTACT_MAIL_FROM}>`,
         subject: "ホームページから問い合わせがありました",
         text: `
 ヤナガワ村役場ホームページから以下の内容で問い合わせがありました。
