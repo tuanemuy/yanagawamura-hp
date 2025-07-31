@@ -1,13 +1,13 @@
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import { useState, useEffect } from "react";
-import { UnflexibleProvider } from "unflexible-ui-core";
-import { StoreProvider } from "providers";
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { StoreProvider } from "providers";
+import { useEffect, useState } from "react";
+import { UnflexibleProvider } from "unflexible-ui-core";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {
           threshold: 0,
           rootMargin: "0px 300px 0px 300px",
-        }
+        },
       );
 
       const targets = document.getElementsByClassName("inview");

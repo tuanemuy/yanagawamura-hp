@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { sizes, colors, fonts, screens } from "variables";
-
 import { extractFile } from "lib/cms";
-import { Event, Tag } from "../";
+import styled from "styled-components";
+import { colors, fonts, screens, sizes } from "variables";
+import type { Event, Tag } from "../";
 
 type Props = {
   event: Event;

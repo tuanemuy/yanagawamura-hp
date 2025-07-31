@@ -1,40 +1,47 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, Block, PlainText } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
-import { ListWithTitle, PlainList, Panel } from "components/container";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ToCategories, ToTags } from "components/button";
-import { PageTitle } from "components/title";
+import { ListWithTitle, Panel, PlainList } from "components/container";
 import { Villager } from "components/cta";
+import { Footer, Header, Main } from "components/layout";
 import { SimplePagination } from "components/pagination";
-import { Link as NewsLink } from "domains/news";
-import { Link as RestaurantLink } from "domains/restaurant";
-import { Link as ShopLink } from "domains/shop";
-import { Link as EventLink } from "domains/event";
-
-import { useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { Order_By } from "lib/graphql";
+import { PageTitle } from "components/title";
 import {
-  News,
-  useGetNewsArchive,
-  getGetNewsArchivePrefetcher,
-  useGetCategories,
+  type Event,
+  Link as EventLink,
+  getGetEventsPrefetcher,
+  useGetEvents,
+} from "domains/event";
+import {
   getGetCategoriesPrefetcher,
-  useGetTags,
+  getGetNewsArchivePrefetcher,
   getGetTagsPrefetcher,
+  type News,
+  Link as NewsLink,
+  useGetCategories,
+  useGetNewsArchive,
+  useGetTags,
 } from "domains/news";
 import {
-  Restaurant,
-  useGetRestaurants,
   getGetRestaurantsPrefetcher,
+  type Restaurant,
+  Link as RestaurantLink,
+  useGetRestaurants,
 } from "domains/restaurant";
-import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
-import { Event, useGetEvents, getGetEventsPrefetcher } from "domains/event";
-import { StoreContext } from "providers";
+import {
+  getGetShopsPrefetcher,
+  type Shop,
+  Link as ShopLink,
+  useGetShops,
+} from "domains/shop";
+import { Order_By } from "lib/graphql";
 import { url } from "lib/util";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { StoreContext } from "providers";
+import { useContext, useEffect } from "react";
+import { Block, Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -49,8 +56,8 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getNewsArchivePrefetcher.key,
-      getNewsArchivePrefetcher.fetcher
-    )
+      getNewsArchivePrefetcher.fetcher,
+    ),
   );
 
   const getEventsPrefetcher = getGetEventsPrefetcher({
@@ -61,8 +68,8 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getEventsPrefetcher.key,
-      getEventsPrefetcher.fetcher
-    )
+      getEventsPrefetcher.fetcher,
+    ),
   );
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
@@ -73,8 +80,8 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getRestaurantsPrefetcher.key,
-      getRestaurantsPrefetcher.fetcher
-    )
+      getRestaurantsPrefetcher.fetcher,
+    ),
   );
 
   const getShopsPrefetcher = getGetShopsPrefetcher({
@@ -85,21 +92,21 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
-      getShopsPrefetcher.fetcher
-    )
+      getShopsPrefetcher.fetcher,
+    ),
   );
 
   const getCategoriesPrefetcher = getGetCategoriesPrefetcher();
   prefetches.push(
     queryClient.prefetchQuery(
       getCategoriesPrefetcher.key,
-      getCategoriesPrefetcher.fetcher
-    )
+      getCategoriesPrefetcher.fetcher,
+    ),
   );
 
   const getTagsPrefetcher = getGetTagsPrefetcher();
   prefetches.push(
-    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher)
+    queryClient.prefetchQuery(getTagsPrefetcher.key, getTagsPrefetcher.fetcher),
   );
 
   await Promise.all(prefetches);
@@ -121,8 +128,8 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
   const router = useRouter();
   const { page } = router.query;
   const pageNumber: number = Array.isArray(page)
-    ? parseInt(page[0] || "1", 10) || 1
-    : parseInt(page || "1", 10) || 1;
+    ? Number.parseInt(page[0] || "1", 10) || 1
+    : Number.parseInt(page || "1", 10) || 1;
 
   const store = useContext(StoreContext);
 
@@ -170,7 +177,7 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
 
   useEffect(() => {
     store.busy.setIsBusy(
-      !getNewsArchive.newsArchive && getNewsArchive.isFetching
+      !getNewsArchive.newsArchive && getNewsArchive.isFetching,
     );
   }, [getNewsArchive.newsArchive, getNewsArchive.isFetching]);
 
@@ -261,9 +268,7 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
           <ListWithTitle
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
-            items={shops.map((s: Shop) => (
-              <ShopLink shop={s} key={s.id} />
-            ))}
+            items={shops.map((s: Shop) => <ShopLink shop={s} key={s.id} />)}
             more={url("shop")}
             reverse
           />
@@ -273,9 +278,7 @@ const NewsArchivePage: NextPage<Props> = ({ limit }) => {
           <ListWithTitle
             title="イベント"
             subtitle="一緒に盛り上がろう！"
-            items={events.map((e: Event) => (
-              <EventLink event={e} key={e.id} />
-            ))}
+            items={events.map((e: Event) => <EventLink event={e} key={e.id} />)}
             more={url("event")}
           />
         </Stacked>

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { lighten, rgba } from "polished";
+import styled from "styled-components";
 import { colors } from "variables";
 
 type Props = {

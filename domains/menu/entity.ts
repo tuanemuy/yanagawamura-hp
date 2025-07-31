@@ -1,7 +1,7 @@
-import { Post, Media, Category, Tag } from "lib/graphql";
 import { getTags, getUpdatedAt, getValueOfField } from "lib/cms";
+import type { Category, Media, Post, Tag } from "lib/graphql";
 
-export type { Tag, Category } from "lib/graphql";
+export type { Category, Tag } from "lib/graphql";
 
 type GenerateMenuVariables = {
   id: number;
@@ -25,7 +25,7 @@ export class Menu {
     public readonly category: Category,
     public readonly tags: Tag[],
     public readonly createdAt: Date,
-    public readonly updatedAt: Date
+    public readonly updatedAt: Date,
   ) {}
 
   static generate({
@@ -48,7 +48,7 @@ export class Menu {
       category,
       tags,
       createdAt,
-      updatedAt
+      updatedAt,
     );
   }
 

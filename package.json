@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome lint",
+    "lint:fix": "biome check --write",
+    "format": "biome format --write",
     "export": "next build && next export",
     "generate": "dotenv -c -- graphql-codegen --config ./lib/graphql/codegen.js"
   },
@@ -17,6 +19,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "date-fns": "^2.29.2",
     "next": "12.2.5",
+    "nodemailer": "^7.0.5",
     "polished": "^4.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -30,6 +33,7 @@
     "urql": "^3.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
     "@graphql-codegen/cli": "^2.11.8",
     "@graphql-codegen/introspection": "^2.2.1",
     "@graphql-codegen/typescript": "^2.7.3",
@@ -39,6 +43,7 @@
     "@graphql-codegen/typescript-resolvers": "^2.7.3",
     "@graphql-codegen/typescript-urql": "^3.6.4",
     "@types/node": "18.7.14",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "@types/styled-components": "^5.1.26",

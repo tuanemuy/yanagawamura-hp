@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { sizes, colors, screens } from "variables";
 import { format } from "date-fns";
-import { Swiper, SwiperSlide } from "swiper/react";
+import styled from "styled-components";
 import { Autoplay, FreeMode } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { colors, screens, sizes } from "variables";
 
-import { News } from "../";
+import type { News } from "../";
 
 type Props = {
   news: News[];

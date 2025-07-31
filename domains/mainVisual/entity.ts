@@ -1,5 +1,5 @@
-import { Post, Media } from "lib/graphql";
 import { getValueOfField } from "lib/cms";
+import type { Media, Post } from "lib/graphql";
 
 type GenerateMainVisualVariables = {
   id: number;
@@ -17,7 +17,7 @@ export class MainVisual {
     public readonly url: string,
     public readonly image: Media,
     public readonly mobileImage: Media,
-    public readonly priority: number
+    public readonly priority: number,
   ) {}
 
   static generate({

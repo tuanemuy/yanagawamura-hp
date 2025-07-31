@@ -1,6 +1,6 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
 import { screens } from "variables";
-import { ReactNode } from "react";
 
 type Props = {
   color: string;

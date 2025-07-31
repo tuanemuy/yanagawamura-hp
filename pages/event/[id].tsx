@@ -1,30 +1,32 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, PlainText } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ListWithTitle, Panel } from "components/container";
-import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
-import { Single } from "domains/event";
-import { Link as RestaurantLink } from "domains/restaurant";
-import { Link as ShopLink } from "domains/shop";
-
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { Order_By } from "lib/graphql";
-import { useGetEvent, getGetEventPrefetcher } from "domains/event";
+import { Footer, Header, Main } from "components/layout";
+import { PageTitle } from "components/title";
+import { getGetEventPrefetcher, Single, useGetEvent } from "domains/event";
 import {
-  Restaurant,
-  useGetRestaurants,
   getGetRestaurantsPrefetcher,
+  type Restaurant,
+  Link as RestaurantLink,
+  useGetRestaurants,
 } from "domains/restaurant";
-import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
-import { url, extractDescription } from "lib/util";
+import {
+  getGetShopsPrefetcher,
+  type Shop,
+  Link as ShopLink,
+  useGetShops,
+} from "domains/shop";
 import { extractFile } from "lib/cms";
+import { Order_By } from "lib/graphql";
+import { extractDescription, url } from "lib/util";
+import type { NextPage } from "next";
+import { Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 export async function getStaticPaths() {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE || ""}/post?post_type=event`
+    `${process.env.NEXT_PUBLIC_API_BASE || ""}/post?post_type=event`,
   );
   const data = await result.json();
 
@@ -38,14 +40,14 @@ export async function getStaticProps({ params }: any) {
   const queryClient = new QueryClient();
   const prefetches = [];
 
-  const id = parseInt(params.id, 10) || 0;
+  const id = Number.parseInt(params.id, 10) || 0;
 
   const getEventPrefetcher = getGetEventPrefetcher({ id });
   prefetches.push(
     queryClient.prefetchQuery(
       getEventPrefetcher.key,
-      getEventPrefetcher.fetcher
-    )
+      getEventPrefetcher.fetcher,
+    ),
   );
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
@@ -56,8 +58,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getRestaurantsPrefetcher.key,
-      getRestaurantsPrefetcher.fetcher
-    )
+      getRestaurantsPrefetcher.fetcher,
+    ),
   );
 
   const getShopsPrefetcher = getGetShopsPrefetcher({
@@ -68,8 +70,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
-      getShopsPrefetcher.fetcher
-    )
+      getShopsPrefetcher.fetcher,
+    ),
   );
 
   await Promise.all(prefetches);
@@ -156,9 +158,7 @@ const EventSinglePage: NextPage<Props> = ({ id }) => {
           <ListWithTitle
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
-            items={shops.map((s: Shop) => (
-              <ShopLink shop={s} key={s.id} />
-            ))}
+            items={shops.map((s: Shop) => <ShopLink shop={s} key={s.id} />)}
             more={url("shop")}
             reverse
           />

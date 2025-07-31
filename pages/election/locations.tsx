@@ -1,36 +1,39 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ListWithTitle, Panel, PlainText } from "components/container";
-import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
-import { Link as RestaurantLink } from "domains/restaurant";
-import { Link as ShopLink } from "domains/shop";
-import { Link as EventLink } from "domains/event";
-
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { Order_By } from "lib/graphql";
+import { Footer, Header, Main } from "components/layout";
+import { PageTitle } from "components/title";
 import {
-  Restaurant,
-  useGetTaggedRestaurants,
+  type Event,
+  Link as EventLink,
+  getGetEventsPrefetcher,
+  useGetEvents,
+} from "domains/event";
+import {
   getGetTaggedRestaurantsPrefetcher,
+  type Restaurant,
+  Link as RestaurantLink,
+  useGetTaggedRestaurants,
 } from "domains/restaurant";
 import {
-  Shop,
-  useGetTaggedShops,
   getGetTaggedShopsPrefetcher,
+  type Shop,
+  Link as ShopLink,
+  useGetTaggedShops,
 } from "domains/shop";
-import { Event, useGetEvents, getGetEventsPrefetcher } from "domains/event";
+import { Order_By } from "lib/graphql";
 import { url } from "lib/util";
+import type { NextPage } from "next";
+import { Columns, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
   const prefetches = [];
 
   const getRestaurantsPrefetcher = getGetTaggedRestaurantsPrefetcher({
-    tagId: parseInt(process.env.ELECTION_TAG_ID || "0"),
+    tagId: Number.parseInt(process.env.ELECTION_TAG_ID || "0"),
     limit: 100,
     offset: 0,
     orderBy: { post: { title: Order_By.Asc } },
@@ -38,12 +41,12 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getRestaurantsPrefetcher.key,
-      getRestaurantsPrefetcher.fetcher
-    )
+      getRestaurantsPrefetcher.fetcher,
+    ),
   );
 
   const getShopsPrefetcher = getGetTaggedShopsPrefetcher({
-    tagId: parseInt(process.env.ELECTION_TAG_ID || "0"),
+    tagId: Number.parseInt(process.env.ELECTION_TAG_ID || "0"),
     limit: 100,
     offset: 0,
     orderBy: { post: { title: Order_By.Asc } },
@@ -51,8 +54,8 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
-      getShopsPrefetcher.fetcher
-    )
+      getShopsPrefetcher.fetcher,
+    ),
   );
 
   const getEventsPrefetcher = getGetEventsPrefetcher({
@@ -63,8 +66,8 @@ export async function getStaticProps() {
   prefetches.push(
     queryClient.prefetchQuery(
       getEventsPrefetcher.key,
-      getEventsPrefetcher.fetcher
-    )
+      getEventsPrefetcher.fetcher,
+    ),
   );
 
   await Promise.all(prefetches);
@@ -72,7 +75,7 @@ export async function getStaticProps() {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      tagId: parseInt(process.env.ELECTION_TAG_ID || "0"),
+      tagId: Number.parseInt(process.env.ELECTION_TAG_ID || "0"),
     },
     revalidate: 60,
   };
@@ -124,7 +127,9 @@ const RestaurantArchivePage: NextPage<Props> = ({ tagId }) => {
                 <h3>選挙期間中</h3>
                 <p>選挙期間中は、以下の店舗にて投票を行うことができます。</p>
                 <h3>特別名刺を持っている方</h3>
-                <p>村長選挙で上位になるともらえる特別名刺を持っている方は、以下の店舗にて優待を受けることができます。</p>
+                <p>
+                  村長選挙で上位になるともらえる特別名刺を持っている方は、以下の店舗にて優待を受けることができます。
+                </p>
               </PlainText>
             </Stacked>
 
@@ -147,7 +152,7 @@ const RestaurantArchivePage: NextPage<Props> = ({ tagId }) => {
                         }`}
                       />
                     );
-                  }
+                  },
                 )}
               </Columns>
             </Stacked>
@@ -180,9 +185,7 @@ const RestaurantArchivePage: NextPage<Props> = ({ tagId }) => {
           <ListWithTitle
             title="イベント"
             subtitle="一緒に盛り上がろう！"
-            items={events.map((e: Event) => (
-              <EventLink event={e} key={e.id} />
-            ))}
+            items={events.map((e: Event) => <EventLink event={e} key={e.id} />)}
             more={url("event")}
           />
         </Stacked>

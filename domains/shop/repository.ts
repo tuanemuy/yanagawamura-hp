@@ -1,24 +1,26 @@
-import { UseQueryOptions, QueryKey } from "@tanstack/react-query";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 import {
-  Order_By,
-  Post,
-  Post_Tag,
-  Category,
-  Tag,
-  GetPostQuery,
-  GetPostsQuery,
-  GetTaggedPostsQuery,
-  GetCategorizedPostsQuery,
+  type Category,
+  type GetCategorizedPostsQuery,
+  type GetPostQuery,
+  type GetPostsQuery,
+  type GetTaggedPostsQuery,
   graphQLClient,
-  useGetPostsQuery,
-  useGetPostQuery,
-  useGetTaggedPostsQuery,
-  useGetCategorizedPostsQuery,
+  type InputMaybe,
+  Order_By,
+  type Post,
+  type Post_Order_By,
+  type Post_Tag,
+  type Post_Tag_Order_By,
+  type Tag,
   useGetCategoriesQuery,
+  useGetCategorizedPostsQuery,
+  useGetPostQuery,
+  useGetPostsQuery,
+  useGetTaggedPostsQuery,
   useGetTagsQuery,
 } from "lib/graphql";
 import { Shop } from "./";
-import { InputMaybe, Post_Order_By, Post_Tag_Order_By } from "lib/graphql";
 
 type GetShopVariables = {
   id: number;
@@ -93,7 +95,7 @@ export function useGetShops({
       offset: offset || 0,
       order_by: orderBy || { created_at: Order_By.Desc },
     },
-    options
+    options,
   );
 
   const shops = ((getShops.data?.post as Post[]) || [])
@@ -170,7 +172,7 @@ export function useGetTaggedShops({
       offset: offset || 0,
       order_by: orderBy || { post: { created_at: Order_By.Desc } },
     },
-    options
+    options,
   );
 
   const taggedShops = (
@@ -250,7 +252,7 @@ export function useGetCategorizedShops({
       offset: offset || 0,
       order_by: orderBy || { created_at: Order_By.Desc },
     },
-    options
+    options,
   );
 
   const categorizedShops = (

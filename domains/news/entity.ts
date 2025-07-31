@@ -1,7 +1,7 @@
-import { Post, Category, Tag } from "lib/graphql";
 import { getTags, getUpdatedAt, getValueOfField } from "lib/cms";
+import type { Category, Post, Tag } from "lib/graphql";
 
-export type { Tag, Category } from "lib/graphql";
+export type { Category, Tag } from "lib/graphql";
 
 type GenerateNewsVariables = {
   id: number;
@@ -25,7 +25,7 @@ export class News {
     public readonly category: Category,
     public readonly tags: Tag[],
     public readonly createdAt: Date,
-    public readonly updatedAt: Date
+    public readonly updatedAt: Date,
   ) {}
 
   static generate({
@@ -48,7 +48,7 @@ export class News {
       category,
       tags,
       createdAt,
-      updatedAt
+      updatedAt,
     );
   }
 

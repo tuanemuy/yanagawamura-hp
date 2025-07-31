@@ -1,18 +1,17 @@
+import { url } from "lib/util";
 import Document, {
-  DocumentContext,
-  DocumentInitialProps,
-  Html,
+  type DocumentContext,
+  type DocumentInitialProps,
   Head,
+  Html,
   Main,
   NextScript,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-import { url } from "lib/util";
-
 export default class MyDocument extends Document {
   static async getInitialProps(
-    ctx: DocumentContext
+    ctx: DocumentContext,
   ): Promise<DocumentInitialProps> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -94,7 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               }"
 height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
             }}
-          ></noscript>
+          />
           <Main />
           <NextScript />
         </body>

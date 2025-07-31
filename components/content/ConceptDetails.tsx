@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, sizes, fonts, screens } from "variables";
+import { colors, fonts, screens, sizes } from "variables";
 
 type Props = {
   title: string;

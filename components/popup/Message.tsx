@@ -1,6 +1,6 @@
+import { MiniButton } from "components/button";
 import styled from "styled-components";
 import { colors, sizes } from "variables";
-import { MiniButton } from "components/button";
 
 type Props = {
   text: string;

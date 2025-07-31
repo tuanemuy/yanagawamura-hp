@@ -1,13 +1,12 @@
-import type { NextPage } from "next";
-import { colors, fonts } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, PlainText } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
-import { Panel } from "components/container";
-import { PageTitle } from "components/title";
 import { MiniLink } from "components/button";
-
+import { Panel } from "components/container";
+import { Footer, Header, Main } from "components/layout";
+import { PageTitle } from "components/title";
 import { url } from "lib/util";
+import type { NextPage } from "next";
+import { Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors, fonts } from "variables";
 
 const ContactThanksPage: NextPage = () => {
   return (

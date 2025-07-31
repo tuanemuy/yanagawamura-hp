@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-import { SideIconLink, LargeSideIconLink } from "components/button";
+import { LargeSideIconLink, SideIconLink } from "components/button";
+import { url } from "lib/util";
+import { useRouter } from "next/router";
 
 import { useState } from "react";
-import { useRouter } from "next/router";
-import { url } from "lib/util";
+import styled from "styled-components";
+import { colors, screens, sizes } from "variables";
 
 type Props = {
   title: string;
@@ -100,9 +100,9 @@ export const Header = ({ title }: Props) => {
           aria-label="メニューを開く"
         >
           <div className="icon">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span />
+            <span />
+            <span />
           </div>
         </button>
 

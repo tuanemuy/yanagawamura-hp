@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper";
-
-import { useEffect, useState } from "react";
 import { extractFile } from "lib/cms";
-import { MainVisual } from "../";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { colors, screens, sizes } from "variables";
+import type { MainVisual } from "../";
 
 type Props = {
   mainVisuals: MainVisual[];

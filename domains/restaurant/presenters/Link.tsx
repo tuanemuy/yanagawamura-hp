@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { sizes, colors, fonts, screens } from "variables";
-
 import { extractFile } from "lib/cms";
-import { Restaurant, Tag } from "../";
+import styled from "styled-components";
+import { colors, fonts, screens, sizes } from "variables";
+import type { Restaurant, Tag } from "../";
 
 type Props = {
   restaurant: Restaurant;

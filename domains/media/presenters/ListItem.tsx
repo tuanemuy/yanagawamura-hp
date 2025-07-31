@@ -1,8 +1,7 @@
+import { extractFile } from "lib/cms";
 import styled from "styled-components";
 import { screens } from "variables";
-
-import { Media } from "../";
-import { extractFile } from "lib/cms";
+import type { Media } from "../";
 
 type Props = {
   media: Media;

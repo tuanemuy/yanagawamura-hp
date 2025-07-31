@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { rgba } from "polished";
-import { colors } from "variables";
-import { ReactNode, useContext } from "react";
 import { StoreContext } from "providers";
+import { type ReactNode, useContext } from "react";
+import styled from "styled-components";
+import { colors } from "variables";
 
 type Props = {
   children: ReactNode;
@@ -30,5 +30,5 @@ const Popup = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.75);
-  background-color: ${rgba(colors.lightGray, .8)};
+  background-color: ${rgba(colors.lightGray, 0.8)};
 `;

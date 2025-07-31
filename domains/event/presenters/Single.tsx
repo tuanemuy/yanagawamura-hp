@@ -1,13 +1,12 @@
-import styled from "styled-components";
-import { colors, sizes, screens } from "variables";
-import { Columns, Stacked } from "unflexible-ui-core";
-import { PlainText } from "components/container";
 import { MiniButton } from "components/button";
-
-import { useRouter } from "next/router";
-import { nl2br } from "lib/util";
+import { PlainText } from "components/container";
 import { extractFile } from "lib/cms";
-import { Event, Tag } from "../";
+import { nl2br } from "lib/util";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { Columns, Stacked } from "unflexible-ui-core";
+import { colors, screens, sizes } from "variables";
+import type { Event, Tag } from "../";
 
 type Props = {
   event: Event;

@@ -1,24 +1,26 @@
-import { UseQueryOptions, QueryKey } from "@tanstack/react-query";
+import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
+import { Event } from "domains/event";
 import {
-  Order_By,
-  Post,
-  Post_Tag,
-  Category,
-  Tag,
-  GetPostQuery,
-  GetPostsQuery,
-  GetTaggedPostsQuery,
-  GetCategorizedPostsQuery,
+  type Category,
+  type GetCategorizedPostsQuery,
+  type GetPostQuery,
+  type GetPostsQuery,
+  type GetTaggedPostsQuery,
   graphQLClient,
-  useGetPostsQuery,
-  useGetPostQuery,
-  useGetTaggedPostsQuery,
-  useGetCategorizedPostsQuery,
+  type InputMaybe,
+  Order_By,
+  type Post,
+  type Post_Order_By,
+  type Post_Tag,
+  type Post_Tag_Order_By,
+  type Tag,
   useGetCategoriesQuery,
+  useGetCategorizedPostsQuery,
+  useGetPostQuery,
+  useGetPostsQuery,
+  useGetTaggedPostsQuery,
   useGetTagsQuery,
 } from "lib/graphql";
-import { Event } from "domains/event";
-import { InputMaybe, Post_Order_By, Post_Tag_Order_By } from "lib/graphql";
 
 type GetEventVariables = {
   id: number;
@@ -94,7 +96,7 @@ export function useGetEvents({
       offset: offset || 0,
       order_by: orderBy || { created_at: Order_By.Desc },
     },
-    options
+    options,
   );
 
   const events = ((getEvents.data?.post as Post[]) || [])
@@ -171,7 +173,7 @@ export function useGetTaggedEvents({
       offset: offset || 0,
       order_by: orderBy || { post: { created_at: Order_By.Desc } },
     },
-    options
+    options,
   );
 
   const taggedEvents = (
@@ -251,7 +253,7 @@ export function useGetCategorizedEvents({
       offset: offset || 0,
       order_by: orderBy || { created_at: Order_By.Desc },
     },
-    options
+    options,
   );
 
   const categorizedEvents = (

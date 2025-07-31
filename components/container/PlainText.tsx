@@ -1,7 +1,6 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
 import { colors, screens } from "variables";
-
-import { ReactNode } from "react";
 
 type Props = {
   text?: string;
@@ -11,9 +10,8 @@ type Props = {
 export const PlainText = ({ text, children }: Props) => {
   if (text) {
     return <Component dangerouslySetInnerHTML={{ __html: text }} />;
-  } else {
-    return <Component>{children}</Component>;
   }
+  return <Component>{children}</Component>;
 };
 
 const Component = styled.div`

@@ -1,31 +1,37 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, Block, PlainText } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { ListWithTitle, Panel } from "components/container";
-import { PageTitle } from "components/title";
 import { Villager } from "components/cta";
-import { Single } from "domains/news";
-import { Link as RestaurantLink } from "domains/restaurant";
-import { Link as ShopLink } from "domains/shop";
-import { Link as EventLink } from "domains/event";
-
-import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { Order_By } from "lib/graphql";
-import { useGetNews, getGetNewsPrefetcher } from "domains/news";
+import { Footer, Header, Main } from "components/layout";
+import { PageTitle } from "components/title";
 import {
-  Restaurant,
-  useGetRestaurants,
+  type Event,
+  Link as EventLink,
+  getGetEventsPrefetcher,
+  useGetEvents,
+} from "domains/event";
+import { getGetNewsPrefetcher, Single, useGetNews } from "domains/news";
+import {
   getGetRestaurantsPrefetcher,
+  type Restaurant,
+  Link as RestaurantLink,
+  useGetRestaurants,
 } from "domains/restaurant";
-import { Shop, useGetShops, getGetShopsPrefetcher } from "domains/shop";
-import { Event, useGetEvents, getGetEventsPrefetcher } from "domains/event";
-import { url, extractDescription } from "lib/util";
+import {
+  getGetShopsPrefetcher,
+  type Shop,
+  Link as ShopLink,
+  useGetShops,
+} from "domains/shop";
+import { Order_By } from "lib/graphql";
+import { extractDescription, url } from "lib/util";
+import type { NextPage } from "next";
+import { Block, Columns, PlainText, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 export async function getStaticPaths() {
   const result = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE || ""}/post?post_type=news`
+    `${process.env.NEXT_PUBLIC_API_BASE || ""}/post?post_type=news`,
   );
   const data = await result.json();
 
@@ -39,7 +45,7 @@ export async function getStaticProps({ params }: any) {
   const queryClient = new QueryClient();
   const prefetches = [];
 
-  const id = parseInt(params.id, 10);
+  const id = Number.parseInt(params.id, 10);
 
   if (Number.isNaN(id)) {
     return {
@@ -49,7 +55,7 @@ export async function getStaticProps({ params }: any) {
 
   const getNewsPrefetcher = getGetNewsPrefetcher({ id });
   prefetches.push(
-    queryClient.prefetchQuery(getNewsPrefetcher.key, getNewsPrefetcher.fetcher)
+    queryClient.prefetchQuery(getNewsPrefetcher.key, getNewsPrefetcher.fetcher),
   );
 
   const getRestaurantsPrefetcher = getGetRestaurantsPrefetcher({
@@ -60,8 +66,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getRestaurantsPrefetcher.key,
-      getRestaurantsPrefetcher.fetcher
-    )
+      getRestaurantsPrefetcher.fetcher,
+    ),
   );
 
   const getShopsPrefetcher = getGetShopsPrefetcher({
@@ -72,8 +78,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getShopsPrefetcher.key,
-      getShopsPrefetcher.fetcher
-    )
+      getShopsPrefetcher.fetcher,
+    ),
   );
 
   const getEventsPrefetcher = getGetEventsPrefetcher({
@@ -84,8 +90,8 @@ export async function getStaticProps({ params }: any) {
   prefetches.push(
     queryClient.prefetchQuery(
       getEventsPrefetcher.key,
-      getEventsPrefetcher.fetcher
-    )
+      getEventsPrefetcher.fetcher,
+    ),
   );
 
   await Promise.all(prefetches);
@@ -134,7 +140,11 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
       }
       path={`news/${news?.id || ""}`}
       ogType="article"
-      header={<Header title={`${news?.title || "ニュース"} | 群馬県高崎市のヤナガワ村`} />}
+      header={
+        <Header
+          title={`${news?.title || "ニュース"} | 群馬県高崎市のヤナガワ村`}
+        />
+      }
       footer={<Footer />}
     >
       <Main color={colors.background} avoidHeader>
@@ -172,9 +182,7 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
           <ListWithTitle
             title="物販・サービス店"
             subtitle="ここでしか出会えないもの。"
-            items={shops.map((s: Shop) => (
-              <ShopLink shop={s} key={s.id} />
-            ))}
+            items={shops.map((s: Shop) => <ShopLink shop={s} key={s.id} />)}
             more={url("shop")}
           />
         </Stacked>
@@ -183,9 +191,7 @@ const NewsSinglePage: NextPage<Props> = ({ id }) => {
           <ListWithTitle
             title="イベント"
             subtitle="一緒に盛り上がろう！"
-            items={events.map((e: Event) => (
-              <EventLink event={e} key={e.id} />
-            ))}
+            items={events.map((e: Event) => <EventLink event={e} key={e.id} />)}
             more={url("event")}
             reverse
           />

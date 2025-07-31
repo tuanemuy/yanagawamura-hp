@@ -1,4 +1,4 @@
-import { Post, Value, Post_Tag, Tag } from "lib/graphql";
+import type { Post, Post_Tag, Tag, Value } from "lib/graphql";
 
 export function getUpdatedAt(post: Post): Date | null {
   if (post.revisions.length < 1) {
@@ -19,7 +19,7 @@ export function getValueOfField(post: Post, slug: string): Value | null {
 
   return (
     (post.revisions[0].values || []).filter(
-      (v: Value) => v.field.slug === slug
+      (v: Value) => v.field.slug === slug,
     )[0] || null
   );
 }
@@ -30,6 +30,6 @@ export function getValuesOfField(post: Post, slug: string): Value[] | null {
   }
 
   return (post.revisions[0].values || []).filter(
-    (v: Value) => v.field.slug === slug
+    (v: Value) => v.field.slug === slug,
   );
 }

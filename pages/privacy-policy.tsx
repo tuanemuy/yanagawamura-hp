@@ -1,12 +1,11 @@
-import type { NextPage } from "next";
-import { colors } from "variables";
-import { Page } from "unflexible-ui-next-page";
-import { Stacked, Columns, Block } from "unflexible-ui-core";
-import { Header, Main, Footer } from "components/layout";
-import { Panel, PlainText as MyPlainText } from "components/container";
+import { PlainText as MyPlainText, Panel } from "components/container";
+import { Footer, Header, Main } from "components/layout";
 import { PageTitle } from "components/title";
-
 import { url } from "lib/util";
+import type { NextPage } from "next";
+import { Block, Columns, Stacked } from "unflexible-ui-core";
+import { Page } from "unflexible-ui-next-page";
+import { colors } from "variables";
 
 const PrivacyPage: NextPage = () => {
   return (
